@@ -3,8 +3,8 @@
 
   describe("Basic assumptions", function() {
     return it("has Sencha Touch loaded", function() {
-      expect(forminator.model.Page).toBeDefined();
-      return Ext.create("forminator.model.Page");
+      expect(app.model.Page).toBeDefined();
+      return Ext.create("app.model.Page");
     });
   });
 
