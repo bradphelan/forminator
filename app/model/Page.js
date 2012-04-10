@@ -10,6 +10,9 @@
         }, {
           name: 'items',
           type: 'array'
+        }, {
+          name: 'help',
+          type: 'string'
         }
       ]
     }

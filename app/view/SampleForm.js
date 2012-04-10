@@ -1,10 +1,11 @@
 (function() {
-  var formDef, json;
+  var json;
 
   json = {
     pages: [
       {
-        title: "Page 0",
+        title: "How do you feel",
+        help: "Tell me how you feel. I can fix it for you.\nTrust me I'm a doctor, I know all the drugs",
         items: [
           {
             xtype: "option",
@@ -25,7 +26,8 @@
           }
         ]
       }, {
-        title: "Page 1",
+        title: "What is your face like?",
+        help: "An ugly face can make you sick. How is yours?",
         items: [
           {
             xtype: "option",
@@ -46,17 +48,24 @@
     ]
   };
 
-  Ext.require('app.model.FormDefinition');
-
   json = Ext.JSON.encode(json);
 
-  formDef = Ext.create('app.model.FormDefinition', json);
+  Ext.define("SampleFormBuilder", {
+    requires: ['app.model.FormDefinition'],
+    buildForm: function() {}
+  });
 
   Ext.define("app.view.SampleForm", {
     extend: "Ext.Panel",
+    requires: ['app.model.FormDefinition'],
+    constructor: function(config) {
+      var formDef;
+      this.callParent(config);
+      formDef = Ext.create('app.model.FormDefinition', json);
+      return this.add(formDef.createForm());
+    },
     config: {
-      layout: "fit",
-      items: [formDef.createForm()]
+      layout: "fit"
     }
   });
 

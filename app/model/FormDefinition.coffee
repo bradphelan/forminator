@@ -5,6 +5,7 @@ Ext.define 'app.model.FormDefinition'
     'Ext.TitleBar'
     'Ext.field.Select'
     'Ext.form.FieldSet'
+    'app.model.form.Option'
   ]
 
   config:
@@ -66,10 +67,19 @@ Ext.define 'app.model.FormDefinition'
                 pagesUI.setActiveItem(index+1)
           ]
 
+        console.log page.get('title')
+        console.log page.get('help')
+        panel.add
+          xtype: 'label'
+          html: page.get('help')
+          padding: 20
+
         # Add the fieldset
         panel.add
           xtype: 'fieldset'
           layout: 'vbox'
+          centered: true
+          width: "75%"
           items: page.get('items').getData().collect (item)=>
             item.createField()
 

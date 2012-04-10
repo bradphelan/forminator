@@ -1,6 +1,10 @@
 json =
   pages: [
-    title: "Page 0"
+    title: "How do you feel"
+    help: """
+      Tell me how you feel. I can fix it for you.
+      Trust me I'm a doctor, I know all the drugs
+    """
     items: [
       xtype: "option"
       name: 'fieldA'
@@ -17,7 +21,10 @@ json =
       ]
     ]
   ,
-    title: "Page 1"
+    title: "What is your face like?"
+    help: """
+      An ugly face can make you sick. How is yours?
+    """
     items: [
       xtype: "option"
       name: 'fieldB'
@@ -33,13 +40,26 @@ json =
 
   ]
 
-Ext.require 'app.model.FormDefinition'
 json = Ext.JSON.encode(json)
-formDef = Ext.create 'app.model.FormDefinition', json
+
+
+Ext.define  "SampleFormBuilder"
+  requires: [
+    'app.model.FormDefinition'
+  ]
+  buildForm: ->
+
 
 Ext.define "app.view.SampleForm",
   extend: "Ext.Panel"
+  requires: [
+    'app.model.FormDefinition'
+  ]
+
+  constructor: (config)->
+    @callParent(config)
+    formDef = Ext.create 'app.model.FormDefinition', json
+    @add formDef.createForm()
+
   config:
     layout: "fit"
-    #items: [ Ext.create 'app.view.Main' ]
-    items: [ formDef.createForm() ]

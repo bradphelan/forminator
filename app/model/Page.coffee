@@ -7,4 +7,7 @@ Ext.define 'app.model.Page'
     ,
       name: 'items'
       type: 'array'
+    ,
+      name: 'help'
+      type: 'string'
     ]
