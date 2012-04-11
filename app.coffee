@@ -14,7 +14,10 @@ Ext.define  'Ext.util.CollectionExtensions'
 
 Ext.application
   name: "app"
-  requires: [ "Ext.MessageBox", "app.view.SampleForm"]
+  requires: [
+    "Ext.MessageBox"
+    "app.view.MainNavigation"
+  ]
   views: [ "Main" ]
   icon:
     57: "resources/icons/Icon.png"
@@ -26,7 +29,8 @@ Ext.application
   tabletStartupScreen: "resources/loading/Homescreen~ipad.jpg"
   launch: ->
     Ext.fly("appLoadingIndicator").destroy()
-    Ext.Viewport.add Ext.create("app.view.SampleForm")
+    #Ext.Viewport.add Ext.create("app.view.SampleForm")
+    Ext.Viewport.add app.view.MainNavigation
 
   onUpdated: ->
     Ext.Msg.confirm "Application Update", "This application has just successfully been updated to the latest version. Reload now?", ->

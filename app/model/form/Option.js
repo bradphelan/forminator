@@ -18,6 +18,8 @@
     },
     createRadioField: function() {
       var _this = this;
+      console.log("foo");
+      console.log(this.get('name'));
       return {
         xtype: 'panel',
         items: this.get('options').map(function(option) {

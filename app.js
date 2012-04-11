@@ -20,7 +20,7 @@
 
   Ext.application({
     name: "app",
-    requires: ["Ext.MessageBox", "app.view.SampleForm"],
+    requires: ["Ext.MessageBox", "app.view.MainNavigation"],
     views: ["Main"],
     icon: {
       57: "resources/icons/Icon.png",
@@ -32,7 +32,7 @@
     tabletStartupScreen: "resources/loading/Homescreen~ipad.jpg",
     launch: function() {
       Ext.fly("appLoadingIndicator").destroy();
-      return Ext.Viewport.add(Ext.create("app.view.SampleForm"));
+      return Ext.Viewport.add(app.view.MainNavigation);
     },
     onUpdated: function() {
       return Ext.Msg.confirm("Application Update", "This application has just successfully been updated to the latest version. Reload now?", function() {
