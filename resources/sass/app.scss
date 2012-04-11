@@ -17,3 +17,11 @@
 @include sencha-msgbox;
 
 // Your custom code goes here...
+
+body.x-ios.x-phone {
+  font-size: 214%;
+}
+
+body {
+  font-size: 204% !important;
+}
