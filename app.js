@@ -19,7 +19,7 @@
   });
 
   Ext.define('Ext.PanelExtensions', {
-    override: 'Ext.Panel',
+    override: 'Ext.Container',
     autowire: function(events) {
       var event, h, m, _i, _len, _results,
         _this = this;
@@ -44,7 +44,7 @@
     name: "app",
     requires: ["Ext.MessageBox", "app.view.MainNavigation", 'app.controller.Forms'],
     views: ["Main"],
-    controllers: ['app.controller.Forms'],
+    controllers: [],
     icon: {
       57: "resources/icons/Icon.png",
       72: "resources/icons/Icon~ipad.png",

@@ -15,7 +15,7 @@ Ext.define  'Ext.util.CollectionExtensions'
 # Create an autowire for events on
 # views for simple proxying of events
 Ext.define  'Ext.PanelExtensions',
-  override: 'Ext.Panel'
+  override: 'Ext.Container'
 
   autowire: (events)->
     for event in events
@@ -35,7 +35,6 @@ Ext.application
   ]
   views: [ "Main" ]
   controllers: [
-    'app.controller.Forms'
   ]
   icon:
     57: "resources/icons/Icon.png"
