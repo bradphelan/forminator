@@ -17,15 +17,14 @@ Ext.define "app.view.FormKiosk"
     ]
 
   doExecuteForm: (record)->
-    console.log 'a'
     app.view.MainNavigation.push record.createForm()
 
   doSelectForm: (record) ->
-    console.log 'b'
     formsummary = @query("formsummary")[0]
     @currentRecord = record
     formsummary.setRecord(record)
     formsummary.initialize()
+
 
   config:
     layout: 'vbox'

@@ -9,12 +9,10 @@
       return this.autowire(['executeForm', 'selectForm']);
     },
     doExecuteForm: function(record) {
-      console.log('a');
       return app.view.MainNavigation.push(record.createForm());
     },
     doSelectForm: function(record) {
       var formsummary;
-      console.log('b');
       formsummary = this.query("formsummary")[0];
       this.currentRecord = record;
       formsummary.setRecord(record);

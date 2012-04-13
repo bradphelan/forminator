@@ -155,13 +155,12 @@ Ext.define 'app.model.FormDefinition'
             items: [
               iconCls: 'action'
               iconMask: true
+              bubbleEvents: 'submitForm'
               align: 'right'
               text: 'SUBMIT!'
               listeners:
-                tap: =>
-                  console.log pagesUI.getRecord()
-                  console.log pagesUI.getRecord().getData(true)
-                  console.log pagesUI.getValues()
+                tap: (me)=>
+                  me.fireEvent 'submitForm', record
                   app.view.MainNavigation.pop()
             ]
 

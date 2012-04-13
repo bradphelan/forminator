@@ -165,13 +165,12 @@
                 {
                   iconCls: 'action',
                   iconMask: true,
+                  bubbleEvents: 'submitForm',
                   align: 'right',
                   text: 'SUBMIT!',
                   listeners: {
-                    tap: function() {
-                      console.log(pagesUI.getRecord());
-                      console.log(pagesUI.getRecord().getData(true));
-                      console.log(pagesUI.getValues());
+                    tap: function(me) {
+                      me.fireEvent('submitForm', record);
                       return app.view.MainNavigation.pop();
                     }
                   }
