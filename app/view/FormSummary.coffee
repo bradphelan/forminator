@@ -22,7 +22,10 @@ Ext.define 'app.view.FormSummary'
         padding: 50
       ,
         xtype: 'button'
-        id: "executeFormButton"
         docked: 'bottom'
+        bubbleEvents: 'executeForm'
         text: "Execute"
+        listeners:
+          tap: (b, e, o)=>
+            b.fireEvent('executeForm', record)
       ]

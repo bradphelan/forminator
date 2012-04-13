@@ -18,6 +18,28 @@
     }
   });
 
+  Ext.define('Ext.PanelExtensions', {
+    override: 'Ext.Panel',
+    autowire: function(events) {
+      var event, h, m, _i, _len, _results,
+        _this = this;
+      _results = [];
+      for (_i = 0, _len = events.length; _i < _len; _i++) {
+        event = events[_i];
+        h = {};
+        m = "do" + (Ext.String.capitalize(event));
+        console.log(m);
+        h[event] = (function(m) {
+          return function() {
+            return _this[m].apply(_this, arguments);
+          };
+        })(m);
+        _results.push(this.addListener(h));
+      }
+      return _results;
+    }
+  });
+
   Ext.application({
     name: "app",
     requires: ["Ext.MessageBox", "app.view.MainNavigation", 'app.controller.Forms'],

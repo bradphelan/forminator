@@ -95,21 +95,15 @@ Ext.define 'app.model.FormDefinition'
         'change':
           'delegate': 'field'
           fn: (field) =>
-            console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
-            console.log Ext.JSON.encode(record.getData(true))
         'check':
           'delegate': 'field'
           fn: (field) =>
-            console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
-            console.log Ext.JSON.encode(record.getData(true))
         'uncheck':
           'delegate': 'field'
           fn: (field) =>
-            console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
-            console.log Ext.JSON.encode(record.getData(true))
 
         'initialize': =>
           console.log "initialized"

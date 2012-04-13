@@ -13,7 +13,8 @@
       });
     },
     initialize: function() {
-      var record;
+      var record,
+        _this = this;
       this.removeAll(true, true);
       if (this.getRecord() != null) {
         record = this.getRecord();
@@ -24,9 +25,14 @@
             padding: 50
           }, {
             xtype: 'button',
-            id: "executeFormButton",
             docked: 'bottom',
-            text: "Execute"
+            bubbleEvents: 'executeForm',
+            text: "Execute",
+            listeners: {
+              tap: function(b, e, o) {
+                return b.fireEvent('executeForm', record);
+              }
+            }
           }
         ]);
       }

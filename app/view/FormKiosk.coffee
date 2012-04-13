@@ -2,11 +2,30 @@ Ext.define "app.view.FormKiosk"
   extend: "Ext.Panel"
   xtype: "formkiosk"
 
+  currentRecord: null
+
   requires: [
     'app.model.FormDefinition'
-    'app.model.SampleForms'
     'app.view.FormSummary'
+    'app.view.FormList'
   ]
+
+  initialize: ->
+    @autowire [
+      'executeForm'
+      'selectForm'
+    ]
+
+  doExecuteForm: (record)->
+    console.log 'a'
+    app.view.MainNavigation.push record.createForm()
+
+  doSelectForm: (record) ->
+    console.log 'b'
+    formsummary = @query("formsummary")[0]
+    @currentRecord = record
+    formsummary.setRecord(record)
+    formsummary.initialize()
 
   config:
     layout: 'vbox'
@@ -19,25 +38,9 @@ Ext.define "app.view.FormKiosk"
       layout: 'hbox'
       flex: 1
       items: [
-        xtype: 'list'
-        id: "formlist"
-        flex: 1
-        itemTpl: '{title}'
-        listeners:
-          initialize: (me, opts)=>
-            me.setStore Ext.create 'app.model.SampleForms'
-          itemtap: (list, index, item, record, e, opts) =>
-            #console.log FormKiosk.formSummary()
-            #app.view.MainNavigation.push record.createForm()
+        xtype: 'formlist'
       ,
         xtype: 'formsummary'
-        id: "formsummary"
         flex: 2
       ]
     ]
-
-    formSummary: ->
-        console.log Ext.ComponentQuery.query("#formsummary")
-
-
-

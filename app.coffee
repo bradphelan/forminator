@@ -12,6 +12,20 @@ Ext.define  'Ext.util.CollectionExtensions'
     @each cb, scope
     array
 
+# Create an autowire for events on
+# views for simple proxying of events
+Ext.define  'Ext.PanelExtensions',
+  override: 'Ext.Panel'
+
+  autowire: (events)->
+    for event in events
+      h = {}
+      m = "do#{Ext.String.capitalize event}"
+      console.log m
+      h[event]= do (m)=>
+        => @[m](arguments...)
+      @addListener h
+
 Ext.application
   name: "app"
   requires: [

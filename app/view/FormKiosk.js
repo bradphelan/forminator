@@ -1,10 +1,25 @@
 (function() {
-  var _this = this;
 
   Ext.define("app.view.FormKiosk", {
     extend: "Ext.Panel",
     xtype: "formkiosk",
-    requires: ['app.model.FormDefinition', 'app.model.SampleForms', 'app.view.FormSummary'],
+    currentRecord: null,
+    requires: ['app.model.FormDefinition', 'app.view.FormSummary', 'app.view.FormList'],
+    initialize: function() {
+      return this.autowire(['executeForm', 'selectForm']);
+    },
+    doExecuteForm: function(record) {
+      console.log('a');
+      return app.view.MainNavigation.push(record.createForm());
+    },
+    doSelectForm: function(record) {
+      var formsummary;
+      console.log('b');
+      formsummary = this.query("formsummary")[0];
+      this.currentRecord = record;
+      formsummary.setRecord(record);
+      return formsummary.initialize();
+    },
     config: {
       layout: 'vbox',
       title: 'Forminator',
@@ -18,27 +33,14 @@
           flex: 1,
           items: [
             {
-              xtype: 'list',
-              id: "formlist",
-              flex: 1,
-              itemTpl: '{title}',
-              listeners: {
-                initialize: function(me, opts) {
-                  return me.setStore(Ext.create('app.model.SampleForms'));
-                },
-                itemtap: function(list, index, item, record, e, opts) {}
-              }
+              xtype: 'formlist'
             }, {
               xtype: 'formsummary',
-              id: "formsummary",
               flex: 2
             }
           ]
         }
-      ],
-      formSummary: function() {
-        return console.log(Ext.ComponentQuery.query("#formsummary"));
-      }
+      ]
     }
   });
 

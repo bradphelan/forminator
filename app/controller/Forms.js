@@ -6,30 +6,11 @@
     config: {
       refs: {
         formlist: '#formlist',
-        formsummary: '#formsummary',
-        executeFormButton: '#executeFormButton'
+        formsummary: '#formsummary'
       },
-      currentRecord: null,
-      control: {
-        formlist: {
-          itemtap: 'doSelectForm'
-        },
-        executeFormButton: {
-          tap: 'doExecuteForm'
-        }
-      }
+      currentRecord: null
     },
-    doSelectForm: function(list, index, item, record, e) {
-      var formsummary;
-      formsummary = this.getFormsummary();
-      this.currentRecord = record;
-      formsummary.setRecord(record);
-      return formsummary.initialize();
-    },
-    doExecuteForm: function() {
-      console.log("yay");
-      return app.view.MainNavigation.push(this.currentRecord.createForm());
-    }
+    init: function() {}
   });
 
 }).call(this);

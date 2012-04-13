@@ -13,9 +13,6 @@ Ext.define 'app.model.form.Option'
     ]
 
   createRadioField: ->
-    console.log "foo"
-    console.log @get('name')
-
     xtype: 'panel'
     items: @get('options').map (option)=>
       xtype: 'radiofield'

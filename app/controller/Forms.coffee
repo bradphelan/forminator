@@ -7,22 +7,8 @@ Ext.define 'app.controller.Forms'
     refs:
       formlist: '#formlist'
       formsummary: '#formsummary'
-      executeFormButton: '#executeFormButton'
     currentRecord: null
 
-    control:
-      formlist:
-        itemtap: 'doSelectForm'
-      executeFormButton:
-        tap: 'doExecuteForm'
+  init: ->
 
-  doSelectForm: (list, index, item, record, e) ->
-    formsummary = @getFormsummary()
-    @currentRecord = record
-    formsummary.setRecord(record)
-    formsummary.initialize()
-
-  doExecuteForm: ->
-    console.log "yay"
-    app.view.MainNavigation.push @currentRecord.createForm()
 

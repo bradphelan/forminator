@@ -92,25 +92,19 @@
           'change': {
             'delegate': 'field',
             fn: function(field) {
-              console.log("Updating " + (field.getName()));
-              record.set(field.getName(), field.getValue());
-              return console.log(Ext.JSON.encode(record.getData(true)));
+              return record.set(field.getName(), field.getValue());
             }
           },
           'check': {
             'delegate': 'field',
             fn: function(field) {
-              console.log("Updating " + (field.getName()));
-              record.set(field.getName(), field.getValue());
-              return console.log(Ext.JSON.encode(record.getData(true)));
+              return record.set(field.getName(), field.getValue());
             }
           },
           'uncheck': {
             'delegate': 'field',
             fn: function(field) {
-              console.log("Updating " + (field.getName()));
-              record.set(field.getName(), field.getValue());
-              return console.log(Ext.JSON.encode(record.getData(true)));
+              return record.set(field.getName(), field.getValue());
             }
           },
           'initialize': function() {
