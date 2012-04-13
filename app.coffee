@@ -17,8 +17,12 @@ Ext.application
   requires: [
     "Ext.MessageBox"
     "app.view.MainNavigation"
+    'app.controller.Forms'
   ]
   views: [ "Main" ]
+  controllers: [
+    'app.controller.Forms'
+  ]
   icon:
     57: "resources/icons/Icon.png"
     72: "resources/icons/Icon~ipad.png"
@@ -29,7 +33,6 @@ Ext.application
   tabletStartupScreen: "resources/loading/Homescreen~ipad.jpg"
   launch: ->
     Ext.fly("appLoadingIndicator").destroy()
-    #Ext.Viewport.add Ext.create("app.view.SampleForm")
     Ext.Viewport.add app.view.MainNavigation
 
   onUpdated: ->

@@ -22,7 +22,13 @@ Ext.define 'app.model.FormDefinition'
     ,
       name: 'title'
       type: 'string'
+    ,
+      name: 'summary'
+      type: 'string'
     ]
+
+  pagesCount: ->
+    @get('pages').getCount()
 
   itemTypeMap: (xtype)->
     switch (xtype)
@@ -53,6 +59,7 @@ Ext.define 'app.model.FormDefinition'
           Ext.create 'app.model.Page', page
 
     @set 'title', json.title
+    @set 'summary', json.summary
 
   pagesCount: ->
     @get('pages').getData().length
@@ -90,16 +97,19 @@ Ext.define 'app.model.FormDefinition'
           fn: (field) =>
             console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
+            console.log Ext.JSON.encode(record.getData(true))
         'check':
           'delegate': 'field'
           fn: (field) =>
             console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
+            console.log Ext.JSON.encode(record.getData(true))
         'uncheck':
           'delegate': 'field'
           fn: (field) =>
             console.log "Updating #{field.getName()}"
             record.set(field.getName(), field.getValue())
+            console.log Ext.JSON.encode(record.getData(true))
 
         'initialize': =>
           console.log "initialized"

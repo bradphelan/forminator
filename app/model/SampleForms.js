@@ -3,14 +3,16 @@
 
   form0 = {
     title: "Ugly Face Form",
+    summary: "Ugly faces are dangerous. We need to\ncollect information on this condition.\n<script>alert('foo')</script>\nPlease assist us.",
     pages: [
       {
         title: "How do you feel",
         help: "Tell me how you feel. I can fix it for you.\nTrust me I'm a doctor, I know all the drugs",
         items: [
           {
-            xtype: "option",
+            type: "integer",
             name: 'fieldA',
+            xtype: "option",
             as: 'radio',
             options: [
               {
@@ -32,6 +34,7 @@
         items: [
           {
             xtype: "option",
+            type: "integer",
             name: 'fieldB',
             as: 'select',
             options: [
@@ -51,6 +54,7 @@
 
   form1 = {
     title: "Pain Form",
+    summary: "Pain is a pain in the popo. Help\nus remove <b>pain</b><script>alert('foo')</script>. Am I annoying you\nyet..",
     pages: [
       {
         title: "How do you feel today",
@@ -58,6 +62,7 @@
         items: [
           {
             xtype: "option",
+            type: "integer",
             name: 'today',
             as: 'radio',
             options: [
@@ -79,8 +84,9 @@
         help: "On average how did you feel yesterday?",
         items: [
           {
-            xtype: "option",
             name: 'yesterday',
+            type: "integer",
+            xtype: "option",
             as: 'radio',
             options: [
               {
@@ -101,9 +107,10 @@
         help: "On average how did you feel last week?",
         items: [
           {
-            xtype: "option",
+            type: "integer",
             name: 'last_week',
             as: 'radio',
+            xtype: "option",
             options: [
               {
                 text: "bad",

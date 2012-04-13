@@ -12,8 +12,14 @@
         }, {
           name: 'title',
           type: 'string'
+        }, {
+          name: 'summary',
+          type: 'string'
         }
       ]
+    },
+    pagesCount: function() {
+      return this.get('pages').getCount();
     },
     itemTypeMap: function(xtype) {
       switch (xtype) {
@@ -42,7 +48,8 @@
           return Ext.create('app.model.Page', page);
         })
       }));
-      return this.set('title', json.title);
+      this.set('title', json.title);
+      return this.set('summary', json.summary);
     },
     pagesCount: function() {
       return this.get('pages').getData().length;
@@ -86,21 +93,24 @@
             'delegate': 'field',
             fn: function(field) {
               console.log("Updating " + (field.getName()));
-              return record.set(field.getName(), field.getValue());
+              record.set(field.getName(), field.getValue());
+              return console.log(Ext.JSON.encode(record.getData(true)));
             }
           },
           'check': {
             'delegate': 'field',
             fn: function(field) {
               console.log("Updating " + (field.getName()));
-              return record.set(field.getName(), field.getValue());
+              record.set(field.getName(), field.getValue());
+              return console.log(Ext.JSON.encode(record.getData(true)));
             }
           },
           'uncheck': {
             'delegate': 'field',
             fn: function(field) {
               console.log("Updating " + (field.getName()));
-              return record.set(field.getName(), field.getValue());
+              record.set(field.getName(), field.getValue());
+              return console.log(Ext.JSON.encode(record.getData(true)));
             }
           },
           'initialize': function() {

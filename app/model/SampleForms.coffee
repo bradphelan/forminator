@@ -1,5 +1,11 @@
 form0 =
   title: "Ugly Face Form"
+  summary: """
+  Ugly faces are dangerous. We need to
+  collect information on this condition.
+  <script>alert('foo')</script>
+  Please assist us.
+  """
   pages: [
     title: "How do you feel"
     help: """
@@ -7,8 +13,9 @@ form0 =
       Trust me I'm a doctor, I know all the drugs
     """
     items: [
-      xtype: "option"
+      type: "integer"
       name: 'fieldA'
+      xtype: "option"
       as: 'radio'
       options: [
         text: "bad"
@@ -28,6 +35,7 @@ form0 =
     """
     items: [
       xtype: "option"
+      type: "integer"
       name: 'fieldB'
       as: 'select'
       options: [
@@ -43,6 +51,11 @@ form0 =
 
 form1 =
   title: "Pain Form"
+  summary: """
+  Pain is a pain in the popo. Help
+  us remove <b>pain</b><script>alert('foo')</script>. Am I annoying you
+  yet..
+  """
   pages: [
     title: "How do you feel today"
     help: """
@@ -50,6 +63,7 @@ form1 =
     """
     items: [
       xtype: "option"
+      type: "integer"
       name: 'today'
       as: 'radio'
       options: [
@@ -69,8 +83,9 @@ form1 =
     On average how did you feel yesterday?
     """
     items: [
-      xtype: "option"
       name: 'yesterday'
+      type: "integer"
+      xtype: "option"
       as: 'radio'
       options: [
         text: "bad"
@@ -90,9 +105,10 @@ form1 =
     On average how did you feel last week?
     """
     items: [
-      xtype: "option"
+      type: "integer"
       name: 'last_week'
       as: 'radio'
+      xtype: "option"
       options: [
         text: "bad"
         value: 0

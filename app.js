@@ -20,8 +20,9 @@
 
   Ext.application({
     name: "app",
-    requires: ["Ext.MessageBox", "app.view.MainNavigation"],
+    requires: ["Ext.MessageBox", "app.view.MainNavigation", 'app.controller.Forms'],
     views: ["Main"],
+    controllers: ['app.controller.Forms'],
     icon: {
       57: "resources/icons/Icon.png",
       72: "resources/icons/Icon~ipad.png",

@@ -2,6 +2,7 @@
   var json;
 
   json = {
+    title: "Ugly Face Form",
     pages: [
       {
         title: "How do you feel",
