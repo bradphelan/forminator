@@ -3,7 +3,7 @@
 
   form0 = {
     title: "Ugly Face Form",
-    summary: "Ugly faces are dangerous. We need to\ncollect information on this condition.\n<script>alert('foo')</script>\nPlease assist us.",
+    summary: "Ugly faces are dangerous. We need to\ncollect information on this condition.\nPlease assist us.",
     pages: [
       {
         title: "How do you feel",
@@ -54,7 +54,7 @@
 
   form1 = {
     title: "Pain Form",
-    summary: "Pain is a pain in the popo. Help\nus remove <b>pain</b><script>alert('foo')</script>. Am I annoying you\nyet..",
+    summary: "Pain is a pain in the popo. Help\nus remove pain. Am I annoying you\nyet..",
     pages: [
       {
         title: "How do you feel today",

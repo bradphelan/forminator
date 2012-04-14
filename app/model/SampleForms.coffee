@@ -3,7 +3,6 @@ form0 =
   summary: """
   Ugly faces are dangerous. We need to
   collect information on this condition.
-  <script>alert('foo')</script>
   Please assist us.
   """
   pages: [
@@ -53,7 +52,7 @@ form1 =
   title: "Pain Form"
   summary: """
   Pain is a pain in the popo. Help
-  us remove <b>pain</b><script>alert('foo')</script>. Am I annoying you
+  us remove pain. Am I annoying you
   yet..
   """
   pages: [
