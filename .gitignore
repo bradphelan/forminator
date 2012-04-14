@@ -2,3 +2,4 @@ build
 .*.*.sw*
 .*.swp*
 resources/sass/.sass-cache
+sdk
