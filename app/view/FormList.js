@@ -1,5 +1,4 @@
 (function() {
-  var _this = this;
 
   Ext.define('app.view.FormList', {
     extend: 'Ext.List',
@@ -8,15 +7,20 @@
     config: {
       flex: 1,
       itemTpl: '{title}',
-      bubbleEvents: 'selectForm',
-      listeners: {
-        initialize: function(me, opts) {
-          return me.setStore(Ext.create('app.model.SampleForms'));
-        },
+      bubbleEvents: 'selectForm'
+    },
+    initialize: function() {
+      var _this = this;
+      this.callParent(arguments);
+      this.setStore(Ext.create('app.model.SampleForms'));
+      return this.addListener({
         itemtap: function(list, index, item, record, e, opts) {
           return list.fireEvent('selectForm', record);
+        },
+        tap: function() {
+          return alert('foo');
         }
-      }
+      });
     }
   });
 

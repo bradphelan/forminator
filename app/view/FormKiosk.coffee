@@ -11,20 +11,16 @@ Ext.define "app.view.FormKiosk"
   ]
 
   initialize: ->
+    @callParent(arguments)
     @autowire [
-      'executeForm'
       'selectForm'
     ]
-
-  doExecuteForm: (record)->
-    app.view.MainNavigation.push record.createForm()
 
   doSelectForm: (record) ->
     formsummary = @query("formsummary")[0]
     @currentRecord = record
     formsummary.setRecord(record)
     formsummary.initialize()
-
 
   config:
     layout: 'vbox'

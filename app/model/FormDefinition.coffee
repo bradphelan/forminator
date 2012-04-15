@@ -161,7 +161,6 @@ Ext.define 'app.model.FormDefinition'
               listeners:
                 tap: (me)=>
                   me.fireEvent 'submitForm', record
-                  app.view.MainNavigation.pop()
             ]
 
 

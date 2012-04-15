@@ -170,8 +170,7 @@
                   text: 'SUBMIT!',
                   listeners: {
                     tap: function(me) {
-                      me.fireEvent('submitForm', record);
-                      return app.view.MainNavigation.pop();
+                      return me.fireEvent('submitForm', record);
                     }
                   }
                 }

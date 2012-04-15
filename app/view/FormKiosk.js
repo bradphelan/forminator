@@ -6,10 +6,8 @@
     currentRecord: null,
     requires: ['app.model.FormDefinition', 'app.view.FormSummary', 'app.view.FormList'],
     initialize: function() {
-      return this.autowire(['executeForm', 'selectForm']);
-    },
-    doExecuteForm: function(record) {
-      return app.view.MainNavigation.push(record.createForm());
+      this.callParent(arguments);
+      return this.autowire(['selectForm']);
     },
     doSelectForm: function(record) {
       var formsummary;

@@ -9,8 +9,12 @@ Ext.define  'app.view.FormList'
     flex: 1
     itemTpl: '{title}'
     bubbleEvents: 'selectForm'
-    listeners:
-      initialize: (me, opts)=>
-        me.setStore Ext.create('app.model.SampleForms')
+
+  initialize: ->
+    @callParent(arguments)
+    @setStore Ext.create('app.model.SampleForms')
+    @addListener
       itemtap: (list, index, item, record, e, opts) =>
         list.fireEvent 'selectForm', record
+      tap:=>
+        alert('foo')

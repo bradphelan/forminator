@@ -1,5 +1,4 @@
 Ext.define  'app.view.MainNavigation'
-  singleton: true
   extend: 'Ext.navigation.View'
   requires: [
     'app.view.FormKiosk'
@@ -13,10 +12,15 @@ Ext.define  'app.view.MainNavigation'
   initialize: ->
     @autowire [
       'submitForm'
+      'executeForm'
     ]
 
+  doExecuteForm: (record)->
+    @push record.createForm()
+
   doSubmitForm: (record) ->
-    app.view.MainNavigation.add
+    @pop()
+    @add
       xtype: 'modalformdata'
       record: record
 
