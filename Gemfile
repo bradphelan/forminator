@@ -7,5 +7,7 @@ group :development do
   gem "compass"
   gem "guard"
   gem "guard-coffeescript"
+  gem "growl"
+  gem "dedent"
 end
 
