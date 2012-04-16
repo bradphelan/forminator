@@ -16,3 +16,12 @@ else
   puts "Debug"
   set :public_folder, "./"
 end
+
+
+get "/forms.json" do
+  require 'json'
+  require 'yaml'
+  content_type :json
+  hash = YAML::load File.open "app/model/SampleForms.yaml"
+  hash.to_json
+end
