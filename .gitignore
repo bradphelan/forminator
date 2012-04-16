@@ -2,3 +2,4 @@
 .*.swp*
 resources/sass/.sass-cache
 /sdk
+/archive

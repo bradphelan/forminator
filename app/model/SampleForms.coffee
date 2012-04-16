@@ -7,14 +7,16 @@ Ext.define 'app.model.SampleForms'
     'Ext.data.Store'
   ]
 
-  proxy:
-    type: 'ajax'
-    url: "/forms.json"
-
-  autoLoad: true
 
   config:
     model: 'app.model.FormDefinition'
+
+    proxy:
+      type: 'ajax'
+      url: "/forms.json"
+      reader: "json"
+
+    autoLoad: true
 
   
 

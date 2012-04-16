@@ -6,6 +6,7 @@
 
   Ext.application({
     name: "app",
+    profiles: ['Tablet'],
     requires: ["app.model.CoreExtensions", "Ext.MessageBox", "app.view.MainNavigation", 'app.controller.Forms'],
     views: ["app.view.MainNavigation"],
     controllers: [],
@@ -17,11 +18,6 @@
     },
     phoneStartupScreen: "resources/loading/Homescreen.jpg",
     tabletStartupScreen: "resources/loading/Homescreen~ipad.jpg",
-    launch: function() {
-      app.model.CoreExtensions;
-      Ext.fly("appLoadingIndicator").destroy();
-      return Ext.Viewport.add(Ext.create('app.view.MainNavigation'));
-    },
     onUpdated: function() {
       return Ext.Msg.confirm("Application Update", "This application has just successfully been updated to the latest version. Reload now?", function() {
         return window.location.reload();

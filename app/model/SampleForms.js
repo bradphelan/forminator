@@ -3,13 +3,14 @@
   Ext.define('app.model.SampleForms', {
     extend: 'Ext.data.Store',
     requires: ['app.model.FormDefinition', 'Ext.data.Store'],
-    proxy: {
-      type: 'ajax',
-      url: "/forms.json"
-    },
-    autoLoad: true,
     config: {
-      model: 'app.model.FormDefinition'
+      model: 'app.model.FormDefinition',
+      proxy: {
+        type: 'ajax',
+        url: "/forms.json",
+        reader: "json"
+      },
+      autoLoad: true
     }
   });
 

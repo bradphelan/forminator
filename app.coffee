@@ -3,6 +3,7 @@ Ext.Loader.setPath Ext: "sdk/src"
 
 Ext.application
   name: "app"
+  profiles: ['Tablet']
   requires: [
     "app.model.CoreExtensions"
     "Ext.MessageBox"
@@ -20,10 +21,6 @@ Ext.application
 
   phoneStartupScreen: "resources/loading/Homescreen.jpg"
   tabletStartupScreen: "resources/loading/Homescreen~ipad.jpg"
-  launch: ->
-    app.model.CoreExtensions
-    Ext.fly("appLoadingIndicator").destroy()
-    Ext.Viewport.add Ext.create 'app.view.MainNavigation'
 
   onUpdated: ->
     Ext.Msg.confirm "Application Update", "This application has just successfully been updated to the latest version. Reload now?", ->
