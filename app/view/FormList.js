@@ -1,7 +1,7 @@
 (function() {
 
   Ext.define('app.view.FormList', {
-    extend: 'Ext.List',
+    extend: 'Ext.dataview.List',
     requires: ['app.model.SampleForms'],
     xtype: 'formlist',
     config: {

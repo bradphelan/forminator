@@ -17,11 +17,12 @@
       return this.push(record.createForm());
     },
     doSubmitForm: function(record) {
+      var panel;
       this.pop();
-      return this.add({
-        xtype: 'modalformdata',
+      panel = Ext.create('app.view.ModalFormData', {
         record: record
       });
+      return Ext.Viewport.add(panel);
     }
   });
 

@@ -108,7 +108,6 @@
             }
           },
           'initialize': function() {
-            console.log("initialized");
             return _this;
           }
         },

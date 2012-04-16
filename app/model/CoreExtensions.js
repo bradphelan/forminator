@@ -27,7 +27,6 @@
             event = events[_i];
             h = {};
             m = "do" + (Ext.String.capitalize(event));
-            console.log(m);
             h[event] = (function(m) {
               return function() {
                 return _this[m].apply(_this, arguments);

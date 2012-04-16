@@ -25,7 +25,6 @@ Ext.define 'app.model.CoreExtensions',
         for event in events
           h = {}
           m = "do#{Ext.String.capitalize event}"
-          console.log m
           h[event]= do (m)=>
             => @[m](arguments...)
           @addListener h

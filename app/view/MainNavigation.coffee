@@ -20,7 +20,7 @@ Ext.define  'app.view.MainNavigation'
 
   doSubmitForm: (record) ->
     @pop()
-    @add
-      xtype: 'modalformdata'
+    panel = Ext.create 'app.view.ModalFormData'
       record: record
+    Ext.Viewport.add panel
 

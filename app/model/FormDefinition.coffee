@@ -106,7 +106,6 @@ Ext.define 'app.model.FormDefinition'
             record.set(field.getName(), field.getValue())
 
         'initialize': =>
-          console.log "initialized"
           @
 
       items: @get('pages').getData().collect (page, index) =>
