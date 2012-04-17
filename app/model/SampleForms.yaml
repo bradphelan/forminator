@@ -150,11 +150,6 @@
     - name: q4
       label: Körpergewicht kg
       type: integer
-  - title: Ihre Schmerzen
-    help: |-
-      Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre
-      Schmerzen auftreten 
-    items: []
   - title: "5 - 6"
     items: 
     - name: "q5_a"
