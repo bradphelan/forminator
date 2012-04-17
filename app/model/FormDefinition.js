@@ -2,7 +2,7 @@
 
   Ext.define('app.model.FormDefinition', {
     extend: 'Ext.data.Model',
-    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.Page', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
+    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.Page', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
     config: {
       identifier: 'uuid',
       fields: [
