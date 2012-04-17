@@ -4,6 +4,6 @@ Ext.define 'app.model.form.Select'
   createSelectField: ->
     xtype: 'selectfield'
     name: @get('name')
-    label: 'choose'
+    label: @createLabel()
     options: @options()
 

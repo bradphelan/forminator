@@ -5,6 +5,10 @@ Ext.define 'app.model.form.Option'
       name: 'name'
       type: 'string'
     ,
+      name: 'label'
+      type: 'string'
+      defaultValue: null
+    ,
       name: 'options'
       type: 'array'
     ,
@@ -12,9 +16,15 @@ Ext.define 'app.model.form.Option'
       type: 'string'
     ]
 
+  createLabel: ->
+    if @get('label')?
+      @get('label')
+    else
+      @get('name').replace /_/, '<br/> '
+
   options: ->
     @get('options').map (option)->
-      if option.name? and option.value?
+      if option.text? and option.value?
         option
       else
         text: option

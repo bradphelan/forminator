@@ -12,7 +12,7 @@ Ext.define 'app.model.form.Radio'
 
     label =
       xtype: 'label'
-      html: "<i style='padding: 0.6em'>#{@get('name')}</i>"
+      html: "<i style='padding: 0.6em'>#{@createLabel()}</i>"
 
     items = [label, items...]
 

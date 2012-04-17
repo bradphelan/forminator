@@ -8,6 +8,10 @@
           name: 'name',
           type: 'string'
         }, {
+          name: 'label',
+          type: 'string',
+          defaultValue: null
+        }, {
           name: 'options',
           type: 'array'
         }, {
@@ -16,9 +20,16 @@
         }
       ]
     },
+    createLabel: function() {
+      if (this.get('label') != null) {
+        return this.get('label');
+      } else {
+        return this.get('name').replace(/_/, '<br/> ');
+      }
+    },
     options: function() {
       return this.get('options').map(function(option) {
-        if ((option.name != null) && (option.value != null)) {
+        if ((option.text != null) && (option.value != null)) {
           return option;
         } else {
           return {

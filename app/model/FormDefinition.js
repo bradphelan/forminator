@@ -67,6 +67,7 @@
           item = _ref1[_j];
           fields.push({
             name: item.name,
+            label: item.label,
             type: item.type != null ? item.type : 'string'
           });
         }

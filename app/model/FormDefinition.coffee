@@ -70,6 +70,7 @@ Ext.define 'app.model.FormDefinition'
       for item in page.items
         fields.push
           name: item.name
+          label: item.label
           type: if item.type? then item.type else 'string'
 
     class_name = "app.model.FormDefinition.ImplicitModel-#{@getId()}"

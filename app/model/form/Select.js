@@ -6,7 +6,7 @@
       return {
         xtype: 'selectfield',
         name: this.get('name'),
-        label: 'choose',
+        label: this.createLabel(),
         options: this.options()
       };
     }

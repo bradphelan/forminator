@@ -17,7 +17,7 @@
       });
       label = {
         xtype: 'label',
-        html: "<i style='padding: 0.6em'>" + (this.get('name')) + "</i>"
+        html: "<i style='padding: 0.6em'>" + (this.createLabel()) + "</i>"
       };
       return items = [label].concat(__slice.call(items));
     },

@@ -8,6 +8,10 @@ Ext.define 'app.model.form.Text'
       name: 'type'
       type: 'string'
       defaultValue: 'string'
+    ,
+      name: 'label'
+      type: 'string'
+      defaultValue: null
     ]
 
   requires: [
@@ -31,7 +35,10 @@ Ext.define 'app.model.form.Text'
         'textfield'
 
   createLabel: ->
-    @get('name').replace /_/, '<br/> '
+    if @get('label')?
+      @get('label')
+    else
+      @get('name').replace /_/, '<br/> '
   createField: ->
     xtype: @mapXType()
     name: @get('name')

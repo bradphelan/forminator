@@ -11,6 +11,10 @@
           name: 'type',
           type: 'string',
           defaultValue: 'string'
+        }, {
+          name: 'label',
+          type: 'string',
+          defaultValue: null
         }
       ]
     },
@@ -35,7 +39,11 @@
       }
     },
     createLabel: function() {
-      return this.get('name').replace(/_/, '<br/> ');
+      if (this.get('label') != null) {
+        return this.get('label');
+      } else {
+        return this.get('name').replace(/_/, '<br/> ');
+      }
     },
     createField: function() {
       return {
