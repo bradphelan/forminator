@@ -16,6 +16,18 @@
         }
       ]
     },
+    options: function() {
+      return this.get('options').map(function(option) {
+        if ((option.name != null) && (option.value != null)) {
+          return option;
+        } else {
+          return {
+            text: option,
+            value: option
+          };
+        }
+      });
+    },
     createField: function() {
       throw "Abstract class";
     }

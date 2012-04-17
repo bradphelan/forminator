@@ -114,7 +114,7 @@
           }
         },
         items: this.get('pages').getData().collect(function(page, index) {
-          var panel;
+          var fieldSetContext, fieldsets, newFieldSet, panel;
           panel = Ext.create('Ext.Panel', {
             layout: 'vbox'
           });
@@ -148,14 +148,38 @@
             html: page.get('help'),
             padding: 20
           });
+          fieldsets = [];
+          newFieldSet = function() {
+            fieldsets.push({
+              xtype: 'fieldset',
+              layout: 'vbox',
+              items: []
+            });
+            return fieldsets;
+          };
+          fieldSetContext = function(item, fn) {
+            var closeFieldSet;
+            closeFieldSet = false;
+            if (item.asFieldSet != null) {
+              newFieldSet();
+              closeFieldSet = true;
+            } else if (fieldsets.length === 0) {
+              newFieldSet();
+            }
+            fn(fieldsets[fieldsets.length - 1].items);
+            if (item.asFieldSet != null) {
+              return newFieldSet();
+            }
+          };
+          page.get('items').getData().each(function(item) {
+            return fieldSetContext(item, function(items) {
+              return items.push(item.createField());
+            });
+          });
           panel.add({
-            xtype: 'fieldset',
+            xtype: 'panel',
             layout: 'vbox',
-            centered: true,
-            width: "75%",
-            items: page.get('items').getData().collect(function(item) {
-              return item.createField();
-            })
+            items: fieldsets
           });
           if (index === _this.pagesCount() - 1) {
             panel.add({

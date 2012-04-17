@@ -7,7 +7,7 @@
         xtype: 'selectfield',
         name: this.get('name'),
         label: 'choose',
-        options: this.get('options')
+        options: this.options()
       };
     }
   });

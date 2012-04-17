@@ -34,11 +34,15 @@
           return 'textfield';
       }
     },
+    createLabel: function() {
+      return this.get('name').replace(/_/, '<br/> ');
+    },
     createField: function() {
       return {
         xtype: this.mapXType(),
         name: this.get('name'),
-        label: this.get('name') + " <i>(" + this.get('type') + ")</i>"
+        label: this.createLabel() + " <i>(" + this.get('type') + ")</i>",
+        labelWrap: true
       };
     }
   });

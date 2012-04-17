@@ -137,13 +137,36 @@ Ext.define 'app.model.FormDefinition'
           padding: 20
 
         # Add the fieldset
+        fieldsets = []
+
+        newFieldSet = =>
+          fieldsets.push
+            xtype: 'fieldset'
+            layout: 'vbox'
+            items: []
+          fieldsets
+
+        fieldSetContext = (item, fn)=>
+          closeFieldSet = false
+          if item.asFieldSet?
+            newFieldSet()
+            closeFieldSet = true
+          else if fieldsets.length == 0
+            newFieldSet()
+
+          fn(fieldsets[fieldsets.length - 1 ].items)
+
+          if item.asFieldSet?
+            newFieldSet()
+
+        page.get('items').getData().each (item)=>
+          fieldSetContext item, (items)=>
+            items.push item.createField()
+          
         panel.add
-          xtype: 'fieldset'
+          xtype: 'panel'
           layout: 'vbox'
-          centered: true
-          width: "75%"
-          items: page.get('items').getData().collect (item)=>
-            item.createField()
+          items: fieldsets
 
         if index == @pagesCount() - 1
           panel.add

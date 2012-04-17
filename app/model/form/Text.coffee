@@ -30,8 +30,11 @@ Ext.define 'app.model.form.Text'
       else
         'textfield'
 
+  createLabel: ->
+    @get('name').replace /_/, '<br/> '
   createField: ->
     xtype: @mapXType()
     name: @get('name')
-    label: @get('name') +  " <i>("  + @get('type') + ")</i>"
+    label: @createLabel() +  " <i>("  + @get('type') + ")</i>"
+    labelWrap: true
 

@@ -13,8 +13,6 @@
     items: 
     - type: integer
       name: fieldA
-      xtype: option
-      as: radio
       options: 
       - text: bad
         value: 0
@@ -25,8 +23,7 @@
   - title: What is your face like?
     help: An ugly face can make you sick. How is yours?
     items: 
-    - xtype: option
-      type: integer
+    - type: integer
       name: fieldB
       as: select
       options: 
@@ -45,8 +42,7 @@
   - title: How do you feel today
     help: On average how do you feel today?
     items: 
-    - xtype: option
-      type: integer
+    - type: integer
       name: today
       as: radio
       options: 
@@ -61,7 +57,6 @@
     items: 
     - name: yesterday
       type: integer
-      xtype: option
       as: radio
       options: 
       - text: bad
@@ -76,7 +71,6 @@
     - type: integer
       name: last_week
       as: radio
-      xtype: option
       options: 
       - text: bad
         value: 0
@@ -85,3 +79,80 @@
       - text: excelent
         value: 2
 
+- title: Deutscher Schmerz-Fragebogen
+  id: b0dccce0-88a4-11e1-b0c4-0800200c9a66
+  summary: |-
+    Sehr geehrte Patientin, sehr geehrter Patient, 
+  
+    sicher haben Sie selbst schon erlebt wie schwierig es ist, Ihrem Arzt eine genaue Beschreibung Ihrer Schmerzen 
+    zu geben. Er ist jedoch darauf angewiesen, zu erfahren, wie Ihre Schmerzen beschaffen sind und wie Sie auf die 
+    Schmerzbehandlung ansprechen.
+    Ihre Angaben in diesem Fragebogen dienen der Vorbereitung des ersten ärztlichen Gespräches und der 
+    Basisuntersuchung. In Ihrem eigenen Interesse möchten wir Sie deshalb bitten, alle Fragen in Ruhe und mit 
+    Sorgfalt zu beantworten. 
+    Bitte beantworten Sie alle Fragen, auch die, die Ihnen unwichtig erscheinen. Wenn Ihnen eine Frage unklar ist, 
+    machen Sie bitte vor der entsprechenden Frage ein Fragezeichen.  
+    Ihre Daten unterliegen der ärztlichen Schweigepflicht. Die Bearbeitung Ihrer Angaben in unserer 
+    schmerztherapeutischen Einrichtung entspricht den Bestimmungen des Bundesdatenschutzgesetzes.  
+    Ihre Fragebogendaten werden in einen EDV-Dokumentationssystem gespeichert, das nur berechtigten 
+    Mitarbeitern unserer Abteilung zugänglich ist. Diese sind zur Verschwiegenheit verpflichtet.  
+    Zur Verbesserung der Versorgung werden Daten für eine externe Qualitätssicherung herangezogen. Dabei 
+    werden die Daten pseudonymisiert, d.h. sie können Ihnen nicht zugeordnet werden.  
+    Wir bitten Sie hiermit um Ihr Einverständnis zur Abspeicherung der Daten. Dieses Einverständnis können Sie 
+    jeder Zeit widerrufen.  
+
+    Copyright- www.dgss.org 
+
+  pages:
+  - title: Einverständniserklärung
+    help: |-
+      Ich bin mit der Abspeicherung und der pseudonymisierten Verwendung der im Fragebogen erhobenen Daten 
+      einverstanden.
+    items:
+    - name: ort
+    - type: date
+      name: datum
+    - name: vorname
+    - name: nachname
+
+  - title: Nicht Für Patienten
+    help: |-
+      Die folgenden vier Zeilen bitte nicht ausfüllen! 
+    items:
+    - name: patienten_nr
+    - name: ausgabe_datum
+      type: date
+    - name: eingangs_datum
+      type: date
+    - name: erster_behandlungstermin 
+      type: date
+
+  - title: Patient
+    help:
+    items:
+    - name: patienten_name
+    - name: datum_beim_aüsfullen
+      type: date
+  - title: Data
+    help:
+    items:
+    - name: geburts_datum
+      type: date
+    - name: alter
+      type: int
+    - name: geschlect
+      options:
+        - männlich
+        - weiblich
+    - name: körpergrosse_cm
+      type: integer
+    - name: körpergewicht_kg
+      type: integer
+  - title: Ihre Schmerzen
+    help: |-
+      Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre
+      Schmerzen auftreten 
+    items: []
+
+
+    

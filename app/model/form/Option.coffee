@@ -12,6 +12,14 @@ Ext.define 'app.model.form.Option'
       type: 'string'
     ]
 
+  options: ->
+    @get('options').map (option)->
+      if option.name? and option.value?
+        option
+      else
+        text: option
+        value: option
+
   createField: ->
     throw "Abstract class"
 
