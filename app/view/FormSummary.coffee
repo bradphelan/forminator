@@ -4,6 +4,8 @@ Ext.define 'app.view.FormSummary'
   config:
     layout: 'vbox'
     record: {}
+    scrollable:
+      direction: 'vertical'
 
 
   st: (txt)->

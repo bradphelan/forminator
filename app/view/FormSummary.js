@@ -5,7 +5,10 @@
     xtype: 'formsummary',
     config: {
       layout: 'vbox',
-      record: {}
+      record: {},
+      scrollable: {
+        direction: 'vertical'
+      }
     },
     st: function(txt) {
       return new Ext.Template(txt, {

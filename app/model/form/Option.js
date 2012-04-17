@@ -16,43 +16,8 @@
         }
       ]
     },
-    createRadioField: function() {
-      var _this = this;
-      return {
-        xtype: 'panel',
-        items: this.get('options').map(function(option) {
-          return {
-            xtype: 'radiofield',
-            value: option.value,
-            label: option.text,
-            name: _this.get('name')
-          };
-        })
-      };
-    },
-    createSelectField: function() {
-      return {
-        xtype: 'selectfield',
-        name: this.get('name'),
-        label: 'choose',
-        options: this.get('options')
-      };
-    },
-    createPickerField: function() {
-      return {
-        xtype: 'picker',
-        name: this.get('name'),
-        label: 'choose',
-        options: this.get('options')
-      };
-    },
     createField: function() {
-      switch (this.get('as')) {
-        case 'radio':
-          return this.createRadioField();
-        case 'select':
-          return this.createSelectField();
-      }
+      throw "Abstract class";
     }
   });
 

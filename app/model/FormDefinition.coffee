@@ -27,15 +27,14 @@ Ext.define 'app.model.FormDefinition'
       type: 'string'
     ]
 
-  pagesCount: ->
-    @get('pages').getCount()
-
-  itemTypeMap: (xtype)->
-    switch (xtype)
-      when 'option'
-        'app.model.form.Option'
+  itemTypeMap: (item)->
+    if item.options?
+      if item.options.length > 6
+        'app.model.form.Select'
       else
-        raise "Argggh!"
+        'app.model.form.Radio'
+    else
+      'app.model.form.Text'
 
   constructor: (@json)->
     @callParent()
@@ -51,7 +50,7 @@ Ext.define 'app.model.FormDefinition'
         model: 'app.model.Page'
         data: json.pages.map (page)=>
           items = page.items.map (item)=>
-            Ext.create @itemTypeMap(item.xtype), item
+            Ext.create @itemTypeMap(item), item
 
           page.items = Ext.create 'Ext.data.Store'
             data: items

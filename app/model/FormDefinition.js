@@ -18,29 +18,31 @@
         }
       ]
     },
-    pagesCount: function() {
-      return this.get('pages').getCount();
-    },
-    itemTypeMap: function(xtype) {
-      switch (xtype) {
-        case 'option':
-          return 'app.model.form.Option';
-        default:
-          return raise("Argggh!");
+    itemTypeMap: function(item) {
+      if (item.options != null) {
+        if (item.options.length > 6) {
+          return 'app.model.form.Select';
+        } else {
+          return 'app.model.form.Radio';
+        }
+      } else {
+        return 'app.model.form.Text';
       }
     },
     constructor: function(json) {
       var _this = this;
       this.json = json;
       this.callParent();
-      if (json.constructor === String) this.json = Ext.JSON.decode(json, true);
+      if (json.constructor === String) {
+        this.json = Ext.JSON.decode(json, true);
+      }
       json = Ext.clone(this.json);
       this.set('pages', Ext.create('Ext.data.Store', {
         model: 'app.model.Page',
         data: json.pages.map(function(page) {
           var items;
           items = page.items.map(function(item) {
-            return Ext.create(_this.itemTypeMap(item.xtype), item);
+            return Ext.create(_this.itemTypeMap(item), item);
           });
           page.items = Ext.create('Ext.data.Store', {
             data: items
@@ -55,14 +57,14 @@
       return this.get('pages').getData().length;
     },
     createModelClass: function() {
-      var class_name, fields, item, page, _i, _j, _len, _len2, _ref, _ref2;
+      var class_name, fields, item, page, _i, _j, _len, _len1, _ref, _ref1;
       fields = [];
       _ref = this.json.pages;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         page = _ref[_i];
-        _ref2 = page.items;
-        for (_j = 0, _len2 = _ref2.length; _j < _len2; _j++) {
-          item = _ref2[_j];
+        _ref1 = page.items;
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          item = _ref1[_j];
           fields.push({
             name: item.name,
             type: item.type != null ? item.type : 'string'
