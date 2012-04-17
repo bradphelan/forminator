@@ -1,26 +1,10 @@
 Ext.define 'app.model.form.Option'
-  extend: 'Ext.data.Model'
+  extend: 'app.model.form.Field'
   config:
     fields: [
-      name: 'name'
-      type: 'string'
-    ,
-      name: 'label'
-      type: 'string'
-      defaultValue: null
-    ,
       name: 'options'
       type: 'array'
-    ,
-      name: 'as'
-      type: 'string'
     ]
-
-  createLabel: ->
-    if @get('label')?
-      @get('label')
-    else
-      @get('name').replace /_/, '<br/> '
 
   options: ->
     @get('options').map (option)->
@@ -30,6 +14,4 @@ Ext.define 'app.model.form.Option'
         text: option
         value: option
 
-  createField: ->
-    throw "Abstract class"
 

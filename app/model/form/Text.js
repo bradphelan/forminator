@@ -1,7 +1,7 @@
 (function() {
 
   Ext.define('app.model.form.Text', {
-    extend: 'Ext.data.Model',
+    extend: 'app.model.form.Field',
     config: {
       fields: [
         {
@@ -36,13 +36,6 @@
           return 'numberfield';
         default:
           return 'textfield';
-      }
-    },
-    createLabel: function() {
-      if (this.get('label') != null) {
-        return this.get('label');
-      } else {
-        return this.get('name').replace(/_/, '<br/> ');
       }
     },
     createField: function() {

@@ -1,5 +1,5 @@
 Ext.define 'app.model.form.Text'
-  extend: 'Ext.data.Model'
+  extend: 'app.model.form.Field'
   config:
     fields: [
       name: 'name'
@@ -34,11 +34,6 @@ Ext.define 'app.model.form.Text'
       else
         'textfield'
 
-  createLabel: ->
-    if @get('label')?
-      @get('label')
-    else
-      @get('name').replace /_/, '<br/> '
   createField: ->
     xtype: @mapXType()
     name: @get('name')
