@@ -24,7 +24,7 @@ Ext.define 'app.model.form.Field'
     else
       @get('name')
 
-    l.replace /_/, ' '
+    Ext.String.capitalize(l.replace /_/, ' ')
        
 
   createItems: ->

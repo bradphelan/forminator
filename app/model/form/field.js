@@ -25,7 +25,7 @@
     createLabel: function() {
       var l;
       l = this.get('label') != null ? this.get('label') : this.get('name');
-      return l.replace(/_/, ' ');
+      return Ext.String.capitalize(l.replace(/_/, ' '));
     },
     createItems: function() {
       var items;
