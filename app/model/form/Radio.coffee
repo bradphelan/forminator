@@ -10,9 +10,14 @@ Ext.define 'app.model.form.Radio'
       label: option.text
       name: @get('name')
 
+    if @get('help')?
+      text = get('help')
+    else
+      text = @createLabel()
+
     label =
       xtype: 'label'
-      html: "<i style='padding: 0.6em'>#{@createLabel()}</i>"
+      html: "<i style='padding: 0.6em'>#{text}</i>"
 
     items = [label, items...]
 

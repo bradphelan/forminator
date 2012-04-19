@@ -2,22 +2,6 @@
 
   Ext.define('app.model.form.Text', {
     extend: 'app.model.form.Field',
-    config: {
-      fields: [
-        {
-          name: 'name',
-          type: 'string'
-        }, {
-          name: 'type',
-          type: 'string',
-          defaultValue: 'string'
-        }, {
-          name: 'label',
-          type: 'string',
-          defaultValue: null
-        }
-      ]
-    },
     requires: ['Ext.form.DatePicker', 'Ext.form.Password', 'Ext.form.Email', 'Ext.form.Number', 'Ext.form.TextArea', 'Ext.form.Url'],
     mapXType: function() {
       switch (this.get('type')) {
@@ -42,7 +26,7 @@
       return {
         xtype: this.mapXType(),
         name: this.get('name'),
-        label: this.createLabel() + " <i>(" + this.get('type') + ")</i>",
+        label: this.createLabel(),
         labelWrap: true
       };
     }

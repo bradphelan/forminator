@@ -5,7 +5,7 @@
     extend: 'app.model.form.Option',
     asFieldSet: true,
     createItems: function() {
-      var items, label,
+      var items, label, text,
         _this = this;
       items = this.options().map(function(option) {
         return {
@@ -15,9 +15,14 @@
           name: _this.get('name')
         };
       });
+      if (this.get('help') != null) {
+        text = get('help');
+      } else {
+        text = this.createLabel();
+      }
       label = {
         xtype: 'label',
-        html: "<i style='padding: 0.6em'>" + (this.createLabel()) + "</i>"
+        html: "<i style='padding: 0.6em'>" + text + "</i>"
       };
       return items = [label].concat(__slice.call(items));
     },

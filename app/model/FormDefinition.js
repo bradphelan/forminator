@@ -174,7 +174,7 @@
           };
           page.get('items').getData().each(function(item) {
             return fieldSetContext(item, function(items) {
-              return items.push(item.createField());
+              return items.push(item.createComponent());
             });
           });
           panel.add({

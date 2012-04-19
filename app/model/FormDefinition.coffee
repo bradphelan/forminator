@@ -166,7 +166,7 @@ Ext.define 'app.model.FormDefinition'
 
         page.get('items').getData().each (item)=>
           fieldSetContext item, (items)=>
-            items.push item.createField()
+            items.push item.createComponent()
           
         panel.add
           xtype: 'panel'

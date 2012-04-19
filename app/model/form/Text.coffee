@@ -1,18 +1,5 @@
 Ext.define 'app.model.form.Text'
   extend: 'app.model.form.Field'
-  config:
-    fields: [
-      name: 'name'
-      type: 'string'
-    ,
-      name: 'type'
-      type: 'string'
-      defaultValue: 'string'
-    ,
-      name: 'label'
-      type: 'string'
-      defaultValue: null
-    ]
 
   requires: [
     'Ext.form.DatePicker'
@@ -37,6 +24,5 @@ Ext.define 'app.model.form.Text'
   createField: ->
     xtype: @mapXType()
     name: @get('name')
-    label: @createLabel() +  " <i>("  + @get('type') + ")</i>"
+    label: @createLabel()
     labelWrap: true
-

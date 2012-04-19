@@ -12,6 +12,10 @@ Ext.define 'app.model.form.Field'
       name: 'label'
       type: 'string'
       defaultValue: null
+    ,
+      name: 'help'
+      type: 'string'
+      defaultValue: null
     ]
 
   createLabel: ->
@@ -19,12 +23,24 @@ Ext.define 'app.model.form.Field'
       @get('label')
     else
       @get('name')
-       
-    l = """
-    <span style="white-space: normal !important">
-      #{l}
-    </span>
-    """
 
-  createField: ->
-    throw "Abstract class"
+    l.replace /_/, ' '
+       
+
+  createItems: ->
+
+    items = []
+
+    items.push @createField()
+
+    if @get('help')?
+      items.push
+        xtype:'label'
+        html: @get('help')
+        cls: 'assist'
+
+    items
+
+  createComponent: ->
+    xtype: 'panel'
+    items: @createItems()

@@ -84,22 +84,27 @@
   summary: |-
     Sehr geehrte Patientin, sehr geehrter Patient, 
   
-    sicher haben Sie selbst schon erlebt wie schwierig es ist, Ihrem Arzt eine genaue Beschreibung Ihrer Schmerzen 
-    zu geben. Er ist jedoch darauf angewiesen, zu erfahren, wie Ihre Schmerzen beschaffen sind und wie Sie auf die 
-    Schmerzbehandlung ansprechen.
-    Ihre Angaben in diesem Fragebogen dienen der Vorbereitung des ersten ärztlichen Gespräches und der 
-    Basisuntersuchung. In Ihrem eigenen Interesse möchten wir Sie deshalb bitten, alle Fragen in Ruhe und mit 
-    Sorgfalt zu beantworten. 
-    Bitte beantworten Sie alle Fragen, auch die, die Ihnen unwichtig erscheinen. Wenn Ihnen eine Frage unklar ist, 
-    machen Sie bitte vor der entsprechenden Frage ein Fragezeichen.  
-    Ihre Daten unterliegen der ärztlichen Schweigepflicht. Die Bearbeitung Ihrer Angaben in unserer 
-    schmerztherapeutischen Einrichtung entspricht den Bestimmungen des Bundesdatenschutzgesetzes.  
-    Ihre Fragebogendaten werden in einen EDV-Dokumentationssystem gespeichert, das nur berechtigten 
-    Mitarbeitern unserer Abteilung zugänglich ist. Diese sind zur Verschwiegenheit verpflichtet.  
-    Zur Verbesserung der Versorgung werden Daten für eine externe Qualitätssicherung herangezogen. Dabei 
-    werden die Daten pseudonymisiert, d.h. sie können Ihnen nicht zugeordnet werden.  
-    Wir bitten Sie hiermit um Ihr Einverständnis zur Abspeicherung der Daten. Dieses Einverständnis können Sie 
-    jeder Zeit widerrufen.  
+    sicher haben Sie selbst schon erlebt wie schwierig es ist, Ihrem
+    Arzt eine genaue Beschreibung Ihrer Schmerzen zu geben. Er ist jedoch
+    darauf angewiesen, zu erfahren, wie Ihre Schmerzen beschaffen sind
+    und wie Sie auf die Schmerzbehandlung ansprechen.  Ihre Angaben in
+    diesem Fragebogen dienen der Vorbereitung des ersten ärztlichen
+    Gespräches und der Basisuntersuchung. In Ihrem eigenen Interesse
+    möchten wir Sie deshalb bitten, alle Fragen in Ruhe und mit Sorgfalt
+    zu beantworten.  Bitte beantworten Sie alle Fragen, auch die, die
+    Ihnen unwichtig erscheinen. Wenn Ihnen eine Frage unklar ist, machen
+    Sie bitte vor der entsprechenden Frage ein Fragezeichen.  Ihre Daten
+    unterliegen der ärztlichen Schweigepflicht. Die Bearbeitung Ihrer
+    Angaben in unserer schmerztherapeutischen Einrichtung entspricht den
+    Bestimmungen des Bundesdatenschutzgesetzes.  Ihre Fragebogendaten
+    werden in einen EDV-Dokumentationssystem gespeichert, das nur
+    berechtigten Mitarbeitern unserer Abteilung zugänglich ist. Diese
+    sind zur Verschwiegenheit verpflichtet.  Zur Verbesserung der
+    Versorgung werden Daten für eine externe Qualitätssicherung
+    herangezogen. Dabei werden die Daten pseudonymisiert, d.h. sie können
+    Ihnen nicht zugeordnet werden.  Wir bitten Sie hiermit um Ihr
+    Einverständnis zur Abspeicherung der Daten. Dieses Einverständnis
+    können Sie jeder Zeit widerrufen.  
 
     Copyright- www.dgss.org 
 
@@ -110,7 +115,9 @@
       einverstanden.
     items:
     - name: ort
+      help: "Place where you live"
     - type: date
+      help: "Current date today"
       name: datum
     - name: vorname
     - name: nachname
@@ -150,14 +157,16 @@
     - name: q4
       label: Körpergewicht kg
       type: integer
+
   - title: "5 - 6"
     items: 
     - name: "q5_a"
-      label: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
+      help: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
     - name: "q5_b"
-      label: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
+      help: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
     - name: "q6"
-      label: Wegen welcher Schmerzen kommen Sie hauptsächlich zur Behandlung?
+      help: Wegen welcher Schmerzen kommen Sie hauptsächlich zur Behandlung?
+
   - title: "7"
     items:
       - name: q7_a
