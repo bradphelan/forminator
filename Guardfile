@@ -42,9 +42,17 @@ module ::Guard
 end
 
 guard 'coffeescript' do
-  watch %r{.+\.coffee$}
+  watch %r{^app/.+\.coffee$}
+  watch %r{^app.coffee$}
 end
 
 guard 'yaml2json' do
   watch %r{app/model/.+\.yaml$}
+end
+
+config = File.expand_path "../resources/sass/config.rb", __FILE__
+path = File.expand_path "../..", config
+
+guard 'compass', :project_path => path,  :configuration_file => config do
+  watch %r{resources/.+\.scss}
 end
