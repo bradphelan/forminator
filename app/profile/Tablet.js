@@ -4,7 +4,7 @@
     extend: 'Ext.app.Profile',
     views: ["app.view.MainNavigation"],
     isActive: function() {
-      return (Ext.os.is.Tablet || Ext.os.is.Desktop) && Ext.browser.is.Chrome;
+      return (Ext.os.is.Tablet || Ext.os.is.Desktop) && (Ext.browser.is.IE || Ext.browser.is.Webkit || Ext.browser.is.Gecko || Ext.browser.is.Opera || Ext.browser.is.Chrome);
     },
     launch: function() {
       app.model.CoreExtensions;
