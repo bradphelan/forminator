@@ -3,3 +3,4 @@
 resources/sass/.sass-cache
 /sdk
 /archive
+.sass-cache
