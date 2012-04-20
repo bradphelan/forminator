@@ -33,10 +33,7 @@ Ext.define 'app.model.FormDefinition'
 
   itemTypeMap: (item)->
     if item.options?
-      if item.options.length > 6
-        'app.model.form.Select'
-      else
-        'app.model.form.Radio'
+      'app.model.form.Radio'
     else
       'app.model.form.Text'
 
