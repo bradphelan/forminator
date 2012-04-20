@@ -133,42 +133,18 @@ Ext.define 'app.model.FormDefinition'
                 pagesUI.setActiveItem(index+1)
           ]
 
-        panel.add
-          xtype: 'label'
-          html: page.get('help')
-          padding: 20
-
-        # Add the fieldset
-        fieldsets = []
-
-        newFieldSet = =>
-          fieldsets.push
-            xtype: 'fieldset'
-            layout: 'vbox'
-            items: []
-          fieldsets
-
-        fieldSetContext = (item, fn)=>
-          closeFieldSet = false
-          if item.asFieldSet?
-            newFieldSet()
-            closeFieldSet = true
-          else if fieldsets.length == 0
-            newFieldSet()
-
-          fn(fieldsets[fieldsets.length - 1 ].items)
-
-          if item.asFieldSet?
-            newFieldSet()
-
-        page.get('items').getData().each (item)=>
-          fieldSetContext item, (items)=>
-            items.push item.createComponent()
-          
+        
         panel.add
           xtype: 'panel'
           layout: 'vbox'
-          items: fieldsets
+          items: [
+            xtype: 'label'
+            html: page.get('help')
+            padding: 20
+          ,
+            xtype: 'panel'
+            items: page.get('items').getData().collect (item)=> item.createComponent()
+          ]
 
         if index == @pagesCount() - 1
           panel.add
