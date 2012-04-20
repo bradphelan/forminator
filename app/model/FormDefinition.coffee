@@ -92,6 +92,9 @@ Ext.define 'app.model.FormDefinition'
       padding: 0
       title: @get('title')
       layout: 'card'
+      scrollable: false
+
+
       listeners:
         'change':
           'delegate': 'field'
@@ -111,11 +114,12 @@ Ext.define 'app.model.FormDefinition'
 
       items: @get('pages').getData().collect (page, index) =>
         panel = Ext.create 'Ext.Panel'
-          layout: 'vbox'
+          scrollable: 'vertical'
 
         panel.add
           xtype: 'titlebar'
           title: page.get('title')
+          docked: "top"
 
           items: [
             iconCls: 'arrow_left'
@@ -136,7 +140,6 @@ Ext.define 'app.model.FormDefinition'
         
         panel.add
           xtype: 'panel'
-          layout: 'vbox'
           items: [
             xtype: 'label'
             html: page.get('help')
