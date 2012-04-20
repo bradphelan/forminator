@@ -1,7 +1,7 @@
 Ext.define 'app.model.form.Select'
   extend: 'app.model.form.Option'
 
-  createSelectField: ->
+  createField: ->
     xtype: 'selectfield'
     name: @get('name')
     label: @createLabel()

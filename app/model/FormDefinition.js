@@ -20,11 +20,7 @@
     },
     itemTypeMap: function(item) {
       if (item.options != null) {
-        if (item.options.length > 6) {
-          return 'app.model.form.Select';
-        } else {
-          return 'app.model.form.Radio';
-        }
+        return 'app.model.form.Radio';
       } else {
         return 'app.model.form.Text';
       }
@@ -91,6 +87,7 @@
         padding: 0,
         title: this.get('title'),
         layout: 'card',
+        scrollable: false,
         listeners: {
           'change': {
             'delegate': 'field',
@@ -115,13 +112,14 @@
           }
         },
         items: this.get('pages').getData().collect(function(page, index) {
-          var fieldSetContext, fieldsets, newFieldSet, panel;
+          var panel;
           panel = Ext.create('Ext.Panel', {
-            layout: 'vbox'
+            scrollable: 'vertical'
           });
           panel.add({
             xtype: 'titlebar',
             title: page.get('title'),
+            docked: "top",
             items: [
               {
                 iconCls: 'arrow_left',
@@ -145,42 +143,19 @@
             ]
           });
           panel.add({
-            xtype: 'label',
-            html: page.get('help'),
-            padding: 20
-          });
-          fieldsets = [];
-          newFieldSet = function() {
-            fieldsets.push({
-              xtype: 'fieldset',
-              layout: 'vbox',
-              items: []
-            });
-            return fieldsets;
-          };
-          fieldSetContext = function(item, fn) {
-            var closeFieldSet;
-            closeFieldSet = false;
-            if (item.asFieldSet != null) {
-              newFieldSet();
-              closeFieldSet = true;
-            } else if (fieldsets.length === 0) {
-              newFieldSet();
-            }
-            fn(fieldsets[fieldsets.length - 1].items);
-            if (item.asFieldSet != null) {
-              return newFieldSet();
-            }
-          };
-          page.get('items').getData().each(function(item) {
-            return fieldSetContext(item, function(items) {
-              return items.push(item.createComponent());
-            });
-          });
-          panel.add({
             xtype: 'panel',
-            layout: 'vbox',
-            items: fieldsets
+            items: [
+              {
+                xtype: 'label',
+                html: page.get('help'),
+                padding: 20
+              }, {
+                xtype: 'panel',
+                items: page.get('items').getData().collect(function(item) {
+                  return item.createComponent();
+                })
+              }
+            ]
           });
           if (index === _this.pagesCount() - 1) {
             panel.add({

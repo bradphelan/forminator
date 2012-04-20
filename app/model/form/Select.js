@@ -2,7 +2,7 @@
 
   Ext.define('app.model.form.Select', {
     extend: 'app.model.form.Option',
-    createSelectField: function() {
+    createField: function() {
       return {
         xtype: 'selectfield',
         name: this.get('name'),

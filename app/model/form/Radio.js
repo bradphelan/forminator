@@ -8,21 +8,37 @@
       var items, label, text,
         _this = this;
       items = this.options().map(function(option) {
-        return {
+        var component;
+        component = {
           xtype: 'radiofield',
           value: option.value,
-          label: option.text,
+          label: Ext.String.capitalize(option.text),
           name: _this.get('name')
         };
+        if (option.help != null) {
+          return {
+            xtype: 'panel',
+            items: [
+              component, {
+                xtype: 'label',
+                html: option.help,
+                cls: 'assist'
+              }
+            ]
+          };
+        } else {
+          return component;
+        }
       });
       if (this.get('help') != null) {
-        text = get('help');
+        text = this.get('help');
       } else {
         text = this.createLabel();
       }
       label = {
         xtype: 'label',
-        html: "<i style='padding: 0.6em'>" + text + "</i>"
+        cls: "assist-radio",
+        html: text
       };
       return items = [label].concat(__slice.call(items));
     },
