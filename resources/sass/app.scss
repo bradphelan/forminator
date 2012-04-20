@@ -19,22 +19,30 @@
 // Your custom code goes here...
 
 body.x-ios.x-phone {
-  font-size: 214%;
+  font-size: 150%;
 }
 
 body {
-  font-size: 204% !important;
+  font-size: 150% !important;
 }
 
-form .assist{
+.assist{
   color: gray;
   margin-left: 30%;
-  padding-left: 1em;
   padding-top: 2px;
   font-style: italic;
   font-size: 0.75em;
   margin-bottom: 20px;
-  @include background-image(linear-gradient(left, lighten($form-label-background-color, 5), $form-label-background-color));
+  @include background-image(linear-gradient(left, $form-label-background-color, lighten($form-label-background-color, 5)));
+}
+
+.assist-radio{
+  @extend .assist;
+  margin-bottom: 0px;
+  padding-left: 0.5em;
+  font-style: normal;
+  font-size: 1em;
+  color: black
 }
 
 .x-form-fieldset .x-field {
