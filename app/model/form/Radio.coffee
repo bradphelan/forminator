@@ -5,19 +5,33 @@ Ext.define 'app.model.form.Radio'
 
   createItems: ->
     items = @options().map (option)=>
-      xtype: 'radiofield'
-      value: option.value
-      label: option.text
-      name: @get('name')
+      component =
+        xtype: 'radiofield'
+        value: option.value
+        label: Ext.String.capitalize option.text
+        name: @get('name')
+
+      if option.help?
+        xtype: 'panel'
+        items: [
+          component
+        ,
+          xtype: 'label'
+          html: option.help
+          cls: 'assist'
+        ]
+      else
+        component
 
     if @get('help')?
-      text = get('help')
+      text = @get('help')
     else
       text = @createLabel()
 
     label =
       xtype: 'label'
-      html: "<i style='padding: 0.6em'>#{text}</i>"
+      cls: "assist-radio"
+      html: text
 
     items = [label, items...]
 
