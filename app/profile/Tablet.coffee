@@ -6,10 +6,9 @@ Ext.define 'app.profile.Tablet',
   isActive: ->
     return (Ext.os.is.Tablet or Ext.os.is.Desktop) and
       ( Ext.browser.is.IE \
-      or Ext.browser.is.Webkit \
+      or Ext.browser.is.WebKit \
       or Ext.browser.is.Gecko \
-      or Ext.browser.is.Opera \
-      or Ext.browser.is.Chrome
+      or Ext.browser.is.Opera 
       )
       
     
