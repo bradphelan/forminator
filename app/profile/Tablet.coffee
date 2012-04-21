@@ -4,11 +4,16 @@ Ext.define 'app.profile.Tablet',
   views: ["app.view.MainNavigation"]
 
   isActive: ->
+
+    # TODO when building for production
+    if Ext.browser.userAgent.match /PhantomJS/
+      return false
+
     return (Ext.os.is.Tablet or Ext.os.is.Desktop) and
       ( Ext.browser.is.IE \
       or Ext.browser.is.WebKit \
       or Ext.browser.is.Gecko \
-      or Ext.browser.is.Opera 
+      or Ext.browser.is.Opera
       )
       
     

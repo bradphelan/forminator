@@ -4,6 +4,9 @@
     extend: 'Ext.app.Profile',
     views: ["app.view.MainNavigation"],
     isActive: function() {
+      if (Ext.browser.userAgent.match(/PhantomJS/)) {
+        return false;
+      }
       return (Ext.os.is.Tablet || Ext.os.is.Desktop) && (Ext.browser.is.IE || Ext.browser.is.WebKit || Ext.browser.is.Gecko || Ext.browser.is.Opera);
     },
     launch: function() {
