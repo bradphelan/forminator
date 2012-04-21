@@ -135,9 +135,13 @@
   - title: Patient
     help:
     items:
-    - name: patienten_name
-    - name: datum_beim_aüsfullen
-      type: date
+      - name: patienten_name
+        label: name
+        help: Patienten Name
+      - name: patient_datum
+        label: date
+        help: Datum beim aüsfullen
+        type: date
 
   - title: "1 - 4"
     help:
@@ -185,28 +189,25 @@
           - text: mehr als 5 Jahre
             value: 120
       - name: 7_b
-        label: Können Sie ein genaues Datum angeben?
+        title: Können Sie ein genaues Datum angeben?
+        label: Datum
         type: date
     
   - title: "8"
-    help: |-
-      Welche der Aussagen trifft auf Ihre Schmerzen in den letzen 4 Wochen am
-      besten zu?  (Bitte nur eine Angabe machen!) 
     items:
       - name: q8_a 
+        title: |-
+          Welche der Aussagen trifft auf Ihre Schmerzen in den letzen 4 Wochen am
+          besten zu?
         options:
-          - help: Dauerschmerzen mit leichten Schwankungen
+          - text: Dauerschmerzen mit leichten Schwankungen
             value: 0
-            text: "a)" 
-          - help: Dauerschmerzen mit starken Schwankungen
+          - text: Dauerschmerzen mit starken Schwankungen
             value: 1
-            text: "b)"
-          - help: Schmerzattacken, dazwischen schmerzfrei
+          - text: Schmerzattacken, dazwischen schmerzfrei
             value: 2
-            text: "c)"
-          - help: Schmerzattacken, auch dazwischen Schmerzen 
+          - text: Schmerzattacken, auch dazwischen Schmerzen 
             value: 3
-            text: "d)"
 
   - title: "8"
     help: Wie oft treten diese Attacken durchschnittlich auf?
@@ -261,62 +262,94 @@
           - nachts
 
 
-  - title "10"
-    help: |-
+  - title: "10"
+
+    help: &help_10 |-
       Mit der folgenden Liste von Eigenschaftsworten können Sie genauer beschreiben, wie Sie Ihre Schmerzen 
       empfinden. Denken Sie bei der Beantwortung an Ihre typischen Schmerzen in der letzten Zeit. 
       Bitte lassen Sie keine der Beschreibungen aus und machen Sie für jedes Wort ein Kreuz, inwieweit die 
       Aussage für Sie zutrifft. 
 
-    options_list: &options_list_10
-      - label: 3
-        text: trifft genau zu
-        value: 3
-      - label: 2
-        text: trifft weitgehend zu
-        value: 2
-      - label: 1
-        text: trifft ein wenig zu
-        value: 1
-      - label: 0
-        text: trifft nicht zu
-        value: 0
-
     items:
       - name: dumpf
-        options: *options_list_10
+        options: &options_10
+          - label: 3
+            text: trifft genau zu
+            value: 3
+          - label: 2
+            text: trifft weitgehend zu
+            value: 2
+          - label: 1
+            text: trifft ein wenig zu
+            value: 1
+          - label: 0
+            text: trifft nicht zu
+            value: 0
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: drückend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: pochend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: klopfend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: stechend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: ziehend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: heiss
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: brennend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: elend
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: schauderhaft
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: scheusslich
-        options: *options_list_10
+        options: *options_10
 
+  - title: "10"
+    help: *help_10
+    items:
       - name: furchtbar
-        options: *options_list_10
+        options: *options_10
 
 
