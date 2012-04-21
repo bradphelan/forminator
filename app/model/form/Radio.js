@@ -6,7 +6,6 @@
     constructor: function() {
       var config;
       config = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
-      console.log(config);
       return this.callParent(config);
     },
     config: {

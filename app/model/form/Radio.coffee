@@ -2,7 +2,6 @@ Ext.define 'app.model.form.Radio'
   extend: 'app.model.form.Option'
 
   constructor: (config...)->
-    console.log config
     @callParent config
 
   config:
