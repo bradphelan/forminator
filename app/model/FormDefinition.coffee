@@ -11,6 +11,8 @@ Ext.define 'app.model.FormDefinition'
     'app.model.form.Text'
     'app.model.form.Field'
     'app.model.Page'
+    'app.view.Page'
+    'app.view.Form'
     'Ext.Panel'
     'Ext.form.Panel'
     'Ext.field.Radio'
@@ -61,9 +63,6 @@ Ext.define 'app.model.FormDefinition'
     @set 'title', json.title
     @set 'summary', json.summary
 
-  pagesCount: ->
-    @get('pages').getData().length
-
   createModelClass: ->
 
     fields = []
@@ -88,85 +87,11 @@ Ext.define 'app.model.FormDefinition'
   createForm: ->
 
     record = Ext.create @createModelClass()
-    pagesUI = Ext.create 'Ext.form.Panel'
-      padding: 0
+
+    pagesUI = Ext.create 'app.view.Form'
       title: @get('title')
-      layout: 'card'
-      scrollable: false
-
-
-      listeners:
-        'change':
-          'delegate': 'field'
-          fn: (field) =>
-            record.set(field.getName(), field.getValue())
-        'check':
-          'delegate': 'field'
-          fn: (field) =>
-            record.set(field.getName(), field.getValue())
-        'uncheck':
-          'delegate': 'field'
-          fn: (field) =>
-            record.set(field.getName(), field.getValue())
-
-        'initialize': =>
-          @
-
-      items: @get('pages').getData().collect (page, index) =>
-        panel = Ext.create 'Ext.Panel'
-          scrollable: 'vertical'
-
-        panel.add
-          xtype: 'titlebar'
-          title: page.get('title')
-          docked: "top"
-
-          items: [
-            iconCls: 'arrow_left'
-            iconMask: true
-            align: 'left'
-            listeners:
-              tap: =>
-                pagesUI.setActiveItem(index-1)
-          ,
-            iconCls: 'arrow_right'
-            iconMask: true
-            align: 'right'
-            listeners:
-              tap: =>
-                pagesUI.setActiveItem(index+1)
-          ]
-
-        
-        panel.add
-          xtype: 'panel'
-          items: [
-            xtype: 'label'
-            html: page.get('help')
-            padding: 20
-          ,
-            xtype: 'panel'
-            items: page.get('items').getData().collect (item)=> item.createComponent()
-          ]
-
-        if index == @pagesCount() - 1
-          panel.add
-            xtype: 'titlebar'
-            docked: 'bottom'
-            title: 'You are done!'
-            items: [
-              iconCls: 'action'
-              iconMask: true
-              bubbleEvents: 'submitForm'
-              align: 'right'
-              text: 'SUBMIT!'
-              listeners:
-                tap: (me)=>
-                  me.fireEvent 'submitForm', record
-            ]
-
-
-        panel
+      pages: @get('pages')
+      record: record
 
     pagesUI.setActiveItem(0)
     pagesUI.setRecord(record)

@@ -2,7 +2,7 @@
 
   Ext.define('app.model.FormDefinition', {
     extend: 'Ext.data.Model',
-    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.Page', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
+    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.Page', 'app.view.Page', 'app.view.Form', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
     config: {
       identifier: 'uuid',
       fields: [
@@ -49,9 +49,6 @@
       this.set('title', json.title);
       return this.set('summary', json.summary);
     },
-    pagesCount: function() {
-      return this.get('pages').getData().length;
-    },
     createModelClass: function() {
       var class_name, fields, item, page, _i, _j, _len, _len1, _ref, _ref1;
       fields = [];
@@ -80,106 +77,12 @@
       return class_name;
     },
     createForm: function() {
-      var pagesUI, record,
-        _this = this;
+      var pagesUI, record;
       record = Ext.create(this.createModelClass());
-      pagesUI = Ext.create('Ext.form.Panel', {
-        padding: 0,
+      pagesUI = Ext.create('app.view.Form', {
         title: this.get('title'),
-        layout: 'card',
-        scrollable: false,
-        listeners: {
-          'change': {
-            'delegate': 'field',
-            fn: function(field) {
-              return record.set(field.getName(), field.getValue());
-            }
-          },
-          'check': {
-            'delegate': 'field',
-            fn: function(field) {
-              return record.set(field.getName(), field.getValue());
-            }
-          },
-          'uncheck': {
-            'delegate': 'field',
-            fn: function(field) {
-              return record.set(field.getName(), field.getValue());
-            }
-          },
-          'initialize': function() {
-            return _this;
-          }
-        },
-        items: this.get('pages').getData().collect(function(page, index) {
-          var panel;
-          panel = Ext.create('Ext.Panel', {
-            scrollable: 'vertical'
-          });
-          panel.add({
-            xtype: 'titlebar',
-            title: page.get('title'),
-            docked: "top",
-            items: [
-              {
-                iconCls: 'arrow_left',
-                iconMask: true,
-                align: 'left',
-                listeners: {
-                  tap: function() {
-                    return pagesUI.setActiveItem(index - 1);
-                  }
-                }
-              }, {
-                iconCls: 'arrow_right',
-                iconMask: true,
-                align: 'right',
-                listeners: {
-                  tap: function() {
-                    return pagesUI.setActiveItem(index + 1);
-                  }
-                }
-              }
-            ]
-          });
-          panel.add({
-            xtype: 'panel',
-            items: [
-              {
-                xtype: 'label',
-                html: page.get('help'),
-                padding: 20
-              }, {
-                xtype: 'panel',
-                items: page.get('items').getData().collect(function(item) {
-                  return item.createComponent();
-                })
-              }
-            ]
-          });
-          if (index === _this.pagesCount() - 1) {
-            panel.add({
-              xtype: 'titlebar',
-              docked: 'bottom',
-              title: 'You are done!',
-              items: [
-                {
-                  iconCls: 'action',
-                  iconMask: true,
-                  bubbleEvents: 'submitForm',
-                  align: 'right',
-                  text: 'SUBMIT!',
-                  listeners: {
-                    tap: function(me) {
-                      return me.fireEvent('submitForm', record);
-                    }
-                  }
-                }
-              ]
-            });
-          }
-          return panel;
-        })
+        pages: this.get('pages'),
+        record: record
       });
       pagesUI.setActiveItem(0);
       return pagesUI.setRecord(record);
