@@ -9,6 +9,10 @@ Ext.define "app.view.Page"
     record: null
 
   areAllItemsOnPageSet: ->
+    # TODO
+    # Don't check in
+    return true
+
     allSet = true
     @getPage().get('items').getData().each (item)=>
       if @getRecord().get(item.get('name')) == null
@@ -95,3 +99,4 @@ Ext.define "app.view.Page"
         ]
 
     @configureListeners()
+    @updateState()

@@ -36,15 +36,20 @@ Ext.define 'app.model.form.Field'
        
   createTitle: -> @get('title')
 
+  createInstructions: -> @get('help')
+
   createItems: ->
 
     items = []
 
+    title = @createTitle()
+    help = @createInstructions()
+
     items.push
       xtype: 'fieldset'
       items: [ @createField() ]
-      instructions: @get('help')
-      title: @createTitle()
+      instructions: help
+      title: title
 
     items
 

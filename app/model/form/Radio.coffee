@@ -8,7 +8,7 @@ Ext.define 'app.model.form.Radio'
     fields: [
       name: "labelWidth"
       type: "string"
-      defaultValue: "90%"
+      defaultValue: "80%"
     ]
 
   createTitle: ->
@@ -26,19 +26,23 @@ Ext.define 'app.model.form.Radio'
         label: Ext.String.capitalize option.text
         name: @get('name')
 
-      if option.help?
-        xtype: 'panel'
-        items: [
-          component
-        ,
-          xtype: 'label'
-          html: option.help
-          cls: 'assist'
-        ]
-      else
+      xtype: 'panel'
+      items: [
         component
+      ,
+        xtype: 'label'
+        html: option.help
+        cls: 'assist'
+      ]
 
     items
+
+  createInstructions: ->
+    i = @callParent()
+    if i?
+      i
+    else
+      "&nbsp;"
 
   createField: ->
     xtype: 'panel'

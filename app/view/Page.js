@@ -12,6 +12,7 @@
     areAllItemsOnPageSet: function() {
       var allSet,
         _this = this;
+      return true;
       allSet = true;
       this.getPage().get('items').getData().each(function(item) {
         if (_this.getRecord().get(item.get('name')) === null) {
@@ -121,7 +122,8 @@
           ]
         });
       }
-      return this.configureListeners();
+      this.configureListeners();
+      return this.updateState();
     }
   });
 

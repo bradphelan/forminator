@@ -40,7 +40,7 @@ body {
   padding-left: 0.5em;
   font-style: normal;
   font-size: 1em;
-  color: black
+  color: black;
 }
 
 // .x-form-fieldset .x-field {
@@ -50,4 +50,11 @@ body {
   margin: 0.3em 0.7em 1em;
   text-align: left;
   padding-left: 30%;
+}
+
+// Allow wrap of title or
+// long title mess up the 
+// layout
+.x-form-fieldset-title{
+  white-space: normal;
 }

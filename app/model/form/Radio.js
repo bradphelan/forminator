@@ -13,7 +13,7 @@
         {
           name: "labelWidth",
           type: "string",
-          defaultValue: "90%"
+          defaultValue: "80%"
         }
       ]
     },
@@ -36,22 +36,27 @@
           label: Ext.String.capitalize(option.text),
           name: _this.get('name')
         };
-        if (option.help != null) {
-          return {
-            xtype: 'panel',
-            items: [
-              component, {
-                xtype: 'label',
-                html: option.help,
-                cls: 'assist'
-              }
-            ]
-          };
-        } else {
-          return component;
-        }
+        return {
+          xtype: 'panel',
+          items: [
+            component, {
+              xtype: 'label',
+              html: option.help,
+              cls: 'assist'
+            }
+          ]
+        };
       });
       return items;
+    },
+    createInstructions: function() {
+      var i;
+      i = this.callParent();
+      if (i != null) {
+        return i;
+      } else {
+        return "&nbsp;";
+      }
     },
     createField: function() {
       return {

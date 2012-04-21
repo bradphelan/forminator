@@ -38,14 +38,19 @@
     createTitle: function() {
       return this.get('title');
     },
+    createInstructions: function() {
+      return this.get('help');
+    },
     createItems: function() {
-      var items;
+      var help, items, title;
       items = [];
+      title = this.createTitle();
+      help = this.createInstructions();
       items.push({
         xtype: 'fieldset',
         items: [this.createField()],
-        instructions: this.get('help'),
-        title: this.createTitle()
+        instructions: help,
+        title: title
       });
       return items;
     },
