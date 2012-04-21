@@ -1,12 +1,28 @@
 Ext.define 'app.model.form.Radio'
   extend: 'app.model.form.Option'
 
-  asFieldSet: true
+  constructor: (config...)->
+    console.log config
+    @callParent config
 
-  createItems: ->
+  config:
+    fields: [
+      name: "labelWidth"
+      type: "string"
+      defaultValue: "90%"
+    ]
+
+  createTitle: ->
+    if @get('title')?
+      @get('title')
+    else
+      @createLabel()
+
+  createRadios: ->
     items = @options().map (option)=>
       component =
         xtype: 'radiofield'
+        labelWidth: @get('labelWidth')
         value: option.value
         label: Ext.String.capitalize option.text
         name: @get('name')
@@ -23,19 +39,8 @@ Ext.define 'app.model.form.Radio'
       else
         component
 
-    if @get('help')?
-      text = @get('help')
-    else
-      text = @createLabel()
-
-    label =
-      xtype: 'label'
-      cls: "assist-radio"
-      html: text
-
-    items = [label, items...]
-
+    items
 
   createField: ->
     xtype: 'panel'
-    items: @createItems()
+    items: @createRadios()

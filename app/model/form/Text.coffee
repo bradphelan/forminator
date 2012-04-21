@@ -26,3 +26,4 @@ Ext.define 'app.model.form.Text'
     name: @get('name')
     label: @createLabel()
     labelWrap: true
+

@@ -13,9 +13,17 @@ Ext.define 'app.model.form.Field'
       type: 'string'
       defaultValue: null
     ,
+      name: 'title'
+      type: 'string'
+      defaultValue: null
+    ,
       name: 'help'
       type: 'string'
       defaultValue: null
+    ,
+      name: "labelWidth"
+      type: "string"
+      defaultValue: "30%"
     ]
 
   createLabel: ->
@@ -26,18 +34,17 @@ Ext.define 'app.model.form.Field'
 
     Ext.String.capitalize(l.replace /_/, ' ')
        
+  createTitle: -> @get('title')
 
   createItems: ->
 
     items = []
 
-    items.push @createField()
-
-    if @get('help')?
-      items.push
-        xtype:'label'
-        html: @get('help')
-        cls: 'assist'
+    items.push
+      xtype: 'fieldset'
+      items: [ @createField() ]
+      instructions: @get('help')
+      title: @createTitle()
 
     items
 

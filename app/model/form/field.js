@@ -16,9 +16,17 @@
           type: 'string',
           defaultValue: null
         }, {
+          name: 'title',
+          type: 'string',
+          defaultValue: null
+        }, {
           name: 'help',
           type: 'string',
           defaultValue: null
+        }, {
+          name: "labelWidth",
+          type: "string",
+          defaultValue: "30%"
         }
       ]
     },
@@ -27,17 +35,18 @@
       l = this.get('label') != null ? this.get('label') : this.get('name');
       return Ext.String.capitalize(l.replace(/_/, ' '));
     },
+    createTitle: function() {
+      return this.get('title');
+    },
     createItems: function() {
       var items;
       items = [];
-      items.push(this.createField());
-      if (this.get('help') != null) {
-        items.push({
-          xtype: 'label',
-          html: this.get('help'),
-          cls: 'assist'
-        });
-      }
+      items.push({
+        xtype: 'fieldset',
+        items: [this.createField()],
+        instructions: this.get('help'),
+        title: this.createTitle()
+      });
       return items;
     },
     createComponent: function() {

@@ -29,11 +29,9 @@ body {
 .assist{
   color: gray;
   margin-left: 30%;
-  padding-top: 2px;
   font-style: italic;
   font-size: 0.75em;
-  margin-bottom: 20px;
-  @include background-image(linear-gradient(left, $form-label-background-color, lighten($form-label-background-color, 5)));
+  @include background-image(linear-gradient(left, $page-bg-color, lighten($form-label-background-color, 5)));
 }
 
 .assist-radio{
@@ -45,6 +43,11 @@ body {
   color: black
 }
 
-.x-form-fieldset .x-field {
-  border-bottom: none
+// .x-form-fieldset .x-field {
+//   border-bottom: none
+// }
+.x-form-fieldset-instructions {
+  margin: 0.3em 0.7em 1em;
+  text-align: left;
+  padding-left: 30%;
 }
