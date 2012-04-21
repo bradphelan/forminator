@@ -8,7 +8,7 @@ Ext.define 'app.model.form.Radio'
     fields: [
       name: "labelWidth"
       type: "string"
-      defaultValue: "80%"
+      defaultValue: "90%"
     ]
 
   createTitle: ->

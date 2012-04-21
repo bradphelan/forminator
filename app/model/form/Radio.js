@@ -13,7 +13,7 @@
         {
           name: "labelWidth",
           type: "string",
-          defaultValue: "80%"
+          defaultValue: "90%"
         }
       ]
     },
