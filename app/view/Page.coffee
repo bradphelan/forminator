@@ -59,7 +59,12 @@ Ext.define "app.view.Page"
         align: 'left'
         listeners:
           tap: =>
-            @getPagesUI().setActiveItem(@currentIndex()-1)
+            @getPagesUI().getLayout().setAnimation
+              type: 'slide'
+              direction: 'right'
+              duration: 500
+            @getPagesUI().setActiveItem @currentIndex()-1
+
       ,
         iconCls: 'arrow_right'
         cls: 'next'
@@ -68,6 +73,10 @@ Ext.define "app.view.Page"
         disabled: true
         listeners:
           tap: =>
+            @getPagesUI().getLayout().setAnimation
+              type: 'slide'
+              direction: 'left'
+              duration: 500
             @getPagesUI().setActiveItem(@currentIndex()+1)
       ]
 

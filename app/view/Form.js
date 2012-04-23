@@ -4,7 +4,13 @@
     extend: "Ext.Panel",
     config: {
       padding: 0,
-      layout: 'card',
+      layout: {
+        type: 'card',
+        animation: {
+          type: 'slide',
+          direction: 'down'
+        }
+      },
       scrollable: false,
       pages: null,
       record: null

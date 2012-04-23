@@ -69,6 +69,11 @@
             align: 'left',
             listeners: {
               tap: function() {
+                _this.getPagesUI().getLayout().setAnimation({
+                  type: 'slide',
+                  direction: 'right',
+                  duration: 500
+                });
                 return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
               }
             }
@@ -80,6 +85,11 @@
             disabled: true,
             listeners: {
               tap: function() {
+                _this.getPagesUI().getLayout().setAnimation({
+                  type: 'slide',
+                  direction: 'left',
+                  duration: 500
+                });
                 return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
               }
             }

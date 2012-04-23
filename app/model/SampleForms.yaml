@@ -115,8 +115,8 @@
       einverstanden.
     items:
     - name: ort
-    - type: date
-      name: datum
+    - name: datum
+      type: date
     - name: vorname
     - name: nachname
 
@@ -162,9 +162,13 @@
       type: integer
 
   - title: "5 - 6"
+    help: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
     items: 
     - name: "q5_a"
-      help: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
+      type: "sketch"
+
+  - title: "5 - 6"
+    items:
     - name: "q5_b"
       help: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
     - name: "q6"

@@ -10,6 +10,7 @@ Ext.define 'app.model.FormDefinition'
     'app.model.form.Select'
     'app.model.form.Text'
     'app.model.form.Field'
+    'app.model.form.Sketch'
     'app.model.Page'
     'app.view.Page'
     'app.view.Form'
@@ -34,7 +35,9 @@ Ext.define 'app.model.FormDefinition'
     ]
 
   itemTypeMap: (item)->
-    if item.options?
+    if item.type == "sketch"
+      'app.model.form.Sketch'
+    else if item.options?
       'app.model.form.Radio'
     else
       'app.model.form.Text'

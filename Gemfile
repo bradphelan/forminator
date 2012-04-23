@@ -3,6 +3,7 @@ gem "sinatra"
 gem "activesupport"
 gem "builder"
 gem "heroku"
+gem "sinatra-contrib"
 group :development do
   gem "compass"
   gem "guard"

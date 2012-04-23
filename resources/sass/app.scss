@@ -18,13 +18,13 @@
 
 // Your custom code goes here...
 
-body.x-ios.x-phone {
-  font-size: 150%;
-}
+// body.x-ios.x-phone {
+//   font-size: 150%;
+// }
 
-body {
-  font-size: 150% !important;
-}
+// body {
+//   font-size: 150% !important;
+// }
 
 .assist{
   color: gray;
@@ -57,4 +57,25 @@ body {
 // layout
 .x-form-fieldset-title{
   white-space: normal;
+}
+
+.sketcher {
+  .tools { margin-bottom: 10px; 
+    a {
+      border: 1px solid black; 
+      height: 30px; 
+      line-height: 30px; 
+      padding: 0 10px; 
+      vertical-align: middle; 
+      text-align: left; 
+      text-decoration: none; 
+      display: inline-block; 
+      color: black; 
+      font-weight: bold;
+      width: 10px;
+    }
+  }
+  canvas {
+    border: 1px solid black; 
+  }
 }
