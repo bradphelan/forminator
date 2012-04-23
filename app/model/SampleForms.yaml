@@ -11,26 +11,10 @@
       Tell me how you feel. I can fix it for you.
       Trust me I'm a doctor, I know all the drugs
     items: 
-    - type: integer
-      name: fieldA
-      options: 
-      - text: bad
-        value: 0
-      - text: good
-        value: 1
-      - text: excelent
-        value: 2
-  - title: What is your face like?
-    help: An ugly face can make you sick. How is yours?
-    items: 
-    - type: integer
-      name: fieldB
-      as: select
-      options: 
-      - text: ugly
-        value: 0
-      - text: pretty
-        value: 1
+    - type: sketch
+      name: drawing_one
+    - type: sketch
+      name: drawing_two
 
 - title: Pain Form
   id: 45e7f6c0-87f6-11e1-b0c4-0800200c9a66

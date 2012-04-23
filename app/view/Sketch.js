@@ -16,14 +16,11 @@
       timerId = null;
       return function() {
         var apply;
-        console.log("Nay! " + timerId);
         if (timerId != null) {
-          console.log("Clearing " + timerId);
           window.clearTimeout(timerId);
           timerId = null;
         }
         apply = function() {
-          console.log("Yay! " + timerId);
           return fn.apply(_this, arguments);
         };
         return timerId = window.setTimeout(apply, timeout);
@@ -56,6 +53,7 @@
       cls: "sketcher",
       layout: "vbox",
       useToolbar: true,
+      bubbleEvents: ['change'],
       items: [
         {
           xtype: "panel",
@@ -92,6 +90,9 @@
       var _ref;
       return $((_ref = this.element).query.apply(_ref, arguments));
     },
+    pngData: function() {
+      return this.sketch.el.toDataURL("png");
+    },
     resize: function(size) {
       this.sketch.size = size;
       return this.sketch.redraw();
@@ -106,10 +107,13 @@
       if (this.getUseToolbar()) {
         this.insertTools();
       }
-      return this.addListener({
+      this.addListener({
         canvasResized: function(size) {
           return _this.resize(size);
         }
+      });
+      return this.sketch.canvas.bind('sketch.change', function(actions) {
+        return _this.fireEvent("change", actions);
       });
     }
   });
@@ -187,7 +191,8 @@
       }
       this.painting = false;
       this.action = null;
-      return this.redraw();
+      this.redraw();
+      return this.canvas.trigger("sketch.change", this.actions);
     };
 
     Sketch.prototype.onEvent = function(e) {

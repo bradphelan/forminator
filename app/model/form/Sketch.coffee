@@ -14,3 +14,4 @@ Ext.define "app.model.form.Sketch"
     minHeight: 600
     useToolbar: false
     label: @createLabel()
+    name: @get('name')

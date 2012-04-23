@@ -16,7 +16,8 @@
         xtype: 'sketchfield',
         minHeight: 600,
         useToolbar: false,
-        label: this.createLabel()
+        label: this.createLabel(),
+        name: this.get('name')
       };
     }
   });

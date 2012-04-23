@@ -15,16 +15,12 @@ Ext.define "app.view.Canvas"
   debounce: (fn, timeout)->
     timerId = null
     =>
-      console.log "Nay! #{timerId}"
       if timerId?
-        console.log "Clearing #{timerId}"
         
         window.clearTimeout timerId
         timerId = null
 
       apply = =>
-        console.log "Yay! #{timerId}"
-        
         fn.apply(@, arguments)
 
       timerId = window.setTimeout apply, timeout
@@ -54,6 +50,9 @@ Ext.define "app.view.Sketch"
     cls: "sketcher"
     layout: "vbox"
     useToolbar: true
+    bubbleEvents: [
+      'change'
+    ]
 
     items: [
       xtype: "panel"
@@ -81,6 +80,8 @@ Ext.define "app.view.Sketch"
   jqFind: ->
     $(@element.query(arguments...))
 
+  pngData: ->
+    @sketch.el.toDataURL("png")
 
   resize: (size)->
     @sketch.size = size
@@ -96,6 +97,9 @@ Ext.define "app.view.Sketch"
     @addListener
       canvasResized: (size)=>
         @resize(size)
+    @sketch.canvas.bind 'sketch.change', (actions)=>
+      @fireEvent "change", actions
+        
         
 
     
@@ -200,6 +204,8 @@ class Sketch
     @painting = false
     @action = null
     @redraw()
+    @canvas.trigger("sketch.change", @actions)
+    
   
   # ### sketch.onEvent(e)
   #

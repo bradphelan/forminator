@@ -7,3 +7,17 @@ Ext.define "app.view.SketchField"
       minHeight: 600
       useToolbar: false
 
+  initialize: ->
+    @callParent()
+    @getComponent().on
+      scope: @
+      change: 'onSketchChange'
+
+  onSketchChange: (sketchData)->
+    @fireEvent "change", @, sketchData
+
+  getValues: ->
+    @getComponent().pngData()
+
+  getValue: ->
+    @getValues()

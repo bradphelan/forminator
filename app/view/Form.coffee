@@ -1,4 +1,5 @@
 Ext.define "app.view.Form"
+  xtype:  "medformpanel"
   extend: "Ext.Panel"
 
   config:
