@@ -7,3 +7,6 @@ Ext.define 'app.model.form.Select'
     label: @createLabel()
     options: @options()
 
+  initialize: ->
+    @callParent(arguments)
+    setComponentClass('app.view.SelectField')

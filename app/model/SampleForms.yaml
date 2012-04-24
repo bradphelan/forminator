@@ -6,15 +6,20 @@
     collect information on this condition.
     Please assist us.
   pages: 
-  - title: How do you feel
-    help: |-
-      Tell me how you feel. I can fix it for you.
-      Trust me I'm a doctor, I know all the drugs
+  - title: A
+    items:
+    - name: drawing
+      type: sketch
+
+  - title: A
     items: 
-    - type: sketch
-      name: drawing_one
-    - type: sketch
-      name: drawing_two
+    - name: a
+      type: integer
+    - name: b
+      type: integer
+      show_if: a > 10
+    - name: c
+      type: integer
 
 - title: Pain Form
   id: 45e7f6c0-87f6-11e1-b0c4-0800200c9a66

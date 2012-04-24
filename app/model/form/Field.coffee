@@ -1,6 +1,7 @@
 Ext.define 'app.model.form.Field'
   extend: 'Ext.data.Model'
   config:
+
     fields: [
       name: 'name'
       type: 'string'
@@ -30,6 +31,12 @@ Ext.define 'app.model.form.Field'
       defaultValue: "30%"
     ]
 
+       
+  idForComponent: ->
+    "form-field-#{@get('name')}"
+
+  createTitle: -> @get('title')
+
   createLabel: ->
     l = if @get('label')?
       @get('label')
@@ -37,39 +44,8 @@ Ext.define 'app.model.form.Field'
       @get('name')
 
     Ext.String.capitalize(l.replace /_/, ' ')
-       
-  createTitle: -> @get('title')
 
   createInstructions: -> @get('help')
-
-  createItems: ->
-
-    items = []
-
-    title = @createTitle()
-    help = @createInstructions()
-
-    items.push
-      xtype: 'fieldset'
-      items: [ @createField() ]
-      instructions: help
-      title: title
-
-    items
-
-  idForComponent: ->
-    "form-field-#{@get('name')}"
-
-  findComponent: (root)->
-    root.down("[id=#{@idForComponent()}]")
-
-  # Create the component for this field
-  # and give it an id
-  createComponent: ->
-    xtype: 'panel'
-    items: @createItems()
-    id: @idForComponent()
-
 
   # Using the 'show_if' item expression
   # return if the field should be visible
@@ -87,4 +63,12 @@ Ext.define 'app.model.form.Field'
   # is set.
   isSet: (record)->
     record.get(@get('name'))?
+
+  findComponent: (context)->
+    context.down "[id=#{@idForComponent()}]"
+
+  createComponent: (record)->
+    Ext.create @getComponentClass(),
+      factory: @
+      record: record
 

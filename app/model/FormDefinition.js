@@ -73,6 +73,14 @@
           extend: 'Ext.data.Model',
           config: {
             fields: fields
+          },
+          set: function(fieldName, newValue) {
+            var oldValue, r;
+            oldValue = this.get('value');
+            r = this.callParent([fieldName, newValue]);
+            this.fireEvent("change:" + fieldName, this, fieldName, newValue, oldValue);
+            this.fireEvent("change", this);
+            return r;
           }
         });
       }

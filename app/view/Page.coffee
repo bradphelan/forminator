@@ -22,31 +22,36 @@ Ext.define "app.view.Page"
     @getPage().get('items').getData().each (item)=>
       visible = item.isVisible(@getRecord())
       item.findComponent(@).setHidden !visible
+      if not visible
+        @getRecord().set(item.get('name'), null)
 
   updateState: ->
     if @areAllItemsOnPageSet()
       @down("[iconCls=arrow_right]").setDisabled false
     @updateVisibility()
 
-  handleChangeEvent: (field)->
-    @getRecord().set(field.getName(), field.getValue())
-    @updateState()
 
   configureListeners: ->
-    handler =
-      'delegate': 'field'
-      fn: (field) => @handleChangeEvent(field)
-    @addListener
-      'change': handler
-      'check': handler
-      'uncheck': handler
+
+    # We use a single shot here 
+    # and rebind it after the handler
+    # has finished. This stop recursive
+    # event updates from occuring. 
+    #
+    # TODO extract into a pattern
+    @getRecord().on
+      change:
+        fn: =>
+          @updateState()
+          @configureListeners()
+        single: true
 
   currentIndex: ->
     @getPagesUI().indexOf(@getPagesUI().getActiveItem())
 
   buildFields: ->
     @getPage().get('items').getData().collect (item)=>
-      item.createComponent()
+      item.createComponent(@getRecord())
 
   buildSubmitToolbar: ->
     xtype: 'titlebar'

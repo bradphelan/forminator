@@ -34,42 +34,19 @@
         }
       ]
     },
+    idForComponent: function() {
+      return "form-field-" + (this.get('name'));
+    },
+    createTitle: function() {
+      return this.get('title');
+    },
     createLabel: function() {
       var l;
       l = this.get('label') != null ? this.get('label') : this.get('name');
       return Ext.String.capitalize(l.replace(/_/, ' '));
     },
-    createTitle: function() {
-      return this.get('title');
-    },
     createInstructions: function() {
       return this.get('help');
-    },
-    createItems: function() {
-      var help, items, title;
-      items = [];
-      title = this.createTitle();
-      help = this.createInstructions();
-      items.push({
-        xtype: 'fieldset',
-        items: [this.createField()],
-        instructions: help,
-        title: title
-      });
-      return items;
-    },
-    idForComponent: function() {
-      return "form-field-" + (this.get('name'));
-    },
-    findComponent: function(root) {
-      return root.down("[id=" + (this.idForComponent()) + "]");
-    },
-    createComponent: function() {
-      return {
-        xtype: 'panel',
-        items: this.createItems(),
-        id: this.idForComponent()
-      };
     },
     isVisible: function(record) {
       var visibleExpression, __record__;
@@ -83,6 +60,15 @@
     },
     isSet: function(record) {
       return record.get(this.get('name')) != null;
+    },
+    findComponent: function(context) {
+      return context.down("[id=" + (this.idForComponent()) + "]");
+    },
+    createComponent: function(record) {
+      return Ext.create(this.getComponentClass(), {
+        factory: this,
+        record: record
+      });
     }
   });
 

@@ -27,6 +27,9 @@
         var visible;
         visible = item.isVisible(_this.getRecord());
         item.findComponent(_this).setHidden(!visible);
+        if (!visible) {
+          return _this.getRecord().set(item.get('name'), null);
+        }
       });
     },
     updateState: function() {
@@ -35,23 +38,16 @@
       }
       return this.updateVisibility();
     },
-    handleChangeEvent: function(field) {
-      this.getRecord().set(field.getName(), field.getValue());
-      return this.updateState();
-    },
     configureListeners: function() {
-      var handler,
-        _this = this;
-      handler = {
-        'delegate': 'field',
-        fn: function(field) {
-          return _this.handleChangeEvent(field);
+      var _this = this;
+      return this.getRecord().on({
+        change: {
+          fn: function() {
+            _this.updateState();
+            return _this.configureListeners();
+          },
+          single: true
         }
-      };
-      return this.addListener({
-        'change': handler,
-        'check': handler,
-        'uncheck': handler
       });
     },
     currentIndex: function() {
@@ -60,7 +56,7 @@
     buildFields: function() {
       var _this = this;
       return this.getPage().get('items').getData().collect(function(item) {
-        return item.createComponent();
+        return item.createComponent(_this.getRecord());
       });
     },
     buildSubmitToolbar: function() {

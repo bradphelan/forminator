@@ -34,6 +34,8 @@ Ext.define 'app.model.FormDefinition'
       type: 'string'
     ]
 
+  # TODO
+  # Factor this into factory class
   itemTypeMap: (item)->
     if item.type == "sketch"
       'app.model.form.Sketch'
@@ -82,6 +84,12 @@ Ext.define 'app.model.FormDefinition'
         extend: 'Ext.data.Model'
         config:
           fields: fields
+        set: (fieldName, newValue)->
+          oldValue = @get('value')
+          r = @callParent([fieldName, newValue])
+          @fireEvent("change:#{fieldName}", @, fieldName, newValue, oldValue )
+          @fireEvent("change", @)
+          r
 
     class_name
 

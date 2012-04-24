@@ -9,6 +9,10 @@
         label: this.createLabel(),
         options: this.options()
       };
+    },
+    initialize: function() {
+      this.callParent(arguments);
+      return setComponentClass('app.view.SelectField');
     }
   });
 
