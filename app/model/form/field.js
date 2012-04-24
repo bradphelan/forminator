@@ -16,6 +16,10 @@
           type: 'string',
           defaultValue: null
         }, {
+          name: 'show_if',
+          type: 'string',
+          defaultValue: null
+        }, {
           name: 'title',
           type: 'string',
           defaultValue: null
@@ -54,11 +58,31 @@
       });
       return items;
     },
+    idForComponent: function() {
+      return "form-field-" + (this.get('name'));
+    },
+    findComponent: function(root) {
+      return root.down("[id=" + (this.idForComponent()) + "]");
+    },
     createComponent: function() {
       return {
         xtype: 'panel',
-        items: this.createItems()
+        items: this.createItems(),
+        id: this.idForComponent()
       };
+    },
+    isVisible: function(record) {
+      var visibleExpression, __record__;
+      visibleExpression = this.get('show_if');
+      if (visibleExpression != null) {
+        __record__ = record;
+        return eval(SkipLogic.parse(visibleExpression));
+      } else {
+        return true;
+      }
+    },
+    isSet: function(record) {
+      return record.get(this.get('name')) != null;
     }
   });
 

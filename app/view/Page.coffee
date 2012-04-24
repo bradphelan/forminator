@@ -15,35 +15,53 @@ Ext.define "app.view.Page"
 
     allSet = true
     @getPage().get('items').getData().each (item)=>
-      if @getRecord().get(item.get('name')) == null
-        allSet = false
+      allSet = false if not item.isSet(@getRecord())
     allSet
 
-  updateState: ->
+  updateVisibility: ->
+    @getPage().get('items').getData().each (item)=>
+      visible = item.isVisible(@getRecord())
+      item.findComponent(@).setHidden !visible
 
+  updateState: ->
     if @areAllItemsOnPageSet()
       @down("[iconCls=arrow_right]").setDisabled false
+    @updateVisibility()
+
+  handleChangeEvent: (field)->
+    @getRecord().set(field.getName(), field.getValue())
+    @updateState()
 
   configureListeners: ->
+    handler =
+      'delegate': 'field'
+      fn: (field) => @handleChangeEvent(field)
     @addListener
-      'change':
-        'delegate': 'field'
-        fn: (field) =>
-          @getRecord().set(field.getName(), field.getValue())
-          @updateState()
-      'check':
-        'delegate': 'field'
-        fn: (field) =>
-          @getRecord().set(field.getName(), field.getValue())
-          @updateState()
-      'uncheck':
-        'delegate': 'field'
-        fn: (field) =>
-          @getRecord().set(field.getName(), field.getValue())
-          @updateState()
+      'change': handler
+      'check': handler
+      'uncheck': handler
 
   currentIndex: ->
     @getPagesUI().indexOf(@getPagesUI().getActiveItem())
+
+  buildFields: ->
+    @getPage().get('items').getData().collect (item)=>
+      item.createComponent()
+
+  buildSubmitToolbar: ->
+    xtype: 'titlebar'
+    docked: 'bottom'
+    title: 'You are done!'
+    items: [
+      iconCls: 'action'
+      iconMask: true
+      bubbleEvents: 'submitForm'
+      align: 'right'
+      text: 'SUBMIT!'
+      listeners:
+        tap: (me)=>
+          me.fireEvent 'submitForm', @getRecord()
+    ]
 
   initialize: ->
 
@@ -88,24 +106,10 @@ Ext.define "app.view.Page"
         padding: 20
       ,
         xtype: 'panel'
-        items: @getPage().get('items').getData().collect (item)=> item.createComponent()
+        items: @buildFields()
       ]
 
-    if @getLast()
-      @add
-        xtype: 'titlebar'
-        docked: 'bottom'
-        title: 'You are done!'
-        items: [
-          iconCls: 'action'
-          iconMask: true
-          bubbleEvents: 'submitForm'
-          align: 'right'
-          text: 'SUBMIT!'
-          listeners:
-            tap: (me)=>
-              me.fireEvent 'submitForm', @getRecord()
-        ]
+    @add @buildSubmitToolbar() if @getLast()
 
     @configureListeners()
     @updateState()

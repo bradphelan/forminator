@@ -43,7 +43,7 @@ case 13:this.$ = '(' + $$[$0-1] + ')';
 break;
 case 14:this.$ = $$[$0];
 break;
-case 15:this.$ = "__record__['" + $$[$0] + "']";
+case 15:this.$ = "__record__.get('" + $$[$0] + "')";
 break;
 }
 },

@@ -15,45 +15,75 @@
       return true;
       allSet = true;
       this.getPage().get('items').getData().each(function(item) {
-        if (_this.getRecord().get(item.get('name')) === null) {
+        if (!item.isSet(_this.getRecord())) {
           return allSet = false;
         }
       });
       return allSet;
     },
+    updateVisibility: function() {
+      var _this = this;
+      return this.getPage().get('items').getData().each(function(item) {
+        var visible;
+        visible = item.isVisible(_this.getRecord());
+        item.findComponent(_this).setHidden(!visible);
+      });
+    },
     updateState: function() {
       if (this.areAllItemsOnPageSet()) {
-        return this.down("[iconCls=arrow_right]").setDisabled(false);
+        this.down("[iconCls=arrow_right]").setDisabled(false);
       }
+      return this.updateVisibility();
+    },
+    handleChangeEvent: function(field) {
+      this.getRecord().set(field.getName(), field.getValue());
+      return this.updateState();
     },
     configureListeners: function() {
-      var _this = this;
-      return this.addListener({
-        'change': {
-          'delegate': 'field',
-          fn: function(field) {
-            _this.getRecord().set(field.getName(), field.getValue());
-            return _this.updateState();
-          }
-        },
-        'check': {
-          'delegate': 'field',
-          fn: function(field) {
-            _this.getRecord().set(field.getName(), field.getValue());
-            return _this.updateState();
-          }
-        },
-        'uncheck': {
-          'delegate': 'field',
-          fn: function(field) {
-            _this.getRecord().set(field.getName(), field.getValue());
-            return _this.updateState();
-          }
+      var handler,
+        _this = this;
+      handler = {
+        'delegate': 'field',
+        fn: function(field) {
+          return _this.handleChangeEvent(field);
         }
+      };
+      return this.addListener({
+        'change': handler,
+        'check': handler,
+        'uncheck': handler
       });
     },
     currentIndex: function() {
       return this.getPagesUI().indexOf(this.getPagesUI().getActiveItem());
+    },
+    buildFields: function() {
+      var _this = this;
+      return this.getPage().get('items').getData().collect(function(item) {
+        return item.createComponent();
+      });
+    },
+    buildSubmitToolbar: function() {
+      var _this = this;
+      return {
+        xtype: 'titlebar',
+        docked: 'bottom',
+        title: 'You are done!',
+        items: [
+          {
+            iconCls: 'action',
+            iconMask: true,
+            bubbleEvents: 'submitForm',
+            align: 'right',
+            text: 'SUBMIT!',
+            listeners: {
+              tap: function(me) {
+                return me.fireEvent('submitForm', _this.getRecord());
+              }
+            }
+          }
+        ]
+      };
     },
     initialize: function() {
       var _this = this;
@@ -105,32 +135,12 @@
             padding: 20
           }, {
             xtype: 'panel',
-            items: this.getPage().get('items').getData().collect(function(item) {
-              return item.createComponent();
-            })
+            items: this.buildFields()
           }
         ]
       });
       if (this.getLast()) {
-        this.add({
-          xtype: 'titlebar',
-          docked: 'bottom',
-          title: 'You are done!',
-          items: [
-            {
-              iconCls: 'action',
-              iconMask: true,
-              bubbleEvents: 'submitForm',
-              align: 'right',
-              text: 'SUBMIT!',
-              listeners: {
-                tap: function(me) {
-                  return me.fireEvent('submitForm', _this.getRecord());
-                }
-              }
-            }
-          ]
-        });
+        this.add(this.buildSubmitToolbar());
       }
       this.configureListeners();
       return this.updateState();

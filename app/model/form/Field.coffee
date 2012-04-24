@@ -13,6 +13,10 @@ Ext.define 'app.model.form.Field'
       type: 'string'
       defaultValue: null
     ,
+      name: 'show_if'
+      type: 'string'
+      defaultValue: null
+    ,
       name: 'title'
       type: 'string'
       defaultValue: null
@@ -53,6 +57,34 @@ Ext.define 'app.model.form.Field'
 
     items
 
+  idForComponent: ->
+    "form-field-#{@get('name')}"
+
+  findComponent: (root)->
+    root.down("[id=#{@idForComponent()}]")
+
+  # Create the component for this field
+  # and give it an id
   createComponent: ->
     xtype: 'panel'
     items: @createItems()
+    id: @idForComponent()
+
+
+  # Using the 'show_if' item expression
+  # return if the field should be visible
+  # given the current record
+  isVisible: (record)->
+    visibleExpression = @get('show_if')
+    if visibleExpression?
+      __record__ = record
+      eval(SkipLogic.parse(visibleExpression))
+    else
+      true
+
+  # Checks if the entry in the record
+  # corresponding to this field model
+  # is set.
+  isSet: (record)->
+    record.get(@get('name'))?
+
