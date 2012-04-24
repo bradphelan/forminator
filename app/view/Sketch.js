@@ -33,6 +33,18 @@
       $(this.canvas()).height(size.height - 10);
       return this.fireEvent('canvasResized', size);
     },
+    fixCanvasLag: function() {
+      return $(this.canvas()).attr("unselectable", "on").css({
+        "-moz-user-select": "none",
+        "-webkit-user-select": "none",
+        "user-select": "none",
+        "::selection": "none"
+      }).each(function() {
+        return this.onselectstart = function() {
+          return false;
+        };
+      });
+    },
     initialize: function() {
       var size;
       this.setHtml("<canvas></canvas>");
@@ -42,7 +54,8 @@
       });
       size = this.element.getSize();
       $(this.canvas()).width(size.width - 10);
-      return $(this.canvas()).height(size.height - 10);
+      $(this.canvas()).height(size.height - 10);
+      return this.fixCanvasLag();
     }
   });
 
@@ -102,7 +115,10 @@
         _this = this;
       this.callParent();
       canvas = this.canvasDOM();
-      this.sketch = new Sketch(canvas);
+      this.sketch = new Sketch(canvas, {
+        toolLinks: false,
+        defaultSize: "10"
+      });
       $(canvas).data('sketch', this.sketch);
       if (this.getUseToolbar()) {
         this.insertTools();
@@ -134,7 +150,7 @@
       }, opts);
       this.painting = false;
       this.color = this.options.defaultColor;
-      this.size = this.options.defaultSize;
+      this.toolSize = this.options.defaultSize;
       this.tool = this.options.defaultTool;
       this.actions = [];
       this.action = [];
@@ -180,7 +196,7 @@
       return this.action = {
         tool: this.tool,
         color: this.color,
-        size: parseFloat(this.size),
+        size: parseFloat(this.toolSize),
         events: []
       };
     };
@@ -206,18 +222,21 @@
     };
 
     Sketch.prototype.redraw = function() {
-      var sketch;
+      var action, sketch, tools, _i, _len, _ref;
       this.el.width = this.canvas.width();
       this.el.height = this.canvas.height();
       this.context = this.el.getContext('2d');
       sketch = this;
-      $.each(this.actions, function() {
-        if (this.tool) {
-          return $.sketch.tools[this.tool].draw.call(sketch, this);
+      tools = $.sketch.tools;
+      _ref = this.actions;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        action = _ref[_i];
+        if (action.tool) {
+          tools[action.tool].draw.call(sketch, action);
         }
-      });
+      }
       if (this.painting && this.action) {
-        return $.sketch.tools[this.action.tool].draw.call(sketch, this.action);
+        return tools[this.action.tool].draw.call(sketch, this.action);
       }
     };
 
@@ -231,42 +250,61 @@
 
   $.sketch.tools.marker = {
     onEvent: function(e) {
+      var apply,
+        _this = this;
       switch (e.type) {
         case 'mousedown':
         case 'touchstart':
-          this.startPainting();
-          break;
+          return this.startPainting();
         case 'mouseup':
         case 'mouseout':
         case 'mouseleave':
         case 'touchend':
         case 'touchcancel':
-          this.stopPainting();
-      }
-      if (this.painting) {
-        this.action.events.push({
-          x: e.pageX - this.canvas.offset().left,
-          y: e.pageY - this.canvas.offset().top,
-          event: e.type
-        });
-        return this.redraw();
+          return this.stopPainting();
+        case 'mousemove':
+          if (!this.doMouseMove) {
+            apply = function(e) {
+              var event, offset;
+              offset = _this.canvas.offset();
+              event = {
+                x: e.pageX - offset.left,
+                y: e.pageY - offset.top,
+                event: e.type
+              };
+              _this.action.events.push(event);
+              return _this.redraw();
+            };
+            this.doMouseMove = Ext.Function.createThrottled(apply, 1000 / 25);
+          }
+          if (this.painting) {
+            return this.doMouseMove(e);
+          }
       }
     },
     draw: function(action) {
-      var event, previous, _i, _len, _ref;
-      this.context.lineJoin = "round";
-      this.context.lineCap = "round";
-      this.context.beginPath();
-      this.context.moveTo(action.events[0].x, action.events[0].y);
-      _ref = action.events;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        event = _ref[_i];
-        this.context.lineTo(event.x, event.y);
-        previous = event;
+      var ctxt, cx, cy, ei, i, p, pts, _i;
+      ctxt = this.context;
+      ctxt.lineJoin = "round";
+      ctxt.lineCap = "round";
+      ctxt.beginPath();
+      ctxt.strokeStyle = action.color;
+      ctxt.lineWidth = action.size;
+      pts = action.events;
+      if (!(pts.length >= 3)) {
+        return;
       }
-      this.context.strokeStyle = action.color;
-      this.context.lineWidth = action.size;
-      return this.context.stroke();
+      p = pts[0];
+      ctxt.moveTo(p.x, p.y);
+      ei = pts.length - 2;
+      ctxt.moveTo(pts[0].x, pts[0].y);
+      for (i = _i = 1; 1 <= ei ? _i <= ei : _i >= ei; i = 1 <= ei ? ++_i : --_i) {
+        cx = (pts[i].x + pts[i + 1].x) / 2;
+        cy = (pts[i].y + pts[i + 1].y) / 2;
+        ctxt.quadraticCurveTo(pts[i].x, pts[i].y, cx, cy);
+      }
+      ctxt.quadraticCurveTo(pts[i - 1].x, pts[i - 1].y, pts[i].x, pts[i].y);
+      return ctxt.stroke();
     }
   };
 

@@ -30,6 +30,17 @@ Ext.define "app.view.Canvas"
     $(@canvas()).width(size.width-10)
     $(@canvas()).height(size.height-10)
     @fireEvent 'canvasResized', size
+
+  fixCanvasLag: ->
+
+      $(@canvas()).attr("unselectable", "on").css(
+        "-moz-user-select": "none"
+        "-webkit-user-select": "none"
+        "user-select": "none"
+        "::selection": "none"
+      ).each ->
+        @onselectstart = ->
+          false
     
   initialize: ->
     @setHtml """
@@ -42,6 +53,8 @@ Ext.define "app.view.Canvas"
     size = @element.getSize()
     $(@canvas()).width(size.width-10)
     $(@canvas()).height(size.height-10)
+
+    @fixCanvasLag()
 
 Ext.define "app.view.Sketch"
   extend: "Ext.Panel"
@@ -90,7 +103,10 @@ Ext.define "app.view.Sketch"
   initialize: ->
     @callParent()
     canvas = @canvasDOM()
-    @sketch = new Sketch(canvas)
+    @sketch = new Sketch canvas,
+      toolLinks: false
+      defaultSize: "10"
+
     $(canvas).data('sketch', @sketch)
     if @getUseToolbar()
       @insertTools()
@@ -132,7 +148,8 @@ class Sketch
     }, opts
     @painting = false
     @color = @options.defaultColor
-    @size = @options.defaultSize
+    @toolSize = @options.defaultSize
+    
     @tool = @options.defaultTool
     @actions = []
     @action = []
@@ -192,7 +209,7 @@ class Sketch
     @action = {
       tool: @tool
       color: @color
-      size: parseFloat(@size)
+      size: parseFloat(@toolSize)
       events: []
     }
 
@@ -230,10 +247,11 @@ class Sketch
     @el.height= @canvas.height()
     @context = @el.getContext '2d'
     sketch = this
-    $.each @actions, ->
-      if this.tool
-        $.sketch.tools[this.tool].draw.call sketch, this
-    $.sketch.tools[@action.tool].draw.call sketch, @action if @painting && @action
+    tools = $.sketch.tools
+    for action in @actions
+      if action.tool
+        tools[action.tool].draw.call sketch, action
+    tools[@action.tool].draw.call sketch, @action if @painting && @action
 
 # # Tools
 #
@@ -257,28 +275,59 @@ $.sketch.tools.marker =
         @startPainting()
       when 'mouseup', 'mouseout', 'mouseleave', 'touchend', 'touchcancel'
         @stopPainting()
+      when 'mousemove'
 
-    if @painting
-      @action.events.push
-        x: e.pageX - @canvas.offset().left
-        y: e.pageY - @canvas.offset().top
-        event: e.type
+        unless @doMouseMove
+          apply = (e)=>
+            offset = @canvas.offset()
+            event =
+              x: e.pageX - offset.left
+              y: e.pageY - offset.top
+              event: e.type
+            @action.events.push event
+            @redraw()
 
-      @redraw()
+          @doMouseMove = Ext.Function.createThrottled(apply, 1000/25)
+
+        if @painting
+          @doMouseMove(e)
+
 
   draw: (action)->
-    @context.lineJoin = "round"
-    @context.lineCap = "round"
-    @context.beginPath()
-    
-    @context.moveTo action.events[0].x, action.events[0].y
-    for event in action.events
-      @context.lineTo event.x, event.y
+    ctxt = @context
+    ctxt.lineJoin = "round"
+    ctxt.lineCap = "round"
+    ctxt.beginPath()
 
-      previous = event
-    @context.strokeStyle = action.color
-    @context.lineWidth = action.size
-    @context.stroke()
+    ctxt.strokeStyle = action.color
+    ctxt.lineWidth = action.size
+    
+    pts = action.events
+
+    return unless pts.length >= 3
+
+    p = pts[0]
+    ctxt.moveTo p.x, p.y
+    ei = pts.length - 2
+
+    ctxt.moveTo(pts[0].x, pts[0].y)
+    for i in [1..ei]
+      cx = (pts[i].x + pts[i+1].x)/2
+      cy = (pts[i].y + pts[i+1].y)/2
+      ctxt.quadraticCurveTo(
+        pts[i].x,
+        pts[i].y,
+        cx,
+        cy)
+
+    ctxt.quadraticCurveTo(
+      pts[i-1].x,
+      pts[i-1].y,
+      pts[i].x,
+      pts[i].y)
+
+
+    ctxt.stroke()
 
 # ## eraser
 #
