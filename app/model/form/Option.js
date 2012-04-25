@@ -15,16 +15,18 @@
       i = 0;
       return this.get('options').map(function(option) {
         option = (function() {
-          if ((option.text != null) && (option.value != null)) {
-            return option;
-          } else if (option.constructor === String) {
+          if (typeof option !== "object") {
             return {
-              text: option,
+              text: "" + option,
               value: i
             };
-          } else if (!(option.value != null)) {
-            option.value = i;
+          } else if ((option.text != null) && (option.value != null)) {
             return option;
+          } else if (option.text != null) {
+            return {
+              text: option.text,
+              value: i
+            };
           } else {
             throw "Arggh";
           }

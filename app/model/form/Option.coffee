@@ -9,14 +9,14 @@ Ext.define 'app.model.form.Option'
   options: ->
     i = 0
     @get('options').map (option)->
-      option = if option.text? and option.value?
-        option
-      else if option.constructor == String
-        text: option
+      option = if typeof(option) != "object"
+        text: "#{option}"
         value: i
-      else if not option.value?
-        option.value = i
+      else if option.text? and option.value?
         option
+      else if option.text?
+        text: option.text
+        value: i
       else
         throw "Arggh"
       i+=1
