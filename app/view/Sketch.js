@@ -266,20 +266,20 @@
           if (!this.doMouseMove) {
             apply = function(e) {
               var event, offset;
-              offset = _this.canvas.offset();
-              event = {
-                x: e.pageX - offset.left,
-                y: e.pageY - offset.top,
-                event: e.type
-              };
-              _this.action.events.push(event);
-              return _this.redraw();
+              if (_this.painting) {
+                offset = _this.canvas.offset();
+                event = {
+                  x: e.pageX - offset.left,
+                  y: e.pageY - offset.top,
+                  event: e.type
+                };
+                _this.action.events.push(event);
+                return _this.redraw();
+              }
             };
             this.doMouseMove = Ext.Function.createThrottled(apply, 1000 / 25);
           }
-          if (this.painting) {
-            return this.doMouseMove(e);
-          }
+          return this.doMouseMove(e);
       }
     },
     draw: function(action) {

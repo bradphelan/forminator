@@ -279,18 +279,18 @@ $.sketch.tools.marker =
 
         unless @doMouseMove
           apply = (e)=>
-            offset = @canvas.offset()
-            event =
-              x: e.pageX - offset.left
-              y: e.pageY - offset.top
-              event: e.type
-            @action.events.push event
-            @redraw()
+            if @painting
+              offset = @canvas.offset()
+              event =
+                x: e.pageX - offset.left
+                y: e.pageY - offset.top
+                event: e.type
+              @action.events.push event
+              @redraw()
 
           @doMouseMove = Ext.Function.createThrottled(apply, 1000/25)
 
-        if @painting
-          @doMouseMove(e)
+        @doMouseMove(e)
 
 
   draw: (action)->
