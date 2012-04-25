@@ -30,8 +30,16 @@ Ext.define "app.view.RadioField"
   createField: ->
     panel = Ext.create "Ext.Panel"
       items: @createRadios()
-    panel.on "check", @doChange, @
-    panel.mo "uncheck", @doChange, @
+    panel.on
+      check:
+        fn: @doChange
+        scope: @
+        delegate: "field"
+      uncheck:
+        fn: @doChange
+        scope: @
+        delegate: "field"
+
 
     panel
 
