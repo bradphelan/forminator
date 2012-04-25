@@ -36,10 +36,9 @@ Ext.define "app.view.SketchField"
     @panel
 
   doChange: ->
-
     @setValue(@panel.getValue())
 
-
-  updateSubValue: (value)->
+  updateValue: (value, oldValue)->
+    @callParent arguments
     # TODO implement
     console.log "warning: cannot update image sketches yet!"

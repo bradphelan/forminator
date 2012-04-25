@@ -2,7 +2,8 @@ Ext.define "app.view.TextField"
 
   extend: "app.view.FormField"
 
-  updateSubValue: (value)->
+  updateValue: (value, oldValue)->
+    @callParent arguments
     field = @down('textfield')
     field.setValue(value)
 

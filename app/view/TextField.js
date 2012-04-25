@@ -2,8 +2,9 @@
 
   Ext.define("app.view.TextField", {
     extend: "app.view.FormField",
-    updateSubValue: function(value) {
+    updateValue: function(value, oldValue) {
       var field;
+      this.callParent(arguments);
       field = this.down('textfield');
       return field.setValue(value);
     },

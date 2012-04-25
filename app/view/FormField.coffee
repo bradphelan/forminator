@@ -25,12 +25,15 @@ Ext.define "app.view.FormField"
       title: @getFactory().createTitle()
     ]
 
-  updateSubValue: (value)->
-    throw "abstract method"
+    @setId(@getFactory().idForComponent())
+
+
+    # This will fill the UI with initial
+    # values
+    @doRecordChange()
 
   updateValue: (value, oldValue)->
     @getRecord().set(@getName(), value)
-    @updateSubValue(value)
 
   handleInnerChangeEvent: (field)->
     @getRecord().set

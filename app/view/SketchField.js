@@ -41,7 +41,8 @@
     doChange: function() {
       return this.setValue(this.panel.getValue());
     },
-    updateSubValue: function(value) {
+    updateValue: function(value, oldValue) {
+      this.callParent(arguments);
       return console.log("warning: cannot update image sketches yet!");
     }
   });

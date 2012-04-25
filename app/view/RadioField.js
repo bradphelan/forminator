@@ -2,8 +2,9 @@
 
   Ext.define("app.view.RadioField", {
     extend: "app.view.FormField",
-    updateSubValue: function(value) {
+    updateValue: function(value, oldValue) {
       var field, fields, _i, _len, _results;
+      this.callParent(arguments);
       fields = this.query('radiofield');
       _results = [];
       for (_i = 0, _len = fields.length; _i < _len; _i++) {

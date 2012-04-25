@@ -1,7 +1,8 @@
 Ext.define "app.view.RadioField"
   extend: "app.view.FormField"
 
-  updateSubValue: (value)->
+  updateValue: (value, oldValue)->
+    @callParent arguments
     fields = @query('radiofield')
     for field in fields
       if field.getValue() == value
