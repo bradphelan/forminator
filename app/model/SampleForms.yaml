@@ -7,19 +7,33 @@
     Please assist us.
   pages: 
   - title: A
-    items:
-    - name: drawing
-      type: sketch
-
-  - title: A
     items: 
-    - name: a
+    - name: Yo Slider
       type: integer
-    - name: b
+      range:
+        min: 2
+        max: 11
+        labels: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11] 
+
+    - name: Another
       type: integer
-      show_if: a > 10
-    - name: c
+      range:
+        min: 0
+        max: 10 
+        labels: ['Cold', 'Warm', 'Hot']
+
+    - name: draw_picture
+      label: Draw a picture?
       type: integer
+      options:
+        - No?
+        - Yes?
+      defaultValue: 0
+    - name: Picture
+      type: sketch
+      show_if: draw_picture != 0 or draw_picture == 1
+    - name: tag
+      defaultValue: hi ho hi ho
 
 - title: Pain Form
   id: 45e7f6c0-87f6-11e1-b0c4-0800200c9a66
@@ -35,12 +49,9 @@
       name: today
       as: radio
       options: 
-      - text: bad
-        value: 0
-      - text: good
-        value: 1
-      - text: excelent
-        value: 2
+      - bad
+      - good
+      - excelent
   - title: How did you feel yesterday
     help: On average how did you feel yesterday?
     items: 
@@ -48,12 +59,9 @@
       type: integer
       as: radio
       options: 
-      - text: bad
-        value: 0
-      - text: good
-        value: 1
-      - text: excelent
-        value: 2
+      - bad
+      - good
+      - excelent
   - title: How did you feel last week
     help: On average how did you feel last week?
     items: 
@@ -61,12 +69,9 @@
       name: last_week
       as: radio
       options: 
-      - text: bad
-        value: 0
-      - text: good
-        value: 1
-      - text: excelent
-        value: 2
+      - bad
+      - good
+      - excelent
 
 - title: Deutscher Schmerz-Fragebogen
   id: b0dccce0-88a4-11e1-b0c4-0800200c9a66
@@ -121,7 +126,7 @@
     - name: erster_behandlungstermin 
       type: date
 
-  - title: Patient
+  - title: Für Patient
     help:
     items:
       - name: patienten_name
@@ -202,12 +207,10 @@
           - text: Schmerzattacken, auch dazwischen Schmerzen 
             value: 3
 
-  - title: "8"
-    help: Wie oft treten diese Attacken durchschnittlich auf?
-    items:
       - name: q8_b
+        label: Wie oft treten diese Attacken durchschnittlich auf?
         # Wenn Sie an Schmerzattacken leiden (Bilder 3 und 4), beantworten Sie bitte zusätzlich noch folgende Fragen:
-        only_if: q8_a == 2 | q8_b == 3 
+        show_if: q8_a == 2 or q8_a == 3 
         options:
           - text: mehrfach täglich  
             value: 0
@@ -224,12 +227,10 @@
           - text: seltener
             value: 6
         
-  - title: "8"
-    help: Wie lange dauern diese Attacken durchschnittlich?
-    items:
       - name: q8_c 
+        label: Wie lange dauern diese Attacken durchschnittlich?
         # Wenn Sie an Schmerzattacken leiden (Bilder 3 und 4), beantworten Sie bitte zusätzlich noch folgende Fragen:
-        only_if: q8_a == 2 | q8_b == 3 
+        show_if: q8_a == 2 or q8_a == 3 
         type: integer
         options:
           - Sekunden  
@@ -344,5 +345,39 @@
     items:
       - name: furchtbar
         options: *options_10
+
+  - title: "11"
+    help: |-
+      Geben Sie im Folgenden die Stärke Ihrer Schmerzen an. Kreuzen Sie auf den
+      unten aufgeführten Linien an, wie stark Sie Ihre Schmerzen empfinden
+      (unter Ihrer üblichen Medikation). Die Zahlen können Ihnen bei der
+      Einteilung helfen: Ein Wert von 0 bedeutet, Sie haben keine Schmerzen,
+      ein Wert von 10 bedeutet, Sie leiden unter Schmerzen, wie sie für Sie
+      nicht stärker vorstellbar sind. Die Zahlen dazwischen geben Abstufungen
+      der Schmerzstärke an.
+    items:
+      - name: q11_a
+        type: integer
+        help: Geben Sie bitte zunächst Ihre momentane Schmerzstärke an 
+        range: &q11_range
+          min: 0
+          max: 10
+          labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+      - name: q11_b
+        type: integer
+        help: Geben Sie jetzt bitte Ihre durchschnittliche Schmerzstärke während der letzten 4 Wochen an
+        range: *q11_range
+
+      - name: q11_c
+        type: integer
+        help: Geben Sie jetzt bitte Ihre größte Schmerzstärke während der letzten 4 Wochen an
+        range: *q11_range
+
+      - name: q11_d
+        type: integer
+        help: Geben Sie jetzt an, welche Schmerzstärke für Sie bei erfolgreicher Behandlung erträglich wäre
+        range: *q11_range
+        
 
 
