@@ -6,6 +6,10 @@
 %%
 \s+                   /* skip whitespace */
 [0-9]+("."[0-9]+)?\b  return 'NUMBER';
+"or"                  return 'or';
+"OR"                  return 'or';
+"and"                 return 'and';
+"AND"                 return 'and';
 [_a-zA-Z]+[_a-zA-Z0-9]*\b  return 'VARIABLE';
 "*"                   return '*';
 "/"                   return '/';
@@ -24,6 +28,8 @@
 <<EOF>>               return 'EOF';
 /lex
 
+%left 'and'
+%left 'or'
 %left '=='
 %left '!='
 %left '>'
@@ -41,7 +47,7 @@
 expressions
   : e EOF
     { if (typeof console !== 'undefined') {
-          //console.log($1);
+          console.log($1);
       }else{
           //print($1);
       }  
@@ -86,7 +92,13 @@ e
 
   | '(' e ')'
     {$$ = '(' + $2 + ')';}
-  
+
+  | e 'and' e
+    {$$ = $1 + " && " + $3;}
+
+  | e 'or' e
+    {$$ = $1 + " || " + $3;}
+    
   | NUMBER
     {$$ = $1;}
   
