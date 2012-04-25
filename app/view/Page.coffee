@@ -21,7 +21,14 @@ Ext.define "app.view.Page"
   updateVisibility: ->
     @getPage().get('items').getData().each (item)=>
       visible = item.isVisible(@getRecord())
-      item.findComponent(@).setHidden !visible
+
+      item.findComponent(@).setShowAnimation "slideIn"
+      item.findComponent(@).setHideAnimation "slideOut"
+      if visible
+        item.findComponent(@).show()
+      else
+        item.findComponent(@).hide()
+
       if not visible
         @getRecord().set(item.get('name'), null)
 

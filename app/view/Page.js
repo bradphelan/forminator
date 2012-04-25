@@ -26,7 +26,13 @@
       return this.getPage().get('items').getData().each(function(item) {
         var visible;
         visible = item.isVisible(_this.getRecord());
-        item.findComponent(_this).setHidden(!visible);
+        item.findComponent(_this).setShowAnimation("slideIn");
+        item.findComponent(_this).setHideAnimation("slideOut");
+        if (visible) {
+          item.findComponent(_this).show();
+        } else {
+          item.findComponent(_this).hide();
+        }
         if (!visible) {
           return _this.getRecord().set(item.get('name'), null);
         }
