@@ -36,7 +36,7 @@ Ext.define  'app.view.MainNavigation'
         'Content-Type': 'application/json;charset=utf-8'
       url: "/form.json"
       success: (response)=>
-        console.log "YAY"
+        console.log "Submitted form to server ok"
       error: =>
         console.log "Nein"
         

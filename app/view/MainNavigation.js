@@ -30,7 +30,7 @@
         },
         url: "/form.json",
         success: function(response) {
-          return console.log("YAY");
+          return console.log("Submitted form to server ok");
         },
         error: function() {
           return console.log("Nein");
