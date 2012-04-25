@@ -77,6 +77,7 @@ Ext.define 'app.model.FormDefinition'
           name: item.name
           label: item.label
           type: if item.type? then item.type else 'string'
+          defaultValue: item.defaultValue
 
     class_name = "app.model.FormDefinition.ImplicitModel-#{@getId()}"
     unless Ext.getClass(class_name)?
@@ -92,8 +93,6 @@ Ext.define 'app.model.FormDefinition'
           r
 
     class_name
-
-
 
   createForm: ->
 

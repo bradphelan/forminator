@@ -63,7 +63,8 @@
           fields.push({
             name: item.name,
             label: item.label,
-            type: item.type != null ? item.type : 'string'
+            type: item.type != null ? item.type : 'string',
+            defaultValue: item.defaultValue
           });
         }
       }

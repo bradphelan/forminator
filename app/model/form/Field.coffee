@@ -10,6 +10,10 @@ Ext.define 'app.model.form.Field'
       type: 'string'
       defaultValue: 'string'
     ,
+      name: 'defaultValue'
+      type: 'string'
+      defaultValue: null
+    ,
       name: 'label'
       type: 'string'
       defaultValue: null
