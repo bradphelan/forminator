@@ -2,7 +2,7 @@
 
   Ext.define('app.model.FormDefinition', {
     extend: 'Ext.data.Model',
-    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Sketch', 'app.model.Page', 'app.view.Page', 'app.view.Form', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
+    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Sketch', 'app.model.form.Range', 'app.model.Page', 'app.view.Page', 'app.view.Form', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
     config: {
       identifier: 'uuid',
       fields: [
@@ -23,6 +23,8 @@
         return 'app.model.form.Sketch';
       } else if (item.options != null) {
         return 'app.model.form.Radio';
+      } else if (item.range != null) {
+        return 'app.model.form.Range';
       } else {
         return 'app.model.form.Text';
       }

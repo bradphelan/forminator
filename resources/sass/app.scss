@@ -83,3 +83,46 @@
 pre {
   white-space: pre;
 }
+
+.x-slider-axis {
+  .x-slider-axis-label {
+    background-color: $form-label-background-color;
+  }
+  .x-slider-axis-container {
+    padding-left: 30px;
+    padding-right: 25px;
+    width: 100%;
+    .x-slider-axis-inner {
+      width: 100%;
+      display: inline-block;
+      background-color: $form-field-bg-color;
+      position: relative;
+      span {
+        position: absolute;
+      }
+    }
+
+  }
+}
+
+// CLEARFIX SUPPORT
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+.clearfix {
+	display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+	display: block;
+}
+ 
+* html .clearfix {
+	height: 1%;
+}
