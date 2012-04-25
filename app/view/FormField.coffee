@@ -1,29 +1,25 @@
 Ext.define "app.view.FormField"
   extend: "Ext.Panel"
   config:
+    # Some subclass of "app.model.form.Field"
     factory: null
+    # A model instance where the entered field values
+    # are stored
     record: null
+    # The name of this field
     name: null
+    # The current value of this field ( will be stored in the model )
     value: null
-    cls: 'x-auto-form-field'
-
 
   initialize: ->
     @setName(@getFactory().get('name'))
-    @doRecordChange()
     @getRecord().on "change:#{@getName()}", @doRecordChange, @
 
-    @add @createItems()
-    @setId(@getFactory().idForComponent())
-
-  createItems: ->
-
-    [
+    @add
       xtype: 'fieldset'
       items: [ @createField() ]
       instructions: @getFactory().createInstructions()
       title: @getFactory().createTitle()
-    ]
 
     @setId(@getFactory().idForComponent())
 
@@ -34,10 +30,6 @@ Ext.define "app.view.FormField"
 
   updateValue: (value, oldValue)->
     @getRecord().set(@getName(), value)
-
-  handleInnerChangeEvent: (field)->
-    @getRecord().set
-    @fireEvent 'change'
 
   doRecordChange: ->
     @setValue @getRecord().get(@getName())
