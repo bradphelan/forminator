@@ -30,6 +30,9 @@ Ext.define "app.view.SketchField"
 
   createField: ->
     @panel = Ext.create "app.view.SketchFieldImpl"
+      name: @getName()
+      label: @getFactory().createLabel()
+      labelWrap: true
 
     @panel.on "change", @doChange, @
 

@@ -34,7 +34,11 @@
   Ext.define("app.view.SketchField", {
     extend: "app.view.FormField",
     createField: function() {
-      this.panel = Ext.create("app.view.SketchFieldImpl");
+      this.panel = Ext.create("app.view.SketchFieldImpl", {
+        name: this.getName(),
+        label: this.getFactory().createLabel(),
+        labelWrap: true
+      });
       this.panel.on("change", this.doChange, this);
       return this.panel;
     },
