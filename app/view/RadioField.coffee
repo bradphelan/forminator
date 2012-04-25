@@ -10,7 +10,7 @@ Ext.define "app.view.RadioField"
 
   createRadio: (option)->
     xtype: 'radiofield'
-    labelWidth: @get('labelWidth')
+    labelWidth: @getFactory().get('labelWidth')
     value: option.value
     label: Ext.String.capitalize option.text
     name: @getName()

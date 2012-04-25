@@ -20,7 +20,7 @@
     createRadio: function(option) {
       return {
         xtype: 'radiofield',
-        labelWidth: this.get('labelWidth'),
+        labelWidth: this.getFactory().get('labelWidth'),
         value: option.value,
         label: Ext.String.capitalize(option.text),
         name: this.getName()
@@ -47,8 +47,18 @@
       panel = Ext.create("Ext.Panel", {
         items: this.createRadios()
       });
-      panel.on("check", this.doChange, this);
-      panel.mo("uncheck", this.doChange, this);
+      panel.on({
+        check: {
+          fn: this.doChange,
+          scope: this,
+          delegate: "field"
+        },
+        uncheck: {
+          fn: this.doChange,
+          scope: this,
+          delegate: "field"
+        }
+      });
       return panel;
     },
     doChange: function(checkBox, e) {
