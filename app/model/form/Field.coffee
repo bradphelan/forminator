@@ -58,7 +58,16 @@ Ext.define 'app.model.form.Field'
     visibleExpression = @get('show_if')
     if visibleExpression?
       __record__ = record
-      eval(SkipLogic.parse(visibleExpression))
+      try
+        eval(SkipLogic.parse(visibleExpression))
+      catch error
+        alert """
+          Error processing skip logic
+
+            #{visibleExpression}
+
+          Please check your form schema.
+        """
     else
       true
 

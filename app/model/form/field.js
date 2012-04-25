@@ -57,7 +57,11 @@
       visibleExpression = this.get('show_if');
       if (visibleExpression != null) {
         __record__ = record;
-        return eval(SkipLogic.parse(visibleExpression));
+        try {
+          return eval(SkipLogic.parse(visibleExpression));
+        } catch (error) {
+          return alert("Error processing skip logic\n\n  " + visibleExpression + "\n\nPlease check your form schema.");
+        }
       } else {
         return true;
       }
