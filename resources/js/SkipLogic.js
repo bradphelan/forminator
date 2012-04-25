@@ -10,9 +10,9 @@ performAction: function anonymous(yytext,yyleng,yylineno,yy,yystate,$$,_$) {
 var $0 = $$.length - 1;
 switch (yystate) {
 case 1: if (typeof console !== 'undefined') {
-          console.log($$[$0-1]);
+          //console.log($$[$0-1]);
       }else{
-          print($$[$0-1]);
+          //print($$[$0-1]);
       }  
       return $$[$0-1]; 
     

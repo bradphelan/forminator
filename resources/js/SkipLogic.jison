@@ -41,9 +41,9 @@
 expressions
   : e EOF
     { if (typeof console !== 'undefined') {
-          console.log($1);
+          //console.log($1);
       }else{
-          print($1);
+          //print($1);
       }  
       return $1; 
     }
