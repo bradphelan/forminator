@@ -27,7 +27,7 @@
         var visible;
         visible = item.isVisible(_this.getRecord());
         item.findComponent(_this).setShowAnimation("slideIn");
-        item.findComponent(_this).setHideAnimation("slideOut");
+        item.findComponent(_this).setHideAnimation("fadeOut");
         if (visible) {
           item.findComponent(_this).show();
         } else {

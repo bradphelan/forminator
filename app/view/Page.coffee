@@ -23,7 +23,7 @@ Ext.define "app.view.Page"
       visible = item.isVisible(@getRecord())
 
       item.findComponent(@).setShowAnimation "slideIn"
-      item.findComponent(@).setHideAnimation "slideOut"
+      item.findComponent(@).setHideAnimation "fadeOut"
       if visible
         item.findComponent(@).show()
       else
