@@ -130,11 +130,9 @@
     help:
     items:
       - name: patienten_name
-        label: name
-        help: Patienten Name
+        label: Patienten Name
       - name: patient_datum
-        label: date
-        help: Datum beim aüsfullen
+        label: Datum beim aüsfullen
         type: date
 
   - title: "1 - 4"
@@ -156,17 +154,17 @@
       type: integer
 
   - title: "5 - 6"
-    help: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
     items: 
-    - name: "q5_a"
-      type: "sketch"
+    - name: q5_a
+      type: sketch
+      label: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
 
   - title: "5 - 6"
     items:
     - name: "q5_b"
-      help: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
+      label: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
     - name: "q6"
-      help: Wegen welcher Schmerzen kommen Sie hauptsächlich zur Behandlung?
+      label: Wegen welcher Schmerzen kommen Sie hauptsächlich zur Behandlung?
 
   - title: "7"
     items:
@@ -187,14 +185,13 @@
           - text: mehr als 5 Jahre
             value: 120
       - name: 7_b
-        title: Können Sie ein genaues Datum angeben?
-        label: Datum
+        label: Können Sie ein genaues Datum angeben?
         type: date
     
   - title: "8"
     items:
       - name: q8_a 
-        title: |-
+        label: |-
           Welche der Aussagen trifft auf Ihre Schmerzen in den letzen 4 Wochen am
           besten zu?
         options:
@@ -240,14 +237,15 @@
           - länger als drei Tage
 
   - title: "9"
-    help: Sind Ihre Schmerzen zu bestimmten Tageszeiten besonders stark?
     items:
       - name: q9_a
+        label: Sind Ihre Schmerzen zu bestimmten Tageszeiten besonders stark?
         options:
           - nein
           - ja
       - name: q9_b
-        only_if: q9_a == 1
+        label: Wenn ja
+        show_if: q9_a == 1
         options:
           - morgens  
           - mittags 
@@ -362,7 +360,7 @@
         range: &q11_range
           min: 0
           max: 10
-          labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+          labels: ["kein Schmertz", "stärkster vorstellbarer Schmerz"]
 
       - name: q11_b
         type: integer
