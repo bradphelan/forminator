@@ -31,6 +31,6 @@ Ext.define "app.view.FormField"
   updateValue: (value, oldValue)->
     @getRecord().set(@getName(), value)
 
-  doRecordChange: ->
-    @setValue @getRecord().get(@getName())
+  doRecordChange: (obj, fieldName, newValue, oldValue)->
+    @setValue newValue
 

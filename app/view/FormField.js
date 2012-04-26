@@ -23,8 +23,8 @@
     updateValue: function(value, oldValue) {
       return this.getRecord().set(this.getName(), value);
     },
-    doRecordChange: function() {
-      return this.setValue(this.getRecord().get(this.getName()));
+    doRecordChange: function(obj, fieldName, newValue, oldValue) {
+      return this.setValue(newValue);
     }
   });
 
