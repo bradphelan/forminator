@@ -89,7 +89,7 @@ Ext.define 'app.model.FormDefinition'
         config:
           fields: fields
         set: (fieldName, newValue)->
-          oldValue = @get('value')
+          oldValue = @get(fieldName)
           r = @callParent([fieldName, newValue])
           @fireEvent("change:#{fieldName}", @, fieldName, newValue, oldValue )
           @fireEvent("change", @)

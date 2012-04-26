@@ -79,7 +79,7 @@
           },
           set: function(fieldName, newValue) {
             var oldValue, r;
-            oldValue = this.get('value');
+            oldValue = this.get(fieldName);
             r = this.callParent([fieldName, newValue]);
             this.fireEvent("change:" + fieldName, this, fieldName, newValue, oldValue);
             this.fireEvent("change", this);
