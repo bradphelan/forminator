@@ -5,7 +5,9 @@ Ext.define "app.view.RadioField"
     @callParent arguments
     fields = @query('radiofield')
     for field in fields
-      if field.getValue() == value
+      if value == null
+        field.setChecked(false)
+      else if field.getValue() == value
         field.setChecked(true)
 
   createRadio: (option)->

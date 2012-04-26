@@ -9,7 +9,9 @@
       _results = [];
       for (_i = 0, _len = fields.length; _i < _len; _i++) {
         field = fields[_i];
-        if (field.getValue() === value) {
+        if (value === null) {
+          _results.push(field.setChecked(false));
+        } else if (field.getValue() === value) {
           _results.push(field.setChecked(true));
         } else {
           _results.push(void 0);
