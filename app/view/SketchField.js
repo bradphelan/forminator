@@ -37,7 +37,8 @@
       this.panel = Ext.create("app.view.SketchFieldImpl", {
         name: this.getName(),
         label: this.getFactory().createLabel(),
-        labelWrap: true
+        labelWrap: true,
+        labelAlign: 'top'
       });
       this.panel.on("change", this.doChange, this);
       return this.panel;

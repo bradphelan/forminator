@@ -34,6 +34,7 @@ Ext.define "app.view.TextField"
         name: @getName()
         label: @getFactory().createLabel()
         labelWrap: true
+        labelAlign: 'top'
       ]
     panel.on
       change:

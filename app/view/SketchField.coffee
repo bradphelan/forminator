@@ -33,6 +33,7 @@ Ext.define "app.view.SketchField"
       name: @getName()
       label: @getFactory().createLabel()
       labelWrap: true
+      labelAlign: 'top'
 
     @panel.on "change", @doChange, @
 

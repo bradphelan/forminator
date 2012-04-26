@@ -36,7 +36,8 @@
             xtype: this.mapXType(),
             name: this.getName(),
             label: this.getFactory().createLabel(),
-            labelWrap: true
+            labelWrap: true,
+            labelAlign: 'top'
           }
         ]
       });
