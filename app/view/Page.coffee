@@ -27,10 +27,11 @@ Ext.define "app.view.Page"
       if visible
         item.findComponent(@).show()
       else
-        item.findComponent(@).hide()
+        component = item.findComponent(@)
+        if not component.getHidden()
+          @getRecord().set(item.get('name'), null)
+          component.hide()
 
-      if not visible
-        @getRecord().set(item.get('name'), null)
 
   updateState: ->
     if @areAllItemsOnPageSet()

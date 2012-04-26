@@ -24,17 +24,18 @@
     updateVisibility: function() {
       var _this = this;
       return this.getPage().get('items').getData().each(function(item) {
-        var visible;
+        var component, visible;
         visible = item.isVisible(_this.getRecord());
         item.findComponent(_this).setShowAnimation("slideIn");
         item.findComponent(_this).setHideAnimation("fadeOut");
         if (visible) {
-          item.findComponent(_this).show();
+          return item.findComponent(_this).show();
         } else {
-          item.findComponent(_this).hide();
-        }
-        if (!visible) {
-          return _this.getRecord().set(item.get('name'), null);
+          component = item.findComponent(_this);
+          if (!component.getHidden()) {
+            _this.getRecord().set(item.get('name'), null);
+            return component.hide();
+          }
         }
       });
     },
