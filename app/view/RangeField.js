@@ -17,6 +17,7 @@
         name: this.getName(),
         label: this.getFactory().createLabel(),
         labelWrap: true,
+        labelAlign: "top",
         minValue: 0,
         maxValue: range.max - range.min
       });
@@ -27,11 +28,16 @@
       c = range.labels.length;
       p = 1 / (c - 1) * 100;
       axes = range.labels.map(function(label, i) {
-        return "<span style=\"right:" + (p * (c - i - 1)) + "%\">" + label + "</span>";
+        if (i === 0) {
+          return "<span style=\"left:-5px;%\">" + label + "</span>";
+        } else {
+          return "<span style=\"right:" + (p * (c - i - 1)) + "%\">" + label + "</span>";
+        }
       });
       axes = axes.join('');
       return {
         xtype: 'panel',
+        cls: 'x-slider-axis-field',
         items: [
           field, {
             xtype: 'panel',
@@ -39,11 +45,6 @@
             layout: 'hbox',
             items: [
               {
-                xtype: 'panel',
-                html: "<span>&nbsp;</span>",
-                width: "30%",
-                cls: 'x-slider-axis-label'
-              }, {
                 xtype: 'panel',
                 html: "<div class='x-slider-axis-container'>\n  <div class='x-slider-axis-inner'>\n    " + axes + "\n    <div class='clearfix'/>\n  </div>\n</div>",
                 flex: 1

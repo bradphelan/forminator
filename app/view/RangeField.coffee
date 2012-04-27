@@ -17,6 +17,7 @@ Ext.define "app.view.RangeField"
       name: @getName()
       label: @getFactory().createLabel()
       labelWrap: true
+      labelAlign: "top"
       minValue: 0
       maxValue: range.max - range.min
 
@@ -28,11 +29,15 @@ Ext.define "app.view.RangeField"
     p = 1 / (c - 1) * 100
     axes = range.labels.map (label, i)=>
 
-      "<span style=\"right:#{p*(c - i - 1 )}%\">#{label}</span>"
+      if i == 0
+        "<span style=\"left:-5px;%\">#{label}</span>"
+      else
+        "<span style=\"right:#{p*(c - i - 1 )}%\">#{label}</span>"
 
     axes = axes.join ''
 
     xtype: 'panel'
+    cls: 'x-slider-axis-field'
     items: [
       field
     ,
@@ -40,11 +45,11 @@ Ext.define "app.view.RangeField"
       cls: 'x-slider-axis'
       layout: 'hbox'
       items: [
-        xtype: 'panel'
-        html: "<span>&nbsp;</span>"
-        width: "30%"
-        cls: 'x-slider-axis-label'
-      ,
+#         xtype: 'panel'
+#         html: "<span>&nbsp;</span>"
+#         width: "30%"
+#         cls: 'x-slider-axis-label'
+#       ,
         xtype: 'panel'
         html: """
         <div class='x-slider-axis-container'>

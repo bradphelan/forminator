@@ -1,3 +1,6 @@
+$form-label-bg-color: black;
+$form-label-color: white;
+
 @import 'sencha-touch/default/all';
 
 // You may remove any of the following modules that you
@@ -125,4 +128,11 @@ html[xmlns] .clearfix {
  
 * html .clearfix {
 	height: 1%;
+}
+
+// Used to add an axis under
+// the slider field and get 
+// rid of the middle border
+.x-slider-axis-field .x-slider-field{
+  border-bottom: none;
 }
