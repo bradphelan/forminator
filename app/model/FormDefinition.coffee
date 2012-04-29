@@ -14,7 +14,7 @@ Ext.define 'app.model.FormDefinition'
     'app.model.form.Range'
     'app.model.Page'
     'app.view.Page'
-    'app.view.Form'
+    'app.view.FormPagesLister'
     'Ext.Panel'
     'Ext.form.Panel'
     'Ext.field.Radio'
@@ -97,13 +97,15 @@ Ext.define 'app.model.FormDefinition'
           @fireEvent("change", @)
           r
 
+    console.log "#{class_name} as model class"
+    
     class_name
 
   createForm: ->
 
     record = Ext.create @createModelClass()
 
-    pagesUI = Ext.create 'app.view.Form'
+    pagesUI = Ext.create 'app.view.FormPagesLister'
       title: @get('title')
       pages: @get('pages')
       record: record

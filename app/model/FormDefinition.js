@@ -2,7 +2,7 @@
 
   Ext.define('app.model.FormDefinition', {
     extend: 'Ext.data.Model',
-    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Sketch', 'app.model.form.Range', 'app.model.Page', 'app.view.Page', 'app.view.Form', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
+    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Sketch', 'app.model.form.Range', 'app.model.Page', 'app.view.Page', 'app.view.FormPagesLister', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
     config: {
       identifier: 'uuid',
       fields: [
@@ -89,12 +89,13 @@
           }
         });
       }
+      console.log("" + class_name + " as model class");
       return class_name;
     },
     createForm: function() {
       var pagesUI, record;
       record = Ext.create(this.createModelClass());
-      pagesUI = Ext.create('app.view.Form', {
+      pagesUI = Ext.create('app.view.FormPagesLister', {
         title: this.get('title'),
         pages: this.get('pages'),
         record: record
