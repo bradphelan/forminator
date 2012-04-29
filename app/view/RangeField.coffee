@@ -30,9 +30,9 @@ Ext.define "app.view.RangeField"
     axes = range.labels.map (label, i)=>
 
       if i == 0
-        "<span style=\"left:-5px;%\">#{label}</span>"
+        "<span class='x-slider-axis-field-label' style=\"left:-5px;%\">#{label}</span>"
       else
-        "<span style=\"right:#{p*(c - i - 1 )}%\">#{label}</span>"
+        "<span class='x-slider-axis-field-label' style=\"right:#{p*(c - i - 1 )}%\">#{label}</span>"
 
     axes = axes.join ''
 

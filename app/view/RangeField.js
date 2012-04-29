@@ -29,9 +29,9 @@
       p = 1 / (c - 1) * 100;
       axes = range.labels.map(function(label, i) {
         if (i === 0) {
-          return "<span style=\"left:-5px;%\">" + label + "</span>";
+          return "<span class='x-slider-axis-field-label' style=\"left:-5px;%\">" + label + "</span>";
         } else {
-          return "<span style=\"right:" + (p * (c - i - 1)) + "%\">" + label + "</span>";
+          return "<span class='x-slider-axis-field-label' style=\"right:" + (p * (c - i - 1)) + "%\">" + label + "</span>";
         }
       });
       axes = axes.join('');
