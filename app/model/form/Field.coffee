@@ -33,6 +33,10 @@ Ext.define 'app.model.form.Field'
       name: "labelWidth"
       type: "string"
       defaultValue: "30%"
+    ,
+      name: "range"
+      type: "object"
+      defaultValue: null
     ]
 
        
