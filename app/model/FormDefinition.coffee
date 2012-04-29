@@ -40,6 +40,8 @@ Ext.define 'app.model.FormDefinition'
   itemTypeMap: (item)->
     if item.type == "sketch"
       'app.model.form.Sketch'
+    else if item.type == 'boolean'
+      'app.model.form.Boolean'
     else if item.options?
       'app.model.form.Radio'
     else if item.range?

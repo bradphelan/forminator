@@ -21,6 +21,8 @@
     itemTypeMap: function(item) {
       if (item.type === "sketch") {
         return 'app.model.form.Sketch';
+      } else if (item.type === 'boolean') {
+        return 'app.model.form.Boolean';
       } else if (item.options != null) {
         return 'app.model.form.Radio';
       } else if (item.range != null) {
