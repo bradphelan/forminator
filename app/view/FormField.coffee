@@ -26,7 +26,7 @@ Ext.define "app.view.FormField"
 
     # This will fill the UI with initial
     # values
-    @doRecordChange()
+    @setValue @getRecord().get(@getName())
 
   updateValue: (value, oldValue)->
     @getRecord().set(@getName(), value)

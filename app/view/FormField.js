@@ -18,7 +18,7 @@
         title: this.getFactory().createTitle()
       });
       this.setId(this.getFactory().idForComponent());
-      return this.doRecordChange();
+      return this.setValue(this.getRecord().get(this.getName()));
     },
     updateValue: function(value, oldValue) {
       return this.getRecord().set(this.getName(), value);
