@@ -5,7 +5,6 @@
     requires: ['app.view.FormKiosk', 'app.view.ModalFormData', 'app.view.Sketch'],
     initialize: function() {
       this.callParent(arguments);
-      this.getNavigationBar().hide();
       this.autowire(['submitForm', 'executeForm']);
       return this.push({
         xtype: "formkiosk"

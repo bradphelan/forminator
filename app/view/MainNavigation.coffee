@@ -10,7 +10,7 @@ Ext.define  'app.view.MainNavigation'
     @callParent(arguments)
     # Hide the nav bar we want to
     # craft our own solution
-    @getNavigationBar().hide()
+    # @getNavigationBar().hide()
     @autowire [
       'submitForm'
       'executeForm'
