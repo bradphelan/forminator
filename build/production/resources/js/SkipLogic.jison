@@ -5,11 +5,10 @@
 %lex
 %%
 \s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b  return 'NUMBER';
-"or"                  return 'or';
-"OR"                  return 'or';
-"and"                 return 'and';
-"AND"                 return 'and';
+[0-9]+("."[0-9]+)?\b              return 'NUMBER';
+((or)|(OR))\b                       return 'or';
+((and)|(AND))\b                     return 'and';
+((TRUE)|(true)|(FALSE)|(false))\b   return 'BOOL';
 [_a-zA-Z]+[_a-zA-Z0-9]*\b  return 'VARIABLE';
 "*"                   return '*';
 "/"                   return '/';
@@ -98,7 +97,10 @@ e
 
   | e 'or' e
     {$$ = $1 + " || " + $3;}
-    
+
+  | 'BOOL'
+    {$$ = $1.toLowerCase()}
+
   | NUMBER
     {$$ = $1;}
   
