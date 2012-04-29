@@ -240,12 +240,10 @@
     items:
       - name: q9_a
         label: Sind Ihre Schmerzen zu bestimmten Tageszeiten besonders stark?
-        options:
-          - nein
-          - ja
+        type: boolean
       - name: q9_b
         label: Wenn ja
-        show_if: q9_a == 1
+        show_if: q9_a == true
         options:
           - morgens  
           - mittags 
@@ -356,7 +354,7 @@
     items:
       - name: q11_a
         type: integer
-        help: Geben Sie bitte zunächst Ihre momentane Schmerzstärke an 
+        label: Geben Sie bitte zunächst Ihre momentane Schmerzstärke an 
         range: &q11_range
           min: 0
           max: 10
@@ -364,18 +362,102 @@
 
       - name: q11_b
         type: integer
-        help: Geben Sie jetzt bitte Ihre durchschnittliche Schmerzstärke während der letzten 4 Wochen an
+        label: Geben Sie jetzt bitte Ihre durchschnittliche Schmerzstärke während der letzten 4 Wochen an
         range: *q11_range
 
       - name: q11_c
         type: integer
-        help: Geben Sie jetzt bitte Ihre größte Schmerzstärke während der letzten 4 Wochen an
+        label: Geben Sie jetzt bitte Ihre größte Schmerzstärke während der letzten 4 Wochen an
         range: *q11_range
 
       - name: q11_d
         type: integer
-        help: Geben Sie jetzt an, welche Schmerzstärke für Sie bei erfolgreicher Behandlung erträglich wäre
+        label: Geben Sie jetzt an, welche Schmerzstärke für Sie bei erfolgreicher Behandlung erträglich wäre
         range: *q11_range
         
 
+  - title: 12
+    help: |-
+      In den folgenden Fragen geht es um Ihre Schmerzen während der letzten 3
+      Monate. Für diesen Zeitraum möchten wir Genaueres über die Auswirkungen der
+      Schmerzen erfahren
+    items:
+    - name: q12_a
+      type: integer
+      label: |-
+        An wie vielen Tagen konnten Sie in den letzten 3 Monaten aufgrund von
+        Schmerzen nicht Ihren üblichen Aktivitäten nachgehen (z.B. Beruf,
+        Schule, Haushalt)?
+    - name: q12_b
+      type: integer
+      label: |-
+        In welchem Maße haben die Schmerzen in den letzten 3 Monaten Ihren
+        Alltag (Ankleiden, Waschen, Essen, Einkaufen etc.) beeinträchtigt?
+      range: &q12_b_range
+        min: 0
+        max: 10
+        labels: ["keine Beeinträchtigung", "völlige Beeinträchtigung"]
+    - name: q12_c
+      type: integer
+      label: |-
+        In welchem Maße haben die Schmerzen in den letzten 3 Monaten Ihre
+        Freizeitaktivitäten oder Unternehmungen im Familien- oder Freundeskreis
+        beeinträchtigt? 
+      range: *q12_b_range
 
+    - name: q12_d
+      type: integer
+      label: |-
+        In welchem Maße haben die Schmerzen in den letzten 3 Monaten Ihre
+        Arbeitsfähigkeit (einschließlich Hausarbeit) beeinträchtigt? 
+      range: *q12_b_range
+  
+  - title: "13"
+    help: |-
+      Auf welche Ursachen führen Sie Ihre Schmerzen zurück?  (Mehrfachnennungen
+      sind möglich) 
+    items:
+      - name: q13_a_1
+        type: boolean
+        label: für mich ist keine Ursache erkennbar
+        defaultValue: false
+
+      - name: q13_a_2
+        label: auf eine bestimmte Krankheit
+        type: boolean
+        defaultValue: false
+
+      - name: q13_a_2_desc
+        type: string
+        label: Welche?
+        show_if: q13_a_2 == 1
+
+      - name: q13_a_3
+        label: auf eine Operation
+        type: boolean
+        defaultValue: false
+
+      - name: q13_a_3_desc
+        type: string
+        label: Welche?
+        show_if: q13_a_3 == 1
+
+
+  - title: "14"
+    items:
+      - name: q14
+        label: |-
+          Was machen Sie selbst, um Ihre Schmerzen günstig zu beeinflussen?
+          Bitte machen Sie genaue Angaben, z.B. spazieren gehen, schlafen,
+          Ablenkung, ... 
+
+  - title: "15"
+    help: Was löst Ihrer Erfahrung nach die Schmerzen aus oder verschlimmert sie?
+    items:
+      - name: q15_a
+        label: Bescreibung
+        show_if: q15_b == false
+      - name: q15_b
+        label: Ich weiss es nicht
+        type: boolean
+        defaultValue: false
