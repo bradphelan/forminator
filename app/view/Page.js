@@ -7,7 +7,8 @@
       last: false,
       pagesUI: null,
       page: null,
-      record: null
+      record: null,
+      padding: 10
     },
     areAllItemsOnPageSet: function() {
       var allSet,
@@ -105,7 +106,8 @@
                 _this.getPagesUI().getLayout().setAnimation({
                   type: 'slide',
                   direction: 'right',
-                  duration: 500
+                  duration: 500,
+                  easing: 'ease-in'
                 });
                 return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
               }
@@ -121,7 +123,8 @@
                 _this.getPagesUI().getLayout().setAnimation({
                   type: 'slide',
                   direction: 'left',
-                  duration: 500
+                  duration: 500,
+                  easing: 'ease-in'
                 });
                 return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
               }

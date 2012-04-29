@@ -7,6 +7,7 @@ Ext.define "app.view.Page"
     pagesUI: null
     page: null
     record: null
+    padding: 10
 
   areAllItemsOnPageSet: ->
     # TODO
@@ -94,6 +95,7 @@ Ext.define "app.view.Page"
               type: 'slide'
               direction: 'right'
               duration: 500
+              easing: 'ease-in'
             @getPagesUI().setActiveItem @currentIndex()-1
 
       ,
@@ -108,6 +110,7 @@ Ext.define "app.view.Page"
               type: 'slide'
               direction: 'left'
               duration: 500
+              easing: 'ease-in'
             @getPagesUI().setActiveItem(@currentIndex()+1)
       ]
 
