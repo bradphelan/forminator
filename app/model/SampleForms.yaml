@@ -461,3 +461,52 @@
         label: Ich weiss es nicht
         type: boolean
         defaultValue: false
+
+
+  - title: "16"
+    help: |-
+      Bitte schätzen Sie Ihr derzeitiges allgemeines Wohlbefinden ein. Geben
+      Sie bitte an, wie Sie sich in den letzten 14 Tagen meistens gefühlt
+      haben. Kreuzen Sie dazu auf der 6-stufigen Skala jeweils die Zahl an, die
+      am ehesten auf Sie zutrifft: 0 = trifft gar nicht zu, 5 = trifft
+      vollkommen zu. Bearbeiten Sie bitte alle Aussagen.
+
+    items:
+    - name q16_1
+      type: integer
+      label: Ich habe meine alltäglichen Anforderungen im Griff gehabt
+      range: &q16_range
+        min: 0
+        max: 5
+        labels: ["trifft gar nicht zu", "trifft vollkommen zu"]
+
+    - name: q16_2
+      type: integer
+      label: Ich bin innerlich erfüllt gewesen. 
+      range: *q16_range
+
+    - name: q16_3
+      type: integer
+      label: Ich habe mich behaglich gefühlt. 
+      range: *q16_range
+
+    - name: q16_4
+      type: integer
+      label: Ich habe mein Leben genießen können. 
+      range: *q16_range
+
+    - name: q16_5
+      type: integer
+      label: Ich bin mit meiner Arbeitsleistung zufrieden gewesen.  
+      range: *q16_range
+
+    - name: q16_6
+      type: integer
+      label: Ich war mit meinem körperlichen Zustand einverstanden.  
+      range: *q16_range
+
+    - name: q16_7
+      type: integer
+      label: Ich habe mich richtig freuen können
+      range: *q16_range
+
