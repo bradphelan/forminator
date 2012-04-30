@@ -27,6 +27,10 @@ class Sinatra::Request
   end
 end
 
+get "/" do
+  redirect "/index.html"
+end
+
 get "/forms.json" do
   require 'json'
   require 'yaml'
