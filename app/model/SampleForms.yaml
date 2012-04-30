@@ -153,13 +153,13 @@
       label: Körpergewicht kg
       type: integer
 
-  - title: "5 - 6"
+  - title: "5a"
     items: 
     - name: q5_a
       type: sketch
       label: Bitte zeichnen Sie im Körperschema ein, an welchen Körperstellen Ihre Schmerzen auftreten  
 
-  - title: "5 - 6"
+  - title: "5b - 6"
     items:
     - name: "q5_b"
       label: Bitte beschreiben Sie Ihre Schmerzen mit eigenen Worten
@@ -184,7 +184,7 @@
             value: 60
           - text: mehr als 5 Jahre
             value: 120
-      - name: 7_b
+      - name: q7_b
         label: Können Sie ein genaues Datum angeben?
         type: date
     
@@ -252,7 +252,7 @@
           - nachts
 
 
-  - title: "10"
+  - title: "10 - Dumpf"
 
     help: &help_10 |-
       Mit der folgenden Liste von Eigenschaftsworten können Sie genauer beschreiben, wie Sie Ihre Schmerzen 
@@ -261,7 +261,7 @@
       Aussage für Sie zutrifft. 
 
     items:
-      - name: dumpf
+      - name: q10_dumpf
         options: &options_10
           - label: 3
             text: trifft genau zu
@@ -276,70 +276,81 @@
             text: trifft nicht zu
             value: 0
 
-  - title: "10"
+  - title: "10 - Drückend"
     help: *help_10
     items:
-      - name: drückend
+      - name: q10_drückend
+        label: drückend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Pochend"
     help: *help_10
     items:
-      - name: pochend
+      - name: q10_pochend
+        label: pochend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Klopfend"
     help: *help_10
     items:
-      - name: klopfend
+      - name: q10_klopfend
+        label: klopfend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Stechend"
     help: *help_10
     items:
-      - name: stechend
+      - name: q10_stechend
+        label: stechend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Ziehend"
     help: *help_10
     items:
-      - name: ziehend
+      - name: q10_ziehend
+        label: ziehend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Heiss"
     help: *help_10
     items:
-      - name: heiss
+      - name: q10_heiss
+        label: heiss
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Brennend"
     help: *help_10
     items:
-      - name: brennend
+      - name: q10_brennend
+        label: brennend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Elend"
     help: *help_10
     items:
-      - name: elend
+      - name: q10_elend
+        label: elend
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Schauderhaft"
     help: *help_10
     items:
-      - name: schauderhaft
+      - name: q10_schauderhaft
+        label: schauderhaft
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Scheusslich"
     help: *help_10
     items:
-      - name: scheusslich
+      - name: q10_scheusslich
+        label: scheusslich
         options: *options_10
 
-  - title: "10"
+  - title: "10 - Furchtbar"
     help: *help_10
     items:
-      - name: furchtbar
+      - name: q10_furchtbar
+        label: furchtbar
         options: *options_10
 
   - title: "11"
@@ -472,7 +483,7 @@
       vollkommen zu. Bearbeiten Sie bitte alle Aussagen.
 
     items:
-    - name q16_1
+    - name: q16_1
       type: integer
       label: Ich habe meine alltäglichen Anforderungen im Griff gehabt
       range: &q16_range
