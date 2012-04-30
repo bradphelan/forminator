@@ -72,14 +72,14 @@
       return {
         xtype: 'titlebar',
         docked: 'bottom',
-        title: 'You are done!',
+        title: 'Sie sind fertig',
         items: [
           {
             iconCls: 'action',
             iconMask: true,
             bubbleEvents: 'submitForm',
             align: 'right',
-            text: 'SUBMIT!',
+            text: 'Legt ihn!',
             listeners: {
               tap: function(me) {
                 return me.fireEvent('submitForm', _this.getRecord());
