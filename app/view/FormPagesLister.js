@@ -58,21 +58,41 @@
       });
       card.on({
         activeitemchange: function(card, item, oldIndex) {
-          var index;
+          var cls, delta, el, height, index, innerHeight, pos, scroller, selected, triggerZone, y;
           index = card.items.indexOf(item);
-          return list.select(index);
+          list.select(index);
+          el = list.element;
+          cls = list.getSelectedCls();
+          selected = el.down("." + cls);
+          if (selected) {
+            innerHeight = list.element.down(".x-list-container").getHeight();
+            height = list.element.getHeight();
+            y = selected.dom.offsetTop;
+            scroller = list.getScrollable().getScroller();
+            delta = height / 5;
+            triggerZone = {
+              min: scroller.position.y + delta,
+              max: scroller.position.y + height - delta
+            };
+            if (!(y > triggerZone.min && y < triggerZone.max)) {
+              pos = y - height / 2;
+              pos = Math.max(0, pos);
+              pos = Math.min(pos, innerHeight - height);
+              return scroller.scrollTo(0, pos, true);
+            }
+          }
         }
       });
       list.select(0);
       this.add({
         xtype: 'panel',
-        width: 200,
+        width: 250,
         docked: 'left',
         layout: 'vbox',
         items: [
           {
             xtype: 'titlebar',
-            title: 'Questions'
+            title: 'Seiten'
           }, list
         ]
       });
