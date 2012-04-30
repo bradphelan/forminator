@@ -32,7 +32,7 @@ Ext.define "app.view.TextField"
       items: [
         xtype: @mapXType()
         name: @getName()
-        label: @getFactory().createLabel()
+        label: null
         labelWrap: true
         labelAlign: 'top'
       ]
@@ -45,4 +45,5 @@ Ext.define "app.view.TextField"
     panel
 
   doChange: (field, e) ->
+    console.log "foo"
     @setValue(field.getValue())

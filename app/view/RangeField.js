@@ -15,7 +15,7 @@
       range = this.getFactory().get('range');
       field = Ext.create('Ext.field.Slider', {
         name: this.getName(),
-        label: this.getFactory().createLabel(),
+        label: null,
         labelWrap: true,
         labelAlign: "top",
         minValue: 0,

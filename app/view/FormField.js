@@ -12,8 +12,14 @@
       this.setName(this.getFactory().get('name'));
       this.getRecord().on("change:" + (this.getName()), this.doRecordChange, this);
       this.add({
-        xtype: 'fieldset',
-        items: [this.createField()],
+        xtype: 'panel',
+        padding: '0 0 10px 0',
+        items: [
+          {
+            xtype: 'panel',
+            html: this.getFactory().createLabel()
+          }, this.createField()
+        ],
         instructions: this.getFactory().createInstructions(),
         title: this.getFactory().createTitle()
       });

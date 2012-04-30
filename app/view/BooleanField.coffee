@@ -13,7 +13,7 @@ Ext.define "app.view.BooleanField"
   createField: ->
     field = Ext.create 'Ext.field.Checkbox'
       name: @getName()
-      label: @getFactory().createLabel()
+      label: null
       labelWrap: false
       labelAlign: "left"
 

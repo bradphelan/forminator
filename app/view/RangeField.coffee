@@ -15,7 +15,7 @@ Ext.define "app.view.RangeField"
 
     field = Ext.create 'Ext.field.Slider'
       name: @getName()
-      label: @getFactory().createLabel()
+      label: null
       labelWrap: true
       labelAlign: "top"
       minValue: 0

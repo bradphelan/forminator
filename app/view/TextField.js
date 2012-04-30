@@ -35,7 +35,7 @@
           {
             xtype: this.mapXType(),
             name: this.getName(),
-            label: this.getFactory().createLabel(),
+            label: null,
             labelWrap: true,
             labelAlign: 'top'
           }
@@ -51,6 +51,7 @@
       return panel;
     },
     doChange: function(field, e) {
+      console.log("foo");
       return this.setValue(field.getValue());
     }
   });

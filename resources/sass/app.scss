@@ -62,6 +62,10 @@ $form-label-color: white;
   white-space: normal;
 }
 
+.x-form-fieldset {
+  padding: 0 5px 5px 5px
+}
+
 .sketcher {
   .tools { margin-bottom: 10px; 
     a {
@@ -133,8 +137,16 @@ html[xmlns] .clearfix {
 // Used to add an axis under
 // the slider field and get 
 // rid of the middle border
-.x-slider-axis-field .x-slider-field{
-  border-bottom: none;
+.x-slider-axis-container {
+  background-color: $form-field-bg-color;
+  .x-slider-axis-field .x-slider-field{
+    border-bottom: none;
+  }
+}
+
+.x-slider-axis-field-label {
+  font-size: 0.75em;
+  color: darkorange
 }
 
 .x-question-list {
@@ -142,9 +154,6 @@ html[xmlns] .clearfix {
 
 }
 
-.x-slider-axis-field-label {
-  font-size: 0.75em;
-}
 
 .x-form-label {
   white-space: normal;

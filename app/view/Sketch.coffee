@@ -27,7 +27,7 @@ Ext.define "app.view.Canvas"
 
   doResize: ->
     size = @element.getSize()
-    $(@canvas()).width(size.width-10)
+    $(@canvas()).width(size.width)
     $(@canvas()).height(size.height-10)
     @fireEvent 'canvasResized', size
 
@@ -51,8 +51,8 @@ Ext.define "app.view.Canvas"
       painted: @doResize
 
     size = @element.getSize()
-    $(@canvas()).width(size.width-10)
-    $(@canvas()).height(size.height-10)
+    $(@canvas()).width(size.width)
+    $(@canvas()).height(size.height)
 
     @fixCanvasLag()
 

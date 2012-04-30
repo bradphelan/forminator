@@ -14,7 +14,7 @@
         _this = this;
       field = Ext.create('Ext.field.Checkbox', {
         name: this.getName(),
-        label: this.getFactory().createLabel(),
+        label: null,
         labelWrap: false,
         labelAlign: "left"
       });

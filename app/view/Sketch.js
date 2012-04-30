@@ -29,7 +29,7 @@
     doResize: function() {
       var size;
       size = this.element.getSize();
-      $(this.canvas()).width(size.width - 10);
+      $(this.canvas()).width(size.width);
       $(this.canvas()).height(size.height - 10);
       return this.fireEvent('canvasResized', size);
     },
@@ -53,8 +53,8 @@
         painted: this.doResize
       });
       size = this.element.getSize();
-      $(this.canvas()).width(size.width - 10);
-      $(this.canvas()).height(size.height - 10);
+      $(this.canvas()).width(size.width);
+      $(this.canvas()).height(size.height);
       return this.fixCanvasLag();
     }
   });

@@ -16,8 +16,14 @@ Ext.define "app.view.FormField"
     @getRecord().on "change:#{@getName()}", @doRecordChange, @
 
     @add
-      xtype: 'fieldset'
-      items: [ @createField() ]
+      xtype: 'panel'
+      padding: '0 0 10px 0'
+      items: [
+        xtype: 'panel'
+        html: @getFactory().createLabel()
+      ,
+        @createField()
+      ]
       instructions: @getFactory().createInstructions()
       title: @getFactory().createTitle()
 
