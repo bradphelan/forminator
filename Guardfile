@@ -60,7 +60,7 @@ module ::Guard
           end
           msg = "#{jison_path}\n=> #{js_path}"
           ::Guard::Notifier.notify msg, :title => "Guard JISON2JS", :image => :success
-        rescue StandardError => error
+        rescue Exception => error
           ::Guard::UI.info "JISON2JS Error: #{error.message}"
           msg = """
           #{jison_path}
