@@ -58,26 +58,31 @@
       });
       card.on({
         activeitemchange: function(card, item, oldIndex) {
-          var cls, delta, el, height, index, innerHeight, pos, scroller, selected, triggerZone, y;
+          var cls, fullListHeight, index, pos, scrollWindowHeight, scroller, selectedElement, selectedHeight, triggerZone, yBottom, yTop;
           index = card.items.indexOf(item);
           list.select(index);
-          el = list.element;
           cls = list.getSelectedCls();
-          selected = el.down("." + cls);
-          if (selected) {
-            innerHeight = list.element.down(".x-list-container").getHeight();
-            height = list.element.getHeight();
-            y = selected.dom.offsetTop;
+          selectedElement = list.element.down("." + cls);
+          selectedHeight = selectedElement.getHeight();
+          if (selectedElement) {
+            fullListHeight = list.element.down(".x-list-container").getHeight();
+            scrollWindowHeight = list.element.getHeight();
+            yTop = selectedElement.dom.offsetTop;
+            yBottom = yTop + selectedHeight;
             scroller = list.getScrollable().getScroller();
-            delta = height / 5;
             triggerZone = {
-              min: scroller.position.y + delta,
-              max: scroller.position.y + height - delta
+              min: scroller.position.y + selectedHeight,
+              max: scroller.position.y + scrollWindowHeight - selectedHeight
             };
-            if (!(y > triggerZone.min && y < triggerZone.max)) {
-              pos = y - height / 2;
+            if (yTop < triggerZone.min) {
+              pos = yTop - selectedHeight;
+            }
+            if (yBottom > triggerZone.max) {
+              pos = yTop + 2 * selectedHeight - scrollWindowHeight;
+            }
+            if (pos != null) {
               pos = Math.max(0, pos);
-              pos = Math.min(pos, innerHeight - height);
+              pos = Math.min(pos, fullListHeight - scrollWindowHeight);
               return scroller.scrollTo(0, pos, true);
             }
           }

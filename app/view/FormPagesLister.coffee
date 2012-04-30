@@ -53,33 +53,46 @@ Ext.define "app.view.FormPagesLister"
         index = card.items.indexOf(item)
         list.select(index)
 
-        el = list.element
+        # Get the selected item. Seems
+        # a bit ugly but it works
         cls = list.getSelectedCls()
-        selected = el.down("." + cls)
+        selectedElement = list.element.down("." + cls)
+        selectedHeight = selectedElement.getHeight()
 
-        if selected
-          innerHeight = list.element.down(".x-list-container").getHeight()
-          height = list.element.getHeight()
-          y = selected.dom.offsetTop
+        if selectedElement
+          # Height of the full list
+          fullListHeight = list.element.down(".x-list-container").getHeight()
+
+          # Height of the scroll window
+          scrollWindowHeight = list.element.getHeight()
+
+          yTop = selectedElement.dom.offsetTop
+          yBottom = yTop + selectedHeight
+          
           scroller = list.getScrollable().getScroller()
 
-          # We only want to trigger scrolls when we trigger
-          # at the top and bottom of the list
-          delta = height / 5
-
+          # Outside this zone a scrollTo will be triggered
           triggerZone =
-            min: scroller.position.y + delta
-            max: scroller.position.y + height - delta
+            min: scroller.position.y + selectedHeight
+            max: scroller.position.y + scrollWindowHeight - selectedHeight
 
-          unless y > triggerZone.min and y < triggerZone.max
+          # Conditions for items above the current scroll
+          # position
+          if yTop < triggerZone.min
+            pos = yTop - selectedHeight
 
-            pos = y - height / 2
+          # Conditions for items below the current scroll
+          # position
+          if yBottom > triggerZone.max
+            pos = yTop + 2*selectedHeight - scrollWindowHeight
+
+          # Adjust for the edge cases where the item
+          # to scroll is at the top or bottom of the
+          # list so we don't get nasty jumping effects
+          if pos?
             pos = Math.max(0, pos)
-            pos = Math.min(pos, innerHeight - height)
-            
+            pos = Math.min(pos, fullListHeight - scrollWindowHeight)
             scroller.scrollTo(0,pos,true)
-
-        
 
     list.select(0)
 
