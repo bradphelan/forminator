@@ -3,28 +3,32 @@
 /* lexical grammar */
 
 %lex
+%x string
 %%
-\s+                   /* skip whitespace */
-[0-9]+("."[0-9]+)?\b              return 'NUMBER';
+\s+                                 /* skip whitespace */
+["]                                 {this.begin('string'); console.log("qs"); return 'DQUOTE';}
+<string>["]                         {this.popState(); console.log("qe"); return 'DQUOTE';}
+<string>([^"])+                     {console.log("qm"); return 'STRING';}
+[0-9]+("."[0-9]+)?\b                return 'NUMBER';
 ((or)|(OR))\b                       return 'or';
 ((and)|(AND))\b                     return 'and';
 ((TRUE)|(true)|(FALSE)|(false))\b   return 'BOOL';
-[_a-zA-Z]+[_a-zA-Z0-9]*\b  return 'VARIABLE';
-"*"                   return '*';
-"/"                   return '/';
-"-"                   return '-';
-"+"                   return '+';
-"("                   return '(';
-")"                   return ')';
+[_a-zA-Z]+[_a-zA-Z0-9]*\b           return 'VARIABLE';
+"*"                                 return '*';
+"/"                                 return '/';
+"-"                                 return '-';
+"+"                                 return '+';
+"("                                 return '(';
+")"                                 return ')';
 
-"=="                  return '==';
-"!="                  return '!=';
-">"                   return '>';
-"<"                   return '<';
-">="                  return '>=';
-"<="                  return '<=';
+"=="                                return '==';
+"!="                                return '!=';
+">"                                 return '>';
+"<"                                 return '<';
+">="                                return '>=';
+"<="                                return '<=';
 
-<<EOF>>               return 'EOF';
+<<EOF>>                             return 'EOF';
 /lex
 
 %left 'and'
@@ -53,6 +57,13 @@ expressions
       return $1; 
     }
     
+  ;
+
+QUOTED_STRING
+  : DQUOTE DQUOTE
+    {$$ =  "''";}
+  | DQUOTE STRING DQUOTE
+    {$$ =  '"' + $2 + '"';}
   ;
 
 e
@@ -103,6 +114,8 @@ e
 
   | NUMBER
     {$$ = $1;}
+
+  | QUOTED_STRING
   
   | VARIABLE
     {$$ = "__record__.get('" + $1 + "')";}
