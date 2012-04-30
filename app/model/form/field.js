@@ -64,7 +64,8 @@
         try {
           return eval(SkipLogic.parse(visibleExpression));
         } catch (error) {
-          return alert("Error processing skip logic\n\n  " + visibleExpression + "\n\nPlease check your form schema.");
+          alert("Error processing skip logic\n\n  " + visibleExpression + "\n\nPlease check your form schema.");
+          throw error;
         }
       } else {
         return true;

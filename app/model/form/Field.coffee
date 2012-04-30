@@ -72,6 +72,7 @@ Ext.define 'app.model.form.Field'
 
           Please check your form schema.
         """
+        throw error
     else
       true
 
