@@ -8,32 +8,19 @@
   pages: 
   - title: A
     items: 
-    - name: Yo Slider
+    - name: X 
+      type: string
+    - name: Y
       type: integer
-      range:
-        min: 2
-        max: 11
-        labels: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11] 
+      show_if: X == "foo"
 
-    - name: Another
-      type: integer
-      range:
-        min: 0
-        max: 10 
-        labels: ['Cold', 'Warm', 'Hot']
+  - title: B
+    items:
+    - name: T
+      type: array
+      items:
+        
 
-    - name: draw_picture
-      label: Draw a picture?
-      type: integer
-      options:
-        - No?
-        - Yes?
-      defaultValue: 0
-    - name: Picture
-      type: sketch
-      show_if: draw_picture != 0 or draw_picture == 1
-    - name: tag
-      defaultValue: hi ho hi ho
 
 - title: Pain Form
   id: 45e7f6c0-87f6-11e1-b0c4-0800200c9a66
@@ -47,27 +34,6 @@
     items: 
     - type: integer
       name: today
-      as: radio
-      options: 
-      - bad
-      - good
-      - excelent
-  - title: How did you feel yesterday
-    help: On average how did you feel yesterday?
-    items: 
-    - name: yesterday
-      type: integer
-      as: radio
-      options: 
-      - bad
-      - good
-      - excelent
-  - title: How did you feel last week
-    help: On average how did you feel last week?
-    items: 
-    - type: integer
-      name: last_week
-      as: radio
       options: 
       - bad
       - good
@@ -279,7 +245,7 @@
   - title: "10 - Drückend"
     help: *help_10
     items:
-      - name: q10_drückend
+      - name: q10_druckend
         label: drückend
         options: *options_10
 
@@ -520,4 +486,446 @@
       type: integer
       label: Ich habe mich richtig freuen können
       range: *q16_range
+
+
+  - title: "17"
+    help: |-
+      Zur vollständigen Beurteilung ihrer Erkrankung bitten wir Sie nun um
+      einige persönliche Angaben. Man weiß heute, dass körperliche Krankheit
+      und seelisches Befinden oft eng zusammenhängen. Deshalb beziehen sich die
+      Fragen ausdrücklich auf Ihre allgemeine und seelische Verfassung.  Wir
+      bitten Sie, jede Frage zu beantworten, und zwar so, wie es für Sie
+      persönlich in den letzten 14 Tagen (inklusive heute) am ehesten zutraf
+      bzw. zutrifft. Machen Sie bitte ein Kreuz für jede Feststellung und
+      lassen Sie bitte keine aus. Überlegen Sie nicht lange, sondern wählen Sie
+      die Antwort aus, die Ihnen auf Anhieb am zutreffendsten erscheint.  
+
+    items: 
+
+    - name: q17_a
+      type: integer
+      label: Ich fühle mich angespannt oder überreizt 
+      options:
+        - meistens 
+        - oft
+        - von Zeit zu Zeit / gelegentlich
+        - überhaupt nicht 
+
+    - name: q17_b
+      type: integer
+      label: Ich kann mich heute noch so freuen wie früher 
+      options:
+        - ganz genau so 
+        -  nicht ganz so sehr 
+        - nur noch ein wenig  
+        - kaum oder gar nicht 
+
+    - name: q17_c
+      type: integer
+      label: Mich überkommt eine ängstliche Vorahnung, dass etwas Schreckliches passieren könnte 
+      options:
+        - ja, sehr stark 
+        - ja, aber nicht allzu stark
+        - etwas, aber es macht mir keine Sorgen  
+        - überhaupt nicht
+
+    - name: q17_d
+      type: integer
+      label: Ich kann lachen und die lustige Seite der Dinge sehen 
+      options:
+        - ja, so viel wie immer 
+        - nicht mehr ganz so viel
+        - inzwischen viel weniger
+        - überhaupt nicht
+
+    - name: q17_e
+      type: integer
+      label: Mir gehen beunruhigende Gedanken durch den Kopf 
+      options:
+        - einen Großteil der Zeit 
+        - verhältnismäßig oft
+        - von Zeit zu Zeit, aber nicht allzu oft
+        - nur gelegentlich / nie 
+
+    - name: q17_f
+      type: integer
+      label: Ich fühle mich glücklich 
+      options:
+        - überhaupt nicht 
+        - selten
+        - manchmal
+        - meistens  
+
+    - name: q17_h
+      type: integer
+      label: Ich kann behaglich dasitzen und mich entspannen 
+      options:
+        - ja, natürlich 
+        - gewöhnlich schon
+        - nicht oft
+        - überhaupt nicht
+
+    - name: q17_i
+      type: integer
+      label: Ich fühle mich in meinen Aktivitäten gebremst 
+      options:
+        - fast immer 
+        - sehr oft
+        - manchmal
+        - überhaupt nicht 
+
+
+    - name: q17_j
+      type: integer
+      label: Ich habe manchmal ein ängstliches Gefühl in der Magengegend 
+      options:
+        - überhaupt nicht 
+        - gelegentlich
+        - ziemlich oft
+        - sehr oft
+
+    - name: q17_k
+      type: integer
+      label: Ich habe das Interesse an meiner äußeren Erscheinung verloren 
+      options:
+        - ja, stimmt genau 
+        - ich kümmere mich nicht so sehr darum, wie ich sollte
+        - möglicherweise kümmere ich mich zu wenig darum  
+        - ich kümmere mich so viel darum wie immer
+
+    - name: q17_l
+      type: integer
+      label: Ich fühle mich rastlos, muss immer in Bewegung sein 
+      options:
+        - ja, tatsächlich sehr 
+        - ziemlich
+        - nicht sehr 
+        - überhaupt nicht 
+
+    - name: q17_m
+      type: integer
+      label: Ich blicke mit Freude in die Zukunft 
+      options:
+        - ja, sehr 
+        - eher weniger als früher
+        - viel weniger als früher
+        - kaum bis gar nicht 
+
+    - name: q17_n
+      type: integer
+      label: Mich überkommt plötzlich ein panikartiger Zustand 
+      options:
+        - ja, tatsächlich sehr oft 
+        - ziemlich oft
+        - nicht sehr oft
+        - überhaupt nicht
+
+    - name: q17_o
+      type: integer
+      label: Ich kann mich an einem guten Buch, einer Radio oder Fernsehsendung erfreuen 
+      options:
+        - oft 
+        - manchmal
+        - eher selten
+        - sehr selten
+
+  - title: 18
+    items:
+      - name: q18
+        label: Ich denke des öfteren daran, mir das Leben zu nehmen
+        type: boolean
+        defaultValue: false
+
+
+  - title: 19
+    items:
+    - name: q19_a
+      type: integer
+      options:
+        - Keine
+        - Behandlung
+        - Allgemeinarzt
+        - Neurochirurg
+        - Psychotherapeut
+        - Chirurg
+        - Neurologe
+        - Radiologe
+        - Heilpraktiker
+        - Orthopäde
+        - Schmerztherapeut
+        - Internist
+        - Psychiater
+        - Andere
+    - name: q19_a_anderer
+      label: Änderer
+      type: text
+      show_if: q19_a == 13
+
+  - title: 20
+    help: |-
+      Wie wurden Ihre Schmerzen bisher behandelt?  Kreuzen Sie bitte an, welche
+      der unten aufgeführten Behandlungsmaßnahmen Sie erhalten haben. Geben Sie
+      bitte auch an, ob Ihre Schmerzen durch diese Maßnahmen zumindest
+      zeitweise gelindert wurden.
+
+    items:
+
+    - name: q20_a
+      label: bisher keine Schmerzbehandlung       
+      type: boolean
+      defaultValue: false
+
+    - name: q20_a_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_a == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_b
+      label: Medikamente
+      type: boolean
+      defaultValue: false
+
+    - name: q20_b_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_b == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_c
+      label: Infusionen
+      type: boolean
+      defaultValue: false
+
+    - name: q20_c_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_c == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_d
+      label: Einspritzungen in das Schmerzgebiet, Nervenblockaden
+      type: boolean
+      defaultValue: false
+
+    - name: q20_d_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_d == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_e
+      label: Einspritzungen am Rückenmark (z.B. epidural)
+      type: boolean
+      defaultValue: false
+
+    - name: q20_e_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_e == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_f
+      label: Rückenmarksnahe Sonden- (SCS) oder Pumpensysteme
+      type: boolean
+      defaultValue: false
+
+    - name: q20_f_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_f == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_g
+      label: Krankengymnastik
+      type: boolean
+      defaultValue: false
+
+    - name: q20_g_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_g == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_h
+      label: Massagen, Bäder, Kälte-/Wärmetherapie
+      type: boolean
+      defaultValue: false
+
+    - name: q20_h_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_h == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_i
+      label: Elektrische Nervenstimulation (TENS)
+      type: boolean
+      defaultValue: false
+
+    - name: q20_i_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_i == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_j
+      label: Akupunktur
+      type: boolean
+      defaultValue: false
+
+    - name: q20_j_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_j == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_k
+      label: Chiropraktik
+      type: boolean
+      defaultValue: false
+
+    - name: q20_k_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_k == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_l
+      label: Psychotherapie
+      type: boolean
+      defaultValue: false
+
+    - name: q20_l_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_l == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_m
+      label: Entspannungsverfahren, Hypnose, Biofeedback
+      type: boolean
+      defaultValue: false
+
+    - name: q20_m_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_m == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_n
+      label: Medikamenten-Entzug
+      type: boolean
+      defaultValue: false
+
+    - name: q20_n_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_n == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+    - name: q20_o
+      label: Kur-/Reha-Behandlung 
+      type: boolean
+      defaultValue: false
+
+    - name: q20_o_wirksam
+      label: Wirksam?
+      type: integer
+      defaultValue: null
+      show_if: q20_o == true
+      options:
+        - nein
+        - vorüber-gehend
+        - ja
+
+  - title: 21
+    items:
+
+    - name: q21_a
+      type: boolean
+      label: Wurden Sie schon einmal operiert?
+
+    - name: q21_b
+      type: integer
+      label: Wie oft?
+      show_if: q21_a == true
+    
+    - name: q21_c_1_text
+      type: text
+      label: Beschreibung 1
+      defaultValue: ""
+
+    - name: q21_c_1_date
+      type: date
+      label: Datum
+      show_if: q21_c_1_text != ""
+
+    - name: q21_c_1_wg
+      type: boolean
+      label: Wegen Ihrer Schmerzen?
+      show_if: q21_c_1_text != ""
+
+
+
+
+
+
+
 
