@@ -1,6 +1,9 @@
 Ext.define "app.view.RangeField"
   extend: "app.view.FormField"
 
+  config:
+    range: "object"
+
   updateValue: (value, oldValue)->
     @callParent arguments
     field = @down('sliderfield')
@@ -11,7 +14,7 @@ Ext.define "app.view.RangeField"
   ]
 
   createField: ->
-    range = @getFactory().get('range')
+    range = @getRange()
 
     field = Ext.create 'Ext.field.Slider'
       name: @getName()
@@ -64,7 +67,7 @@ Ext.define "app.view.RangeField"
     ]
 
   rangeMin: ->
-    @getFactory().get('range').min
+    @getRange().min
 
   doChange: (field, e)->
     @setValue(field.getValue()[0] + @rangeMin())

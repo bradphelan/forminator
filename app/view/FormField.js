@@ -3,13 +3,13 @@
   Ext.define("app.view.FormField", {
     extend: "Ext.Panel",
     config: {
-      factory: null,
       record: null,
       name: null,
-      value: null
+      value: null,
+      label: "",
+      type: "string"
     },
     initialize: function() {
-      this.setName(this.getFactory().get('name'));
       this.getRecord().on("change:" + (this.getName()), this.doRecordChange, this);
       this.add({
         xtype: 'panel',
@@ -17,13 +17,10 @@
         items: [
           {
             xtype: 'panel',
-            html: this.getFactory().createLabel()
+            html: this.getLabel()
           }, this.createField()
-        ],
-        instructions: this.getFactory().createInstructions(),
-        title: this.getFactory().createTitle()
+        ]
       });
-      this.setId(this.getFactory().idForComponent());
       return this.setValue(this.getRecord().get(this.getName()));
     },
     updateValue: function(value, oldValue) {

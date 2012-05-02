@@ -10,6 +10,10 @@
         }
       ]
     },
+    constructor: function() {
+      this.callParent(arguments);
+      return this.set('options', this.options());
+    },
     options: function() {
       var i;
       i = 0;

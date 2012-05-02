@@ -17,7 +17,7 @@ Ext.define "app.view.TextField"
   ]
 
   mapXType: ->
-    switch @getFactory().get('type')
+    switch @getType()
       when 'password' then 'passwordfield'
       when 'email' then 'emailfield'
       when 'date' then 'datepickerfield'

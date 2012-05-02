@@ -12,22 +12,6 @@
           defaultValue: "90%"
         }
       ]
-    },
-    createTitle: function() {
-      if (this.get('title') != null) {
-        return this.get('title');
-      } else {
-        return this.createLabel();
-      }
-    },
-    createInstructions: function() {
-      var i;
-      i = this.callParent();
-      if (i != null) {
-        return i;
-      } else {
-        return "&nbsp;";
-      }
     }
   });
 

@@ -22,14 +22,6 @@ Ext.define 'app.model.form.Field'
       type: 'string'
       defaultValue: null
     ,
-      name: 'title'
-      type: 'string'
-      defaultValue: null
-    ,
-      name: 'help'
-      type: 'string'
-      defaultValue: null
-    ,
       name: "labelWidth"
       type: "string"
       defaultValue: "30%"
@@ -40,10 +32,6 @@ Ext.define 'app.model.form.Field'
     ]
 
        
-  idForComponent: ->
-    "form-field-#{@get('name')}"
-
-  createTitle: -> @get('title')
 
   createLabel: ->
     l = if @get('label')?
@@ -52,8 +40,6 @@ Ext.define 'app.model.form.Field'
       @get('name')
 
     Ext.String.capitalize(l.replace /_/, ' ')
-
-  createInstructions: -> @get('help')
 
   # Using the 'show_if' item expression
   # return if the field should be visible
@@ -85,8 +71,19 @@ Ext.define 'app.model.form.Field'
   findComponent: (context)->
     context.down "[id=#{@idForComponent()}]"
 
+  idForComponent: ->
+    "form-field-#{@get('name')}"
+
   createComponent: (record)->
-    Ext.create @getComponentClass(),
-      factory: @
+    config =
+      label: @createLabel()
       record: record
+      name: @get('name')
+      id: @idForComponent()
+
+    config = Ext.merge(@getData(), config)
+
+    console.log config
+    
+    Ext.create @getComponentClass(), config
 

@@ -10,7 +10,7 @@
     },
     requires: ['Ext.form.DatePicker', 'Ext.form.Password', 'Ext.form.Email', 'Ext.form.Number', 'Ext.form.TextArea', 'Ext.form.Url'],
     mapXType: function() {
-      switch (this.getFactory().get('type')) {
+      switch (this.getType()) {
         case 'password':
           return 'passwordfield';
         case 'email':

@@ -2,6 +2,9 @@
 
   Ext.define("app.view.RadioField", {
     extend: "app.view.FormField",
+    config: {
+      options: "array"
+    },
     updateValue: function(value, oldValue) {
       var field, fields, _i, _len, _results;
       this.callParent(arguments);
@@ -22,7 +25,6 @@
     createRadio: function(option) {
       return {
         xtype: 'radiofield',
-        labelWidth: this.getFactory().get('labelWidth'),
         value: option.value,
         label: Ext.String.capitalize(option.text),
         name: this.getName()
@@ -31,13 +33,13 @@
     createRadios: function() {
       var items,
         _this = this;
-      return items = this.getFactory().options().map(function(option) {
+      return items = this.getOptions().map(function(option) {
         return {
           xtype: 'panel',
           items: [
             _this.createRadio(option), {
               xtype: 'label',
-              html: option.help,
+              html: option.label,
               cls: 'assist'
             }
           ]

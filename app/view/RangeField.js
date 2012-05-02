@@ -2,6 +2,9 @@
 
   Ext.define("app.view.RangeField", {
     extend: "app.view.FormField",
+    config: {
+      range: "object"
+    },
     updateValue: function(value, oldValue) {
       var field;
       this.callParent(arguments);
@@ -12,7 +15,7 @@
     createField: function() {
       var axes, c, field, p, range,
         _this = this;
-      range = this.getFactory().get('range');
+      range = this.getRange();
       field = Ext.create('Ext.field.Slider', {
         name: this.getName(),
         label: null,
@@ -55,7 +58,7 @@
       };
     },
     rangeMin: function() {
-      return this.getFactory().get('range').min;
+      return this.getRange().min;
     },
     doChange: function(field, e) {
       return this.setValue(field.getValue()[0] + this.rangeMin());

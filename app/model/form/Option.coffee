@@ -6,6 +6,10 @@ Ext.define 'app.model.form.Option'
       type: 'array'
     ]
 
+  constructor: ->
+    @callParent arguments
+    @set('options', @options())
+
   options: ->
     i = 0
     @get('options').map (option)->

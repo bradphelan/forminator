@@ -24,14 +24,6 @@
           type: 'string',
           defaultValue: null
         }, {
-          name: 'title',
-          type: 'string',
-          defaultValue: null
-        }, {
-          name: 'help',
-          type: 'string',
-          defaultValue: null
-        }, {
           name: "labelWidth",
           type: "string",
           defaultValue: "30%"
@@ -42,19 +34,10 @@
         }
       ]
     },
-    idForComponent: function() {
-      return "form-field-" + (this.get('name'));
-    },
-    createTitle: function() {
-      return this.get('title');
-    },
     createLabel: function() {
       var l;
       l = this.get('label') != null ? this.get('label') : this.get('name');
       return Ext.String.capitalize(l.replace(/_/, ' '));
-    },
-    createInstructions: function() {
-      return this.get('help');
     },
     isVisible: function(record) {
       var visibleExpression, __record__;
@@ -77,11 +60,20 @@
     findComponent: function(context) {
       return context.down("[id=" + (this.idForComponent()) + "]");
     },
+    idForComponent: function() {
+      return "form-field-" + (this.get('name'));
+    },
     createComponent: function(record) {
-      return Ext.create(this.getComponentClass(), {
-        factory: this,
-        record: record
-      });
+      var config;
+      config = {
+        label: this.createLabel(),
+        record: record,
+        name: this.get('name'),
+        id: this.idForComponent()
+      };
+      config = Ext.merge(this.getData(), config);
+      console.log(config);
+      return Ext.create(this.getComponentClass(), config);
     }
   });
 

@@ -1,6 +1,9 @@
 Ext.define "app.view.RadioField"
   extend: "app.view.FormField"
 
+  config:
+    options: "array"
+
   updateValue: (value, oldValue)->
     @callParent arguments
     fields = @query('radiofield')
@@ -12,20 +15,19 @@ Ext.define "app.view.RadioField"
 
   createRadio: (option)->
     xtype: 'radiofield'
-    labelWidth: @getFactory().get('labelWidth')
     value: option.value
     label: Ext.String.capitalize option.text
     name: @getName()
 
   createRadios: ->
-    items = @getFactory().options().map (option)=>
+    items = @getOptions().map (option)=>
 
       xtype: 'panel'
       items: [
         @createRadio(option)
       ,
         xtype: 'label'
-        html: option.help
+        html: option.label
         cls: 'assist'
       ]
 
