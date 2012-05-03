@@ -1,6 +1,7 @@
 Ext.define "app.view.FormField"
   extend: "Ext.Panel"
   config:
+    # The record for databinding
     record: null
     # The name of this field
     name: null

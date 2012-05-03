@@ -2,7 +2,7 @@
 
   Ext.define('app.model.FormDefinition', {
     extend: 'Ext.data.Model',
-    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Boolean', 'app.model.form.Sketch', 'app.model.form.Range', 'app.model.Page', 'app.view.Page', 'app.view.FormPagesLister', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
+    requires: ['Ext.TitleBar', 'Ext.field.Select', 'Ext.form.FieldSet', 'app.model.form.Option', 'app.model.form.Radio', 'app.model.form.Select', 'app.model.form.Text', 'app.model.form.Field', 'app.model.form.Array', 'app.model.form.Boolean', 'app.model.form.Sketch', 'app.model.form.Range', 'app.model.Page', 'app.view.Page', 'app.view.FormPagesLister', 'Ext.Panel', 'Ext.form.Panel', 'Ext.field.Radio', 'Ext.Label', 'Ext.data.identifier.Uuid'],
     config: {
       identifier: 'uuid',
       fields: [
@@ -19,7 +19,9 @@
       ]
     },
     itemTypeMap: function(item) {
-      if (item.type === "sketch") {
+      if (item.type === "array") {
+        return 'app.model.form.Array';
+      } else if (item.type === "sketch") {
         return 'app.model.form.Sketch';
       } else if (item.type === 'boolean') {
         return 'app.model.form.Boolean';
@@ -55,6 +57,17 @@
       this.set('title', json.title);
       return this.set('summary', json.summary);
     },
+    createModelField: function(item) {
+      return {
+        name: item.name,
+        label: item.label,
+        type: item.type != null ? item.type : 'string',
+        defaultValue: item.defaultValue
+      };
+    },
+    createModelClassName: function() {
+      return "app.model.FormDefinition.ImplicitModel-" + (this.getId());
+    },
     createModelClass: function() {
       var class_name, fields, item, page, _i, _j, _len, _len1, _ref, _ref1;
       fields = [];
@@ -64,16 +77,11 @@
         _ref1 = page.items;
         for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
           item = _ref1[_j];
-          fields.push({
-            name: item.name,
-            label: item.label,
-            type: item.type != null ? item.type : 'string',
-            defaultValue: item.defaultValue
-          });
+          fields.push(this.createModelField(item));
         }
       }
       class_name = "app.model.FormDefinition.ImplicitModel-" + (this.getId());
-      if (Ext.getClass(class_name) == null) {
+      if (Ext.getClass(this.createModelClassName()) == null) {
         Ext.define(class_name, {
           extend: 'Ext.data.Model',
           config: {
@@ -89,7 +97,6 @@
           }
         });
       }
-      console.log("" + class_name + " as model class");
       return class_name;
     },
     createForm: function() {

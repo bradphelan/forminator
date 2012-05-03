@@ -10,6 +10,7 @@ Ext.define 'app.model.FormDefinition'
     'app.model.form.Select'
     'app.model.form.Text'
     'app.model.form.Field'
+    'app.model.form.Array'
     'app.model.form.Boolean'
     'app.model.form.Sketch'
     'app.model.form.Range'
@@ -39,7 +40,11 @@ Ext.define 'app.model.FormDefinition'
   # TODO
   # Factor this into factory class
   itemTypeMap: (item)->
-    if item.type == "sketch"
+    if item.type == "array"
+      'app.model.form.Array'
+      # Allow subtypes are
+      # boolean, date, and text types
+    else if item.type == "sketch"
       'app.model.form.Sketch'
     else if item.type == 'boolean'
       'app.model.form.Boolean'
@@ -63,34 +68,42 @@ Ext.define 'app.model.FormDefinition'
     @set 'pages', Ext.create 'Ext.data.Store'
         model: 'app.model.Page'
         data: json.pages.map (page)=>
-          items = page.items.map (item)=>
-            Ext.create @itemTypeMap(item), item
 
           page.items = Ext.create 'Ext.data.Store'
-            data: items
+            data: page.items.map (item)=>
+              Ext.create @itemTypeMap(item), item
                 
           Ext.create 'app.model.Page', page
 
     @set 'title', json.title
     @set 'summary', json.summary
 
-  createModelClass: ->
+  createModelField: (item)->
+    name: item.name
+    label: item.label
+    type: if item.type? then item.type else 'string'
+    defaultValue: item.defaultValue
 
+  createModelFields: ->
     fields = []
     for page in @json.pages
       for item in page.items
-        fields.push
-          name: item.name
-          label: item.label
-          type: if item.type? then item.type else 'string'
-          defaultValue: item.defaultValue
+        fields.push @createModelField(item)
+    fields
 
-    class_name = "app.model.FormDefinition.ImplicitModel-#{@getId()}"
-    unless Ext.getClass(class_name)?
-      Ext.define class_name,
+  createModelClassName: ->
+    "app.model.FormDefinition.ImplicitModel-#{@getId()}"
+
+  
+  getModelClass: ->
+    unless Ext.getClass(@createModelClassName())
+
+  createModelClass: ->
+    unless @getModelClass()?
+      Ext.define @createModelClassName()
         extend: 'Ext.data.Model'
         config:
-          fields: fields
+          fields: @greateModelFields()
         set: (fieldName, newValue)->
           oldValue = @get(fieldName)
           r = @callParent([fieldName, newValue])
@@ -98,8 +111,6 @@ Ext.define 'app.model.FormDefinition'
           @fireEvent("change", @)
           r
 
-    console.log "#{class_name} as model class"
-    
     class_name
 
   createForm: ->

@@ -45,5 +45,4 @@ Ext.define "app.view.TextField"
     panel
 
   doChange: (field, e) ->
-    console.log "foo"
     @setValue(field.getValue())

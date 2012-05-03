@@ -51,7 +51,6 @@
       return panel;
     },
     doChange: function(field, e) {
-      console.log("foo");
       return this.setValue(field.getValue());
     }
   });

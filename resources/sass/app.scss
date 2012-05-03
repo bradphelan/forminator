@@ -160,3 +160,12 @@ html[xmlns] .clearfix {
 .x-form-label {
   white-space: normal;
 }
+
+.x-table-title {
+  background-color: darkgray;
+  padding: 2px;
+  margin: 1px;
+  text-align: center;
+}
+
+@include pictos-iconmask('delete')

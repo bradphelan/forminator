@@ -6,38 +6,28 @@
     collect information on this condition.
     Please assist us.
   pages: 
-  - title: A
-    items: 
-    - name: X 
-      type: string
-    - name: Y
-      type: integer
-      show_if: X == "foo"
-
   - title: B
     items:
     - name: T
       type: array
-      items:
+      min: 3
+      max: 6
+      fields:
+
+      - name: X
+        type: boolean
+        flex: 1
+
+      - name: Y
+        type: integer
+        flex: 2
+
+      - name: Z
+        type: date
+        flex: 1
         
 
 
-- title: Pain Form
-  id: 45e7f6c0-87f6-11e1-b0c4-0800200c9a66
-  summary: |-
-    Pain is a pain in the popo. Help
-    us remove pain. Am I annoying you
-    yet..
-  pages: 
-  - title: How do you feel today
-    help: On average how do you feel today?
-    items: 
-    - type: integer
-      name: today
-      options: 
-      - bad
-      - good
-      - excelent
 
 - title: Deutscher Schmerz-Fragebogen
   id: b0dccce0-88a4-11e1-b0c4-0800200c9a66
@@ -640,6 +630,7 @@
   - title: 19
     items:
     - name: q19_a
+      label: Von wem wurden Sie bisher wegen Ihrer Schmerzen untersucht oder behandelt?
       type: integer
       options:
         - Keine
@@ -903,24 +894,24 @@
       label: Wurden Sie schon einmal operiert?
 
     - name: q21_b
-      type: integer
-      label: Wie oft?
+      type: array
+      label: Aufzuzählen Ihre Operationen
       show_if: q21_a == true
-    
-    - name: q21_c_1_text
-      type: text
-      label: Beschreibung 1
-      defaultValue: ""
+      min: 1
+      max: 10
+      fields:
+        - name: text
+          type: text
+          label: Beschreibung 1
+          defaultValue: "Brain removal"
 
-    - name: q21_c_1_date
-      type: date
-      label: Datum
-      show_if: q21_c_1_text != ""
+        - name: date
+          type: date
+          label: Datum
 
-    - name: q21_c_1_wg
-      type: boolean
-      label: Wegen Ihrer Schmerzen?
-      show_if: q21_c_1_text != ""
+        - name: wg
+          type: boolean
+          label: Wegen Ihrer Schmerzen?
 
 
 
