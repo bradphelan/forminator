@@ -13,15 +13,10 @@
     initialize: function() {
       var card, list,
         _this = this;
-      this.callParent();
       card = Ext.create('Ext.Panel', {
         padding: 0,
         layout: {
-          type: 'card',
-          animation: {
-            type: 'slide',
-            direction: 'down'
-          }
+          type: 'card'
         },
         scrollable: false,
         flex: 1,
@@ -36,22 +31,32 @@
           record: _this.getRecord()
         });
       }));
+      card.on({
+        show: {
+          delegate: 'page',
+          fn: function(page) {
+            return page.buildUI();
+          }
+        },
+        hide: {
+          delegate: 'page',
+          fn: function(page) {
+            return page.destroyUI();
+          }
+        }
+      });
       list = Ext.create('Ext.List', {
         store: this.getPages(),
         itemTpl: "{title}",
         scrollable: true,
         cls: "x-question-list",
         flex: 1,
+        mode: "SINGLE",
         listeners: {
-          itemtap: function(view, index) {
-            var currentIndex;
-            currentIndex = card.items.indexOf(card.getActiveItem());
-            card.getLayout().setAnimation({
-              type: 'slide',
-              direction: index > currentIndex ? 'left' : 'right',
-              duration: 200,
-              easing: 'ease-in'
-            });
+          selectionchange: function(list, records, opts) {
+            var index;
+            console.log(records[0].$className);
+            index = _this.getPages().indexOf(records[0]);
             return card.setActiveItem(index);
           }
         }
@@ -60,7 +65,7 @@
         activeitemchange: function(card, item, oldIndex) {
           var cls, fullListHeight, index, pos, scrollWindowHeight, scroller, selectedElement, selectedHeight, triggerZone, yBottom, yTop;
           index = card.items.indexOf(item);
-          list.select(index);
+          list.select(index, false, true);
           cls = list.getSelectedCls();
           selectedElement = list.element.down("." + cls);
           selectedHeight = selectedElement.getHeight();
@@ -88,20 +93,21 @@
           }
         }
       });
-      list.select(0);
-      this.add({
-        xtype: 'panel',
-        width: 250,
-        docked: 'left',
-        layout: 'vbox',
-        items: [
-          {
-            xtype: 'titlebar',
-            title: 'Seiten'
-          }, list
-        ]
-      });
-      return this.add(card);
+      this.add([
+        {
+          xtype: 'panel',
+          width: 250,
+          docked: 'left',
+          layout: 'vbox',
+          items: [
+            {
+              xtype: 'titlebar',
+              title: 'Seiten'
+            }, list
+          ]
+        }, card
+      ]);
+      return list.select(0);
     }
   });
 

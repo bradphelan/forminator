@@ -2,6 +2,7 @@
 
   Ext.define("app.view.Page", {
     extend: "Ext.Panel",
+    xtype: 'page',
     config: {
       scrollable: "vertical",
       last: false,
@@ -30,20 +31,10 @@
       var component;
       component = this.componentMap[item.idForComponent()];
       if (item.isVisible(this.getRecord())) {
-        if (animate) {
-          return component.show();
-        } else {
-          return component.setHidden(false);
-        }
+        return component.show(animate);
       } else {
-        if (!component.getHidden()) {
-          this.getRecord().set(item.get('name'), null);
-          if (animate) {
-            return component.hide();
-          } else {
-            return component.setHidden(true);
-          }
-        }
+        this.getRecord().set(item.get('name'), null);
+        return component.hide(animate);
       }
     },
     updateVisibility: function() {
@@ -53,21 +44,13 @@
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           item = _ref[_i];
-          _results.push(this.updateComponentVisibilty(item));
+          _results.push(this.updateComponentVisibilty(item, true));
         }
         return _results;
       }
     },
     configureListeners: function() {
       var _this = this;
-      this.on({
-        show: function(me, opts) {
-          return _this.buildUI();
-        },
-        hide: function(me, opts) {
-          return _this.destroyUI();
-        }
-      });
       return this.getRecord().on({
         change: {
           fn: function() {
@@ -86,10 +69,10 @@
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         item = _ref[_i];
         component = item.createComponent(this.getRecord());
-        component.setShowAnimation("slideIn");
+        component.setShowAnimation("fadeIn");
         component.setHideAnimation("fadeOut");
         this.componentMap[item.idForComponent()] = component;
-        _results.push(this.updateComponentVisibilty(item, false));
+        _results.push(component.setHidden(!item.isVisible(this.getRecord())));
       }
       return _results;
     },
@@ -124,11 +107,12 @@
       return this.buildUIDone = false;
     },
     buildUI: function() {
-      var fields, titleBar,
+      var items, panel,
         _this = this;
+      panel = this;
       if (!this.buildUIDone) {
         this.componentMap = {};
-        titleBar = {
+        this.titleBar = {
           xtype: 'titlebar',
           title: this.getPage().get('title'),
           docked: "top",
@@ -140,11 +124,6 @@
               align: 'left',
               listeners: {
                 tap: function() {
-                  _this.getPagesUI().getLayout().setAnimation({
-                    type: 'slide',
-                    direction: 'right',
-                    duration: 200
-                  });
                   return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
                 }
               }
@@ -155,18 +134,13 @@
               align: 'right',
               listeners: {
                 tap: function() {
-                  _this.getPagesUI().getLayout().setAnimation({
-                    type: 'slide',
-                    direction: 'left',
-                    duration: 200
-                  });
                   return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
                 }
               }
             }
           ]
         };
-        fields = {
+        this.fields = {
           xtype: 'panel',
           items: [
             {
@@ -179,11 +153,11 @@
             }
           ]
         };
-        this.add(titleBar);
-        this.add(fields);
+        items = [this.titleBar, this.fields];
         if (this.getLast()) {
-          this.add(this.buildSubmitToolbar());
+          items.push(this.buildSubmitToolbar());
         }
+        panel.add(items);
         return this.buildUIDone = true;
       }
     }

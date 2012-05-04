@@ -15,6 +15,7 @@ Ext.define "app.view.FormField"
     
     @getRecord().on "change:#{@getName()}", @doRecordChange, @
 
+    @cachedField = @createField()
     @add
       xtype: 'panel'
       padding: '0 0 10px 0'
@@ -22,7 +23,7 @@ Ext.define "app.view.FormField"
         xtype: 'panel'
         html: @getLabel()
       ,
-        @createField()
+        @cachedField
       ]
 
     # This will fill the UI with initial
@@ -33,8 +34,13 @@ Ext.define "app.view.FormField"
 
   updateValue: (value, oldValue)->
     unless @noProp
+      @noProp = true
       @getRecord().set(@getName(), value)
+      @noProp = false
 
   doRecordChange: (obj, fieldName, newValue, oldValue)->
-    @setValue newValue
+    unless @noProp
+      @noProp = true
+      @setValue newValue
+      @noProp = false
 

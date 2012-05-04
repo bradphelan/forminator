@@ -15,37 +15,28 @@ Ext.define "app.view.RadioField"
 
   createRadio: (option)->
     xtype: 'radiofield'
-    value: option.value
-    label: Ext.String.capitalize option.text
+    value: "#{option.value}"
+    label: option.text
+    labelWidth: "90%"
+    labelWrap: true
     name: @getName()
 
   createRadios: ->
-    items = @getOptions().map (option)=>
-
-      xtype: 'panel'
-      items: [
-        @createRadio(option)
-      ,
-        xtype: 'label'
-        html: option.label
-        cls: 'assist'
-      ]
+    @getOptions().map (option)=>
+      @createRadio(option)
 
   createField: ->
-    panel = Ext.create "Ext.Panel"
+    panel = Ext.create "Ext.form.FieldSet"
       items: @createRadios()
     panel.on
       check:
         fn: @doChange
         scope: @
         delegate: "field"
-      uncheck:
-        fn: @doChange
-        scope: @
-        delegate: "field"
-
 
     panel
 
   doChange: (checkBox, e) ->
-    @setValue(checkBox.getValue())
+    console.log "cb #{checkBox.getSubmitValue()}"
+    
+    @setValue(checkBox.getSubmitValue())

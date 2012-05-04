@@ -25,39 +25,26 @@
     createRadio: function(option) {
       return {
         xtype: 'radiofield',
-        value: option.value,
-        label: Ext.String.capitalize(option.text),
+        value: "" + option.value,
+        label: option.text,
+        labelWidth: "90%",
+        labelWrap: true,
         name: this.getName()
       };
     },
     createRadios: function() {
-      var items,
-        _this = this;
-      return items = this.getOptions().map(function(option) {
-        return {
-          xtype: 'panel',
-          items: [
-            _this.createRadio(option), {
-              xtype: 'label',
-              html: option.label,
-              cls: 'assist'
-            }
-          ]
-        };
+      var _this = this;
+      return this.getOptions().map(function(option) {
+        return _this.createRadio(option);
       });
     },
     createField: function() {
       var panel;
-      panel = Ext.create("Ext.Panel", {
+      panel = Ext.create("Ext.form.FieldSet", {
         items: this.createRadios()
       });
       panel.on({
         check: {
-          fn: this.doChange,
-          scope: this,
-          delegate: "field"
-        },
-        uncheck: {
           fn: this.doChange,
           scope: this,
           delegate: "field"
@@ -66,7 +53,8 @@
       return panel;
     },
     doChange: function(checkBox, e) {
-      return this.setValue(checkBox.getValue());
+      console.log("cb " + (checkBox.getSubmitValue()));
+      return this.setValue(checkBox.getSubmitValue());
     }
   });
 

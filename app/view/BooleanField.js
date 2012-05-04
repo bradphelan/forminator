@@ -3,10 +3,8 @@
   Ext.define("app.view.BooleanField", {
     extend: "app.view.FormField",
     updateValue: function(value, oldValue) {
-      var field;
       this.callParent(arguments);
-      field = this.down('checkboxfield');
-      return field.setChecked(value);
+      return this.cachedField.setChecked(value);
     },
     requires: ['Ext.field.Checkbox'],
     createField: function() {

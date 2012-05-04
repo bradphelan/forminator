@@ -1,10 +1,9 @@
-Ext.define "app.view.BooleanField" 
-  extend: "app.view.FormField" 
+Ext.define "app.view.BooleanField"
+  extend: "app.view.FormField"
   
   updateValue: (value, oldValue)->
     @callParent arguments
-    field = @down('checkboxfield')
-    field.setChecked(value)
+    @cachedField.setChecked(value)
 
   requires: [
     'Ext.field.Checkbox'

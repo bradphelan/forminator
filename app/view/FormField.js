@@ -11,6 +11,7 @@
     },
     initialize: function() {
       this.getRecord().on("change:" + (this.getName()), this.doRecordChange, this);
+      this.cachedField = this.createField();
       this.add({
         xtype: 'panel',
         padding: '0 0 10px 0',
@@ -18,7 +19,7 @@
           {
             xtype: 'panel',
             html: this.getLabel()
-          }, this.createField()
+          }, this.cachedField
         ]
       });
       this.noProp = true;
@@ -27,11 +28,17 @@
     },
     updateValue: function(value, oldValue) {
       if (!this.noProp) {
-        return this.getRecord().set(this.getName(), value);
+        this.noProp = true;
+        this.getRecord().set(this.getName(), value);
+        return this.noProp = false;
       }
     },
     doRecordChange: function(obj, fieldName, newValue, oldValue) {
-      return this.setValue(newValue);
+      if (!this.noProp) {
+        this.noProp = true;
+        this.setValue(newValue);
+        return this.noProp = false;
+      }
     }
   });
 

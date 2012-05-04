@@ -10,16 +10,14 @@ Ext.define "app.view.FormPagesLister"
     @getPages().getData().length
 
   initialize: ->
-    @callParent()
-
 
     card = Ext.create 'Ext.Panel'
       padding: 0
       layout:
         type: 'card'
-        animation:
-          type: 'slide'
-          direction: 'down'
+#         animation:
+#           type: 'slide'
+#           direction: 'down'
       scrollable: false
       flex: 1
       pages: @getPages()
@@ -32,26 +30,44 @@ Ext.define "app.view.FormPagesLister"
         page: page
         record: @getRecord()
 
+    # Setup the build and destroy hooks
+    # to manage the page lifecycles
+    card.on
+      show:
+        delegate: 'page'
+        fn: (page)->
+          page.buildUI()
+      hide:
+        delegate: 'page'
+        fn: (page)->
+          page.destroyUI()
+      
+
     list = Ext.create 'Ext.List'
       store: @getPages()
       itemTpl: "{title}"
       scrollable: true
       cls: "x-question-list"
       flex: 1
+      mode: "SINGLE"
       listeners:
-        itemtap: (view, index)=>
-            currentIndex = card.items.indexOf(card.getActiveItem())
-            card.getLayout().setAnimation
-              type: 'slide'
-              direction: if index > currentIndex then 'left' else 'right'
-              duration: 200
-              easing: 'ease-in'
-            card.setActiveItem index
+#         itemtap: (view, index)=>
+#             currentIndex = card.items.indexOf(card.getActiveItem())
+#             card.getLayout().setAnimation
+#               type: 'slide'
+#               direction: if index > currentIndex then 'left' else 'right'
+#               duration: 200
+#               easing: 'ease-in'
+#             card.setActiveItem index
+        selectionchange: (list, records, opts)=>
+          console.log records[0].$className
+          index = @getPages().indexOf(records[0])
+          card.setActiveItem index
 
     card.on
       activeitemchange: (card, item, oldIndex)=>
         index = card.items.indexOf(item)
-        list.select(index)
+        list.select(index, false, true)
 
         # Get the selected item. Seems
         # a bit ugly but it works
@@ -94,9 +110,8 @@ Ext.define "app.view.FormPagesLister"
             pos = Math.min(pos, fullListHeight - scrollWindowHeight)
             scroller.scrollTo(0,pos,true)
 
-    list.select(0)
 
-    @add
+    @add [
       xtype: 'panel'
       width: 250
       docked: 'left'
@@ -107,5 +122,8 @@ Ext.define "app.view.FormPagesLister"
       ,
         list
       ]
+    ,
+      card
+    ]
 
-    @add card
+    list.select(0)

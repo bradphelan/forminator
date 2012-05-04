@@ -1,5 +1,6 @@
 Ext.define "app.view.Page"
   extend: "Ext.Panel"
+  xtype: 'page'
 
   config:
     scrollable: "vertical"
@@ -25,30 +26,23 @@ Ext.define "app.view.Page"
   updateComponentVisibilty: (item, animate)->
     component = @componentMap[item.idForComponent()]
     if item.isVisible(@getRecord())
-      if animate
-        component.show()
-      else
-        component.setHidden(false)
+      component.show(animate)
     else
-      if not component.getHidden()
-        @getRecord().set(item.get('name'), null)
-        if animate
-          component.hide()
-        else
-          component.setHidden(true)
+      @getRecord().set(item.get('name'), null)
+      component.hide(animate)
 
   updateVisibility: ->
     if @buildUIDone
       for item in @getPage().get('items')
-        @updateComponentVisibilty(item)
+        @updateComponentVisibilty(item, true)
 
 
   configureListeners: ->
-    @on
-      show: (me, opts)=>
-        @buildUI()
-      hide: (me, opts)=>
-        @destroyUI()
+#     @on
+#       show: (me, opts)=>
+#         @buildUI(@)
+#       hide: (me, opts)=>
+#         @destroyUI()
 
     @getRecord().on
       change:
@@ -61,10 +55,10 @@ Ext.define "app.view.Page"
   buildFields: ->
     for item in @getPage().get('items')
       component = item.createComponent(@getRecord())
-      component.setShowAnimation "slideIn"
+      component.setShowAnimation "fadeIn"
       component.setHideAnimation "fadeOut"
       @componentMap[item.idForComponent()] = component
-      @updateComponentVisibilty(item, false)
+      component.setHidden(not item.isVisible(@getRecord()))
 
   buildSubmitToolbar: ->
     xtype: 'titlebar'
@@ -91,9 +85,10 @@ Ext.define "app.view.Page"
 
   buildUI:->
 
+    panel = @
     unless @buildUIDone
       @componentMap = {}
-      titleBar =
+      @titleBar =
         xtype: 'titlebar'
         title: @getPage().get('title')
         docked: "top"
@@ -105,10 +100,10 @@ Ext.define "app.view.Page"
           align: 'left'
           listeners:
             tap: =>
-              @getPagesUI().getLayout().setAnimation
-                type: 'slide'
-                direction: 'right'
-                duration: 200
+#               @getPagesUI().getLayout().setAnimation
+#                 type: 'slide'
+#                 direction: 'right'
+#                 duration: 200
               @getPagesUI().setActiveItem @currentIndex()-1
 
         ,
@@ -118,14 +113,14 @@ Ext.define "app.view.Page"
           align: 'right'
           listeners:
             tap: =>
-              @getPagesUI().getLayout().setAnimation
-                type: 'slide'
-                direction: 'left'
-                duration: 200
+#               @getPagesUI().getLayout().setAnimation
+#                 type: 'slide'
+#                 direction: 'left'
+#                 duration: 200
               @getPagesUI().setActiveItem(@currentIndex()+1)
         ]
 
-      fields =
+      @fields =
         xtype: 'panel'
         items: [
           xtype: 'label'
@@ -136,9 +131,13 @@ Ext.define "app.view.Page"
           items: @buildFields()
         ]
 
-      @add titleBar
-      @add fields
-      @add @buildSubmitToolbar() if @getLast()
+      items = [
+        @titleBar
+        @fields
+      ]
+      items.push @buildSubmitToolbar() if @getLast()
+
+      panel.add items
 
       @buildUIDone = true
 
