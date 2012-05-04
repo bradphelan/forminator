@@ -8,7 +8,11 @@
   pages: 
   - title: B
     items:
+    - name: A
+      type: boolean
+      defaultValue: false
     - name: T
+      show_if: A == true
       type: array
       min: 3
       max: 6
@@ -913,6 +917,46 @@
           type: boolean
           label: Wegen Ihrer Schmerzen?
 
+
+  - title: 22
+    help: |-
+      Aktuelle Medikamenten-Einnahme. Bitte tragen Sie in die nachfolgende
+      Tabelle alle Medikamente ein, die Sie zur Zeit nehmen (Schmerzmedikamente,
+      Blutdruckmittel u.s.w)  
+    items:
+      - name: q22
+        type: array
+        fields:
+        - name: eintragen
+          label: Bitte hier Ihre Medikamente eintragen
+          type: text
+          flex: 3
+
+        - name: fruh
+          type: integer
+          defaultValue: 0
+
+        - name: mittags
+          type: integer
+          defaultValue: 0
+
+        - name: abends
+          type: integer
+          defaultValue: 0
+
+        - name: spatabends
+          label: spät-abends
+          type: integer
+          defaultValue: 0
+
+        - name: nur_bei_bedarf
+          label: Nur bei bedarf
+          type: boolean
+          defaultValue: false
+
+        - name: wie_oft_pro_monat
+          label: "ungefähr Wie oft pro Monat?"
+          type: integer
 
 
 
