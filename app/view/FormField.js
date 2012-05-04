@@ -21,10 +21,14 @@
           }, this.createField()
         ]
       });
-      return this.setValue(this.getRecord().get(this.getName()));
+      this.noProp = true;
+      this.setValue(this.getRecord().get(this.getName()));
+      return this.noProp = false;
     },
     updateValue: function(value, oldValue) {
-      return this.getRecord().set(this.getName(), value);
+      if (!this.noProp) {
+        return this.getRecord().set(this.getName(), value);
+      }
     },
     doRecordChange: function(obj, fieldName, newValue, oldValue) {
       return this.setValue(newValue);

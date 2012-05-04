@@ -9,13 +9,16 @@ Ext.define "app.view.Page"
     record: null
     padding: 10
 
+  constructor: ->
+    @callParent arguments
+
   areAllItemsOnPageSet: ->
     # TODO
     # Don't check in
     return true
 
     allSet = true
-    @getPage().get('items').getData().each (item)=>
+    for item in @getPage().get('items')
       allSet = false if not item.isSet(@getRecord())
     allSet
 
@@ -36,7 +39,7 @@ Ext.define "app.view.Page"
 
   updateVisibility: ->
     if @buildUIDone
-      @getPage().get('items').getData().each (item)=>
+      for item in @getPage().get('items')
         @updateComponentVisibilty(item)
 
 
@@ -56,7 +59,7 @@ Ext.define "app.view.Page"
     @getPagesUI().indexOf(@getPagesUI().getActiveItem())
 
   buildFields: ->
-    @getPage().get('items').getData().collect (item)=>
+    for item in @getPage().get('items')
       component = item.createComponent(@getRecord())
       component.setShowAnimation "slideIn"
       component.setHideAnimation "fadeOut"
@@ -90,7 +93,7 @@ Ext.define "app.view.Page"
 
     unless @buildUIDone
       @componentMap = {}
-      @add
+      titleBar =
         xtype: 'titlebar'
         title: @getPage().get('title')
         docked: "top"
@@ -106,7 +109,6 @@ Ext.define "app.view.Page"
                 type: 'slide'
                 direction: 'right'
                 duration: 200
-                easing: 'ease-in'
               @getPagesUI().setActiveItem @currentIndex()-1
 
         ,
@@ -120,11 +122,10 @@ Ext.define "app.view.Page"
                 type: 'slide'
                 direction: 'left'
                 duration: 200
-                easing: 'ease-in'
               @getPagesUI().setActiveItem(@currentIndex()+1)
         ]
 
-      @add
+      fields =
         xtype: 'panel'
         items: [
           xtype: 'label'
@@ -135,6 +136,8 @@ Ext.define "app.view.Page"
           items: @buildFields()
         ]
 
+      @add titleBar
+      @add fields
       @add @buildSubmitToolbar() if @getLast()
 
       @buildUIDone = true

@@ -12,6 +12,7 @@ Ext.define "app.view.FormField"
     type: "string"
 
   initialize: ->
+    
     @getRecord().on "change:#{@getName()}", @doRecordChange, @
 
     @add
@@ -26,10 +27,13 @@ Ext.define "app.view.FormField"
 
     # This will fill the UI with initial
     # values
+    @noProp = true
     @setValue @getRecord().get(@getName())
+    @noProp = false
 
   updateValue: (value, oldValue)->
-    @getRecord().set(@getName(), value)
+    unless @noProp
+      @getRecord().set(@getName(), value)
 
   doRecordChange: (obj, fieldName, newValue, oldValue)->
     @setValue newValue

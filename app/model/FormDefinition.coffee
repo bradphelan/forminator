@@ -69,10 +69,11 @@ Ext.define 'app.model.FormDefinition'
         model: 'app.model.Page'
         data: json.pages.map (page)=>
 
-          page.items = Ext.create 'Ext.data.Store'
-            data: page.items.map (item)=>
+          data = page.items.map (item)=>
               Ext.create @itemTypeMap(item), item
-                
+
+          page.items = data
+
           Ext.create 'app.model.Page', page
 
     @set 'title', json.title
@@ -117,6 +118,7 @@ Ext.define 'app.model.FormDefinition'
   createForm: ->
 
     record = Ext.create @createModelClass()
+
 
     pagesUI = Ext.create 'app.view.FormPagesLister'
       title: @get('title')

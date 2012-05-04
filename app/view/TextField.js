@@ -8,7 +8,7 @@
       field = this.down('textfield');
       return field.setValue(value);
     },
-    requires: ['Ext.form.DatePicker', 'Ext.form.Password', 'Ext.form.Email', 'Ext.form.Number', 'Ext.form.TextArea', 'Ext.form.Url'],
+    requires: ['Ext.field.DatePicker', 'Ext.field.Password', 'Ext.field.Email', 'Ext.field.Number', 'Ext.field.TextArea', 'Ext.field.Url'],
     mapXType: function() {
       switch (this.getType()) {
         case 'password':

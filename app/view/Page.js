@@ -10,16 +10,20 @@
       record: null,
       padding: 10
     },
+    constructor: function() {
+      return this.callParent(arguments);
+    },
     areAllItemsOnPageSet: function() {
-      var allSet,
-        _this = this;
+      var allSet, item, _i, _len, _ref;
       return true;
       allSet = true;
-      this.getPage().get('items').getData().each(function(item) {
-        if (!item.isSet(_this.getRecord())) {
-          return allSet = false;
+      _ref = this.getPage().get('items');
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        item = _ref[_i];
+        if (!item.isSet(this.getRecord())) {
+          allSet = false;
         }
-      });
+      }
       return allSet;
     },
     updateComponentVisibilty: function(item, animate) {
@@ -43,11 +47,15 @@
       }
     },
     updateVisibility: function() {
-      var _this = this;
+      var item, _i, _len, _ref, _results;
       if (this.buildUIDone) {
-        return this.getPage().get('items').getData().each(function(item) {
-          return _this.updateComponentVisibilty(item);
-        });
+        _ref = this.getPage().get('items');
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          item = _ref[_i];
+          _results.push(this.updateComponentVisibilty(item));
+        }
+        return _results;
       }
     },
     configureListeners: function() {
@@ -72,15 +80,18 @@
       return this.getPagesUI().indexOf(this.getPagesUI().getActiveItem());
     },
     buildFields: function() {
-      var _this = this;
-      return this.getPage().get('items').getData().collect(function(item) {
-        var component;
-        component = item.createComponent(_this.getRecord());
+      var component, item, _i, _len, _ref, _results;
+      _ref = this.getPage().get('items');
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        item = _ref[_i];
+        component = item.createComponent(this.getRecord());
         component.setShowAnimation("slideIn");
         component.setHideAnimation("fadeOut");
-        _this.componentMap[item.idForComponent()] = component;
-        return _this.updateComponentVisibilty(item, false);
-      });
+        this.componentMap[item.idForComponent()] = component;
+        _results.push(this.updateComponentVisibilty(item, false));
+      }
+      return _results;
     },
     buildSubmitToolbar: function() {
       var _this = this;
@@ -113,10 +124,11 @@
       return this.buildUIDone = false;
     },
     buildUI: function() {
-      var _this = this;
+      var fields, titleBar,
+        _this = this;
       if (!this.buildUIDone) {
         this.componentMap = {};
-        this.add({
+        titleBar = {
           xtype: 'titlebar',
           title: this.getPage().get('title'),
           docked: "top",
@@ -131,8 +143,7 @@
                   _this.getPagesUI().getLayout().setAnimation({
                     type: 'slide',
                     direction: 'right',
-                    duration: 200,
-                    easing: 'ease-in'
+                    duration: 200
                   });
                   return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
                 }
@@ -147,16 +158,15 @@
                   _this.getPagesUI().getLayout().setAnimation({
                     type: 'slide',
                     direction: 'left',
-                    duration: 200,
-                    easing: 'ease-in'
+                    duration: 200
                   });
                   return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
                 }
               }
             }
           ]
-        });
-        this.add({
+        };
+        fields = {
           xtype: 'panel',
           items: [
             {
@@ -168,7 +178,9 @@
               items: this.buildFields()
             }
           ]
-        });
+        };
+        this.add(titleBar);
+        this.add(fields);
         if (this.getLast()) {
           this.add(this.buildSubmitToolbar());
         }

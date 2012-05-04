@@ -8,12 +8,12 @@ Ext.define "app.view.TextField"
     field.setValue(value)
 
   requires: [
-    'Ext.form.DatePicker'
-    'Ext.form.Password'
-    'Ext.form.Email'
-    'Ext.form.Number'
-    'Ext.form.TextArea'
-    'Ext.form.Url'
+    'Ext.field.DatePicker'
+    'Ext.field.Password'
+    'Ext.field.Email'
+    'Ext.field.Number'
+    'Ext.field.TextArea'
+    'Ext.field.Url'
   ]
 
   mapXType: ->

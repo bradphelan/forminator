@@ -44,11 +44,11 @@
       this.set('pages', Ext.create('Ext.data.Store', {
         model: 'app.model.Page',
         data: json.pages.map(function(page) {
-          page.items = Ext.create('Ext.data.Store', {
-            data: page.items.map(function(item) {
-              return Ext.create(_this.itemTypeMap(item), item);
-            })
+          var data;
+          data = page.items.map(function(item) {
+            return Ext.create(_this.itemTypeMap(item), item);
           });
+          page.items = data;
           return Ext.create('app.model.Page', page);
         })
       }));
