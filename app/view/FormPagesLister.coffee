@@ -44,7 +44,7 @@ Ext.define "app.view.FormPagesLister"
             card.getLayout().setAnimation
               type: 'slide'
               direction: if index > currentIndex then 'left' else 'right'
-              duration: 500
+              duration: 200
               easing: 'ease-in'
             card.setActiveItem index
 

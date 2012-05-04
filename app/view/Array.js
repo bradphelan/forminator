@@ -7,7 +7,7 @@
       width: "100%",
       count: 0,
       min: 1,
-      max: 1
+      max: 50
     },
     itemTypeMap: function(item) {
       switch (item.type) {
@@ -60,7 +60,7 @@
       index = this.indexOfRow(row);
       v = this.getArray();
       (v[index] || (v[index] = {}))[field.name] = newValue;
-      if (this.rowCount === v.length && this.rowCount < this.getMax()) {
+      if (unt === v.length && this.rowCount < this.getMax()) {
         return this.createRow();
       }
     },
@@ -80,19 +80,24 @@
         }
       }
     },
-    createRow: function() {
-      var data, i, row,
+    createDataRow: function() {
+      var data,
         _this = this;
+      data = {};
+      this.getArray().push(data);
+      return this.getFields().map(function(f) {
+        return data[f.name] = f.defaultValue || null;
+      });
+    },
+    createRow: function() {
+      var row,
+        _this = this;
+      this.createDataRow();
       row = Ext.create('Ext.Panel', {
         layout: 'hbox'
       });
-      i = this.rowCount;
-      this.rowCount++;
-      data = {};
-      this.getArray().push(data);
       this.panel.add(row);
       this.getFields().map(function(f) {
-        data[f.name] = f.defaultValue || null;
         return row.add({
           xtype: _this.itemTypeMap(f),
           label: null,
@@ -132,7 +137,6 @@
         layout: 'hbox'
       });
       this.panel.add(header);
-      this.rowCount = 0;
       this.getFields().map(function(f) {
         return header.add({
           xtype: 'label',

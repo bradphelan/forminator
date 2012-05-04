@@ -32,6 +32,41 @@ Ext.define 'app.model.form.Field'
     ]
 
        
+  showIf: ->
+    true
+
+  constructor: ->
+    @callParent arguments
+
+    visibleExpression = @get('show_if')
+    if visibleExpression?
+      try
+        expr = SkipLogic.parse(visibleExpression)
+        fnDef = """
+          this.showIf = function(__record__){
+            return #{expr};
+          }
+        """
+        eval fnDef
+        # For some reason we must return
+        # something other than the return
+        # value of eval or we get a crash
+        true
+      catch error
+        
+        alert """
+          Error processing skip logic
+
+            #{fnDef}
+
+          Got error
+
+            #{error}
+
+          Please check your form schema.
+        """
+        throw error
+
 
   createLabel: ->
     l = if @get('label')?
@@ -45,22 +80,7 @@ Ext.define 'app.model.form.Field'
   # return if the field should be visible
   # given the current record
   isVisible: (record)->
-    visibleExpression = @get('show_if')
-    if visibleExpression?
-      __record__ = record
-      try
-        eval(SkipLogic.parse(visibleExpression))
-      catch error
-        alert """
-          Error processing skip logic
-
-            #{visibleExpression}
-
-          Please check your form schema.
-        """
-        throw error
-    else
-      true
+    @showIf(record)
 
   # Checks if the entry in the record
   # corresponding to this field model
@@ -83,7 +103,5 @@ Ext.define 'app.model.form.Field'
 
     config = Ext.merge(@getData(), config)
 
-    console.log config
-    
     Ext.create @getComponentClass(), config
 

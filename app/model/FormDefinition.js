@@ -44,12 +44,10 @@
       this.set('pages', Ext.create('Ext.data.Store', {
         model: 'app.model.Page',
         data: json.pages.map(function(page) {
-          var items;
-          items = page.items.map(function(item) {
-            return Ext.create(_this.itemTypeMap(item), item);
-          });
           page.items = Ext.create('Ext.data.Store', {
-            data: items
+            data: page.items.map(function(item) {
+              return Ext.create(_this.itemTypeMap(item), item);
+            })
           });
           return Ext.create('app.model.Page', page);
         })
@@ -65,11 +63,8 @@
         defaultValue: item.defaultValue
       };
     },
-    createModelClassName: function() {
-      return "app.model.FormDefinition.ImplicitModel-" + (this.getId());
-    },
-    createModelClass: function() {
-      var class_name, fields, item, page, _i, _j, _len, _len1, _ref, _ref1;
+    createModelFields: function() {
+      var fields, item, page, _i, _j, _len, _len1, _ref, _ref1;
       fields = [];
       _ref = this.json.pages;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -80,24 +75,34 @@
           fields.push(this.createModelField(item));
         }
       }
-      class_name = "app.model.FormDefinition.ImplicitModel-" + (this.getId());
-      if (Ext.getClass(this.createModelClassName()) == null) {
-        Ext.define(class_name, {
+      return fields;
+    },
+    createModelClassName: function() {
+      return "app.model.FormDefinition.ImplicitModel-" + (this.getId());
+    },
+    getModelClass: function() {
+      return Ext.getClass(this.createModelClassName());
+    },
+    createModelClass: function() {
+      if (this.getModelClass() == null) {
+        Ext.define(this.createModelClassName(), {
           extend: 'Ext.data.Model',
           config: {
-            fields: fields
+            fields: this.createModelFields()
           },
           set: function(fieldName, newValue) {
             var oldValue, r;
             oldValue = this.get(fieldName);
             r = this.callParent([fieldName, newValue]);
-            this.fireEvent("change:" + fieldName, this, fieldName, newValue, oldValue);
-            this.fireEvent("change", this);
+            if (oldValue !== newValue) {
+              this.fireEvent("change:" + fieldName, this, fieldName, newValue, oldValue);
+              this.fireEvent("change", this);
+            }
             return r;
           }
         });
       }
-      return class_name;
+      return this.createModelClassName();
     },
     createForm: function() {
       var pagesUI, record;

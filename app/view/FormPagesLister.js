@@ -49,7 +49,7 @@
             card.getLayout().setAnimation({
               type: 'slide',
               direction: index > currentIndex ? 'left' : 'right',
-              duration: 500,
+              duration: 200,
               easing: 'ease-in'
             });
             return card.setActiveItem(index);

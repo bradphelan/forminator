@@ -34,25 +34,32 @@
         }
       ]
     },
+    showIf: function() {
+      return true;
+    },
+    constructor: function() {
+      var expr, fnDef, visibleExpression;
+      this.callParent(arguments);
+      visibleExpression = this.get('show_if');
+      if (visibleExpression != null) {
+        try {
+          expr = SkipLogic.parse(visibleExpression);
+          fnDef = "this.showIf = function(__record__){\n  return " + expr + ";\n}";
+          eval(fnDef);
+          return true;
+        } catch (error) {
+          alert("Error processing skip logic\n\n  " + fnDef + "\n\nGot error\n\n  " + error + "\n\nPlease check your form schema.");
+          throw error;
+        }
+      }
+    },
     createLabel: function() {
       var l;
       l = this.get('label') != null ? this.get('label') : this.get('name');
       return Ext.String.capitalize(l.replace(/_/, ' '));
     },
     isVisible: function(record) {
-      var visibleExpression, __record__;
-      visibleExpression = this.get('show_if');
-      if (visibleExpression != null) {
-        __record__ = record;
-        try {
-          return eval(SkipLogic.parse(visibleExpression));
-        } catch (error) {
-          alert("Error processing skip logic\n\n  " + visibleExpression + "\n\nPlease check your form schema.");
-          throw error;
-        }
-      } else {
-        return true;
-      }
+      return this.showIf(record);
     },
     isSet: function(record) {
       return record.get(this.get('name')) != null;
@@ -72,7 +79,6 @@
         id: this.idForComponent()
       };
       config = Ext.merge(this.getData(), config);
-      console.log(config);
       return Ext.create(this.getComponentClass(), config);
     }
   });

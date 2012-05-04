@@ -22,39 +22,49 @@
       });
       return allSet;
     },
-    updateVisibility: function() {
-      var _this = this;
-      return this.getPage().get('items').getData().each(function(item) {
-        var component, visible;
-        visible = item.isVisible(_this.getRecord());
-        item.findComponent(_this).setShowAnimation("slideIn");
-        item.findComponent(_this).setHideAnimation("fadeOut");
-        if (visible) {
-          return item.findComponent(_this).show();
+    updateComponentVisibilty: function(item, animate) {
+      var component;
+      component = this.componentMap[item.idForComponent()];
+      if (item.isVisible(this.getRecord())) {
+        if (animate) {
+          return component.show();
         } else {
-          component = item.findComponent(_this);
-          if (!component.getHidden()) {
-            _this.getRecord().set(item.get('name'), null);
+          return component.setHidden(false);
+        }
+      } else {
+        if (!component.getHidden()) {
+          this.getRecord().set(item.get('name'), null);
+          if (animate) {
             return component.hide();
+          } else {
+            return component.setHidden(true);
           }
         }
-      });
-    },
-    updateState: function() {
-      if (this.areAllItemsOnPageSet()) {
-        this.down("[iconCls=arrow_right]").setDisabled(false);
       }
-      return this.updateVisibility();
+    },
+    updateVisibility: function() {
+      var _this = this;
+      if (this.buildUIDone) {
+        return this.getPage().get('items').getData().each(function(item) {
+          return _this.updateComponentVisibilty(item);
+        });
+      }
     },
     configureListeners: function() {
       var _this = this;
+      this.on({
+        show: function(me, opts) {
+          return _this.buildUI();
+        },
+        hide: function(me, opts) {
+          return _this.destroyUI();
+        }
+      });
       return this.getRecord().on({
         change: {
           fn: function() {
-            _this.updateState();
-            return _this.configureListeners();
-          },
-          single: true
+            return _this.updateVisibility();
+          }
         }
       });
     },
@@ -64,7 +74,12 @@
     buildFields: function() {
       var _this = this;
       return this.getPage().get('items').getData().collect(function(item) {
-        return item.createComponent(_this.getRecord());
+        var component;
+        component = item.createComponent(_this.getRecord());
+        component.setShowAnimation("slideIn");
+        component.setHideAnimation("fadeOut");
+        _this.componentMap[item.idForComponent()] = component;
+        return _this.updateComponentVisibilty(item, false);
       });
     },
     buildSubmitToolbar: function() {
@@ -90,66 +105,75 @@
       };
     },
     initialize: function() {
-      var _this = this;
-      this.add({
-        xtype: 'titlebar',
-        title: this.getPage().get('title'),
-        docked: "top",
-        items: [
-          {
-            iconCls: 'arrow_left',
-            cls: 'previous',
-            iconMask: true,
-            align: 'left',
-            listeners: {
-              tap: function() {
-                _this.getPagesUI().getLayout().setAnimation({
-                  type: 'slide',
-                  direction: 'right',
-                  duration: 500,
-                  easing: 'ease-in'
-                });
-                return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
-              }
-            }
-          }, {
-            iconCls: 'arrow_right',
-            cls: 'next',
-            iconMask: true,
-            align: 'right',
-            disabled: true,
-            listeners: {
-              tap: function() {
-                _this.getPagesUI().getLayout().setAnimation({
-                  type: 'slide',
-                  direction: 'left',
-                  duration: 500,
-                  easing: 'ease-in'
-                });
-                return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
-              }
-            }
-          }
-        ]
-      });
-      this.add({
-        xtype: 'panel',
-        items: [
-          {
-            xtype: 'label',
-            html: this.getPage().get('help'),
-            padding: 20
-          }, {
-            xtype: 'panel',
-            items: this.buildFields()
-          }
-        ]
-      });
-      if (this.getLast()) {
-        this.add(this.buildSubmitToolbar());
-      }
       this.configureListeners();
-      return this.updateState();
+      return this.buildUIDone = false;
+    },
+    destroyUI: function() {
+      this.removeAll(true, true);
+      return this.buildUIDone = false;
+    },
+    buildUI: function() {
+      var _this = this;
+      if (!this.buildUIDone) {
+        this.componentMap = {};
+        this.add({
+          xtype: 'titlebar',
+          title: this.getPage().get('title'),
+          docked: "top",
+          items: [
+            {
+              iconCls: 'arrow_left',
+              cls: 'previous',
+              iconMask: true,
+              align: 'left',
+              listeners: {
+                tap: function() {
+                  _this.getPagesUI().getLayout().setAnimation({
+                    type: 'slide',
+                    direction: 'right',
+                    duration: 200,
+                    easing: 'ease-in'
+                  });
+                  return _this.getPagesUI().setActiveItem(_this.currentIndex() - 1);
+                }
+              }
+            }, {
+              iconCls: 'arrow_right',
+              cls: 'next',
+              iconMask: true,
+              align: 'right',
+              listeners: {
+                tap: function() {
+                  _this.getPagesUI().getLayout().setAnimation({
+                    type: 'slide',
+                    direction: 'left',
+                    duration: 200,
+                    easing: 'ease-in'
+                  });
+                  return _this.getPagesUI().setActiveItem(_this.currentIndex() + 1);
+                }
+              }
+            }
+          ]
+        });
+        this.add({
+          xtype: 'panel',
+          items: [
+            {
+              xtype: 'label',
+              html: this.getPage().get('help'),
+              padding: 20
+            }, {
+              xtype: 'panel',
+              items: this.buildFields()
+            }
+          ]
+        });
+        if (this.getLast()) {
+          this.add(this.buildSubmitToolbar());
+        }
+        return this.buildUIDone = true;
+      }
     }
   });
 

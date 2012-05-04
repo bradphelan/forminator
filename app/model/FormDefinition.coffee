@@ -96,22 +96,23 @@ Ext.define 'app.model.FormDefinition'
 
   
   getModelClass: ->
-    unless Ext.getClass(@createModelClassName())
+    Ext.getClass(@createModelClassName())
 
   createModelClass: ->
     unless @getModelClass()?
-      Ext.define @createModelClassName()
+      Ext.define @createModelClassName(),
         extend: 'Ext.data.Model'
         config:
-          fields: @greateModelFields()
+          fields: @createModelFields()
         set: (fieldName, newValue)->
           oldValue = @get(fieldName)
           r = @callParent([fieldName, newValue])
-          @fireEvent("change:#{fieldName}", @, fieldName, newValue, oldValue )
-          @fireEvent("change", @)
+          unless oldValue == newValue
+            @fireEvent("change:#{fieldName}", @, fieldName, newValue, oldValue )
+            @fireEvent("change", @)
           r
 
-    class_name
+    @createModelClassName()
 
   createForm: ->
 

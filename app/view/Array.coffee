@@ -5,7 +5,7 @@ Ext.define "app.view.Array"
     width: "100%"
     count: 0
     min: 1
-    max: 1
+    max: 50
 
   itemTypeMap: (item)->
     switch item.type
@@ -55,7 +55,7 @@ Ext.define "app.view.Array"
 
     (v[index] ||= {})[field.name] = newValue
 
-    if @rowCount == v.length and @rowCount < @getMax()
+    if unt == v.length and @rowCount < @getMax()
       @createRow()
 
   # handle default values for different
@@ -72,23 +72,23 @@ Ext.define "app.view.Array"
         else
           ""
 
+  createDataRow: ->
+    data = {}
+    @getArray().push data
+    @getFields().map (f)=>
+      data[f.name] = f.defaultValue || null
+
   # Append a new row with default data 
   # to the end of the UI list
   createRow: ->
+
+    @createDataRow()
+
     row = Ext.create 'Ext.Panel'
       layout: 'hbox'
 
-    i = @rowCount
-    @rowCount++
-
-    data = {}
-    @getArray().push data
-
     @panel.add row
     @getFields().map (f)=>
-
-      data[f.name] = f.defaultValue || null
-
       row.add
         xtype: @itemTypeMap(f)
         label: null
@@ -122,7 +122,6 @@ Ext.define "app.view.Array"
       layout: 'hbox'
 
     @panel.add header
-    @rowCount = 0
 
     @getFields().map (f)=>
       header.add
