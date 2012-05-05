@@ -33,6 +33,214 @@
 
 
 
+
+- title: BDI
+  id: 0493bdb0-968a-11e1-a8b0-0800200c9a66
+  summary: |-
+
+    Dieser Fragebogen enthält 21 Gruppen von Patientenetikette Aussagen. Bitte
+    lesen Sie jede Gruppe (von A bis U) sorgfältig durch. Suchen Sie dann die
+    eine Aussage in jeder Gruppe heraus, die am besten beschreibt, wie Sie sich
+    in dieser Woche einschließlich heute gefühlt haben und kreuzen Score Sie
+    die dazugehörige Ziffer (0, 1, 2 oder 3) an. Falls mehrere Aussagen einer
+    Gruppe gleichermaßen zutreffen, können Sie auch mehrere Ziffern markieren.
+    Lesen Sie auf jeden Fall alle Aussagen in jeder Gruppe, bevor SieIhre Wahl
+    treffen.
+
+
+  pages:
+  - title: "A"
+    items:
+      - name: A
+        type: integer
+        options:
+        - Ich bin nicht traurig.
+        - Ich bin traurig.
+        - Ich bin die ganze Zeit traurig und komme nicht davon los.
+        - Ich bin so traurig oder unglücklich, daß ich es kaum noch ertrage.
+  - title: "B"
+    items:
+      - name: B
+        type: integer
+        options:
+        - Ich sehe nicht besonders mutlos in die Zukunft.
+        - Ich sehe mutlos in die Zukunft
+        - Ich habe nichts, worauf ich mich freuen kann.
+        - Ich habe das Gefühl, daß die Zukunft hoffnungslos ist, und daß die Situation nicht besser werden kann.
+  - title: "C"
+    items:
+      - name: C
+        type: integer
+        options:
+        - Ich fühle mich nicht als Versager.
+        - Ich habe das Gefühl, öfter versagt zu haben als der Durchschnitt.
+        - Wenn ich auf mein Leben zurückblicke, sehe ich bloß eine Menge Fehlschläge.
+        - Ich habe das Gefühl, als Mensch ein völliger Versager zu sein.
+  - title: "D"
+    items:
+      - name: D
+        type: integer
+        options:
+        - Ich kann die Dinge genauso genießen wie früher.
+        - Ich kann die Dinge nicht mehr so genießen wie früher
+        - Ich kann aus nichts mehr eine echte Befriedigung ziehen.
+        - Ich bin mit allem unzufrieden oder gelangweilt.
+  - title: "E"
+    items:
+      - name: E
+        type: integer
+        options:
+        - Ich habe keine Schuldgefühle.
+        - Ich habe häufig Schuldgefühle.
+        - Ich habe fast immer Schuldgefühle.
+        - Ich habe immer Schuldgefühle.
+  - title: "F"
+    items:
+      - name: F
+        type: integer
+        options:
+        - Ich habe nicht das Gefühl, gestraft zu sein.
+        - Ich habe das Gefühl, vielleicht bestraft zu werden.
+        - Ich erwarte, bestraft zu werden.
+        - Ich habe das Gefühl, bestraft zu sein.
+  - title: "G"
+    items:
+      - name: G
+        type: integer
+        options:
+        - Ich bin nicht von mir enttäuscht.
+        - Ich bin von mir enttäuscht.
+        - Ich finde mich fürchterlich.
+        - Ich hasse mich.
+  - title: "H"
+    items:
+      - name: H
+        type: integer
+        options:
+        - Ich habe nicht das Gefühl, schlechter zu sein als alle anderen.
+        - Ich kritisiere mich wegen kleiner Fehler und Schwächen.
+        - Ich mache mir die ganze Zeit Vorwürfe wegen meiner Mängel.
+        - Ich gebe mit für alles die Schuld, was schiefgeht.
+  - title: "I"
+    items:
+      - name: I
+        type: integer
+        options:
+        - Ich denke nicht daran, mir etwas anzutun.
+        - Ich denke manchmal an Selbstmord, aber ich würde es nicht tun.
+        - Ich möchte mich am liebsten umbringen.
+        - Ich würde mich umbringen, wenn ich die Gelegenheit dazu hätte.
+  - title: "J"
+    items:
+      - name: J
+        type: integer
+        options:
+        - Ich weine nicht öfter als früher.
+        - Ich weine jetzt mehr als früher.
+        - Ich weine jetzt die ganze Zeit.
+        - Früher konnte ich weinen, aber jetzt kann ich es nicht mehr, obwohl ich es möchte.
+  - title: "K"
+    items:
+      - name: K
+        type: integer
+        options:
+        - Ich bin nicht reizbarer als sonst.
+        - Ich bin jetzt leichter verärgert oder gereizt als früher.
+        - Ich fühle mich dauernd gereizt.
+        - Die Dinge, die mich früher geärgert haben, berühren mich jetzt nicht mehr.
+  - title: "L"
+    items:
+      - name: L
+        type: integer
+        options:
+        - Ich habe nicht das Interesse an Menschen verloren.
+        - Ich interessiere mich jetzt weniger für Menschen als früher.
+        - Ich habe mein Interessen an anderen Menschen zum größten Teil verloren.
+        - Ich habe mein ganzes Interesse an anderen Menschen verloren.
+  - title: "M"
+    items:
+      - name: M
+        type: integer
+        options:
+        - Ich bin so entschlußfreudig wie immer.
+        - Ich schiebe Entscheidungen jetzt öfter als früher auf.
+        - Es fällt mir jetzt schwerer als früher, Entscheidungen zu treffen.
+        - Ich kann überhaupt keine Entscheidungen mehr treffen.
+  - title: "N"
+    items:
+      - name: N
+        type: integer
+        options:
+        - Ich habe nicht das Gefühl, schlechter auszusehen als früher.
+        - Ich mache mir Sorgen, daß ich alt oder unattraktiv aussehe.
+        - Ich habe das Gefühl, daß Veränderungen in meinem Aussehen auftreten, die mich häßlich machen.
+        - Ich finde mich häßlich.
+  - title: "O"
+    items:
+      - name: O
+        type: integer
+        options:
+        - Ich kann so gut arbeiten wie früher.
+        - Ich muß mir einen Ruck geben, bevor ich eine Tätigkeit in Angriff nehme.
+        - Ich muß mich zu jeder Tätigkeit zwingen.
+        - Ich bin unfähig zu arbeiten.
+  - title: "P"
+    items:
+      - name: P
+        type: integer
+        options:
+        - Ich schlafe so gut wie sonst.
+        - Ich schlafe nicht mehr so gut wie früher.
+        - Ich wache 1 bis 2 Stunden früher auf als sonst, und es fällt mir schwer, wieder einzuschlafen.
+        - Ich wache mehrere Stunden früher auf als sonst und kann nicht mehr einschlafen.
+  - title: "Q"
+    items:
+      - name: Q
+        type: integer
+        options:
+        - Ich ermüde nicht stärker als sonst.
+        - Ich ermüde schneller als früher.
+        - Fast alles ermüdet mich.
+        - Ich bin zu müde, um etwas zu tun.
+  - title: "R"
+    items:
+      - name: R
+        type: integer
+        options:
+        - Mein Appetit ist nicht schlechter als sonst.
+        - Mein Appetit ist nicht mehr so gut wie früher.
+        - Mein Appetit hat stark nachgelassen.
+        - Ich habe überhaupt keinen Appetit mehr.
+  - title: "S"
+    items:
+      - name: S
+        type: integer
+        options:
+        - Ich habe in der letzten Zeit kaum abgenommen.
+        - Ich habe mehr als 2 Kilo abgenommen.
+        - Ich habe mehr als 5 Kilo abgenommen.
+        - Ich habe mehr als 8 Kilo abgenommen.
+  - title: "T"
+    items:
+      - name: T
+        type: integer
+        options:
+        - Ich mache mir keine größeren Sorgen um meine Gesundheit als sonst.
+        - Ich mache mir Sorgen um körperliche Probleme, wie Schmerzen, Magenbeschwerden oder Verstopfung.
+        - Ich mache mir so große Sorgen um gesundheitliche Probleme, daß es mir schwerfällt, an etwas anderes zu denken.
+        - Ich mache mir so große Sorgen um gesundheitliche Probleme, daß ich an nichts anderes mehr denken kann.
+  - title: "U"
+    items:
+      - name: U
+        type: integer
+        options:
+        - Ich habe in der letzten Zeit keine Veränderungen meines Interesses an Sex bemerkt.
+        - Ich interessiere mich weniger für Sex als früher.
+        - Ich interessiere mich jetzt viel weniger für Sex.
+        - Ich habe das Interesse an Sex völlig verloren.
+
+
+
 - title: Deutscher Schmerz-Fragebogen
   id: b0dccce0-88a4-11e1-b0c4-0800200c9a66
   summary: |-
@@ -961,6 +1169,167 @@
 
 
 
+  
+- title: DOLOSHORT
+  id: 5d506310-968d-11e1-a8b0-0800200c9a66
+  summary:
+  pages:
+    - title: Foo
+      help: TODO Remove me.
+      items: []
+    - title: Hauptpage
+      items:
+      - label: Körperliche Beschwerden
+        name: q1
+        options:
+          - keine Beschwerden
+          - Beschwerden werden nur auf Nachfrage geäussert
+          - gelegentliche spontan geäusserte Beschwerden
+          - permanente spontan geäusserte Beschwerden
+      - label: Schutzlagerung des Patienten in Ruhe
+        name: q2
+        options:
+          - keine Schutzlagerung
+          - Patient vermeidet bestimmte Körperhaltungen
+          - Patient nimmt ständig und erfolgreich eine erleichternde Körperhaltung ein
+          - Patient sucht ständig erfolglos eine erleichternde Körperhaltung
+      - label: Schutz schmerzhafter Körperstellen
+        name: q3
+        options:
+          - keine Schutz/Abwehrbewegungen
+          - Schutz-/Abwehrbewegungen, Untersuchung/Pﬂege wird aber zugelassen
+          - Schutz/Abwehrbewegungen gegen jede Untersuchung/Pﬂegemaßnahme
+          - ständige Schutz/Abwehrbewegungen auch in Ruhe
+      - label: Soziale Interaktion
+        name: q4
+        options:
+          - nimmt an den tägliche Aktivitäten teil (Essen, Unterhaltung, Therapie)
+          - nimmt an den tägliche Aktivitäten nur nach Aufforderung teil
+          - Patient verweigert teilweise die Teilnahme an täglichen Aktivitäten
+          - Patient verweigert sämtliche Teilnahme
+      - label: Verhaltensstörung
+        name: q5
+        options:
+          - normales Verhalten
+          - wiederholtes abwehrendes/aggressives Verhalten bei Untersuchung/Pﬂege
+          - anhaltendes abwehrendes/aggressives Verhalten bei Untersuchung/Pﬂege
+          - anhaltendes abwehrendes/aggressives Verhalten auch ohne Untersuchung/Pﬂege
 
+
+- title: Neuropathic Pain
+  id: e40c8bb0-9690-11e1-a8b0-0800200c9a66
+  summary: Schmerz Fragebogen
+  pages:
+    - title: Patient Data
+      items:
+      - label: Datum
+        type: date
+        name: datum
+      - label: Name
+        type: string
+        name: name
+      - label: Fallzahl
+        type: integer
+        name: fallzahl
+
+    - title: Fragen
+      items:
+      - name: q1
+        label: Leiden sie unter einem brennenden Gefühl
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q2
+        label: Haben Sie im Bereich Ihrer Schmerzen ein Kribbel- oder Prickelgefühl (wie Ameisenlaufen, Stromkribbeln)
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q3
+        label: Ist leichte Berührung (Kleidung, Bettdecke) in diesem Bereich schmerzhaft?
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q4
+        label: Haben Sie im Bereich der Schmerzen blitzartige, elektrisierende Schmerzattacken?
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q5
+        label: Ist Kälte oder Wärme (Badewannenwasser) gelegentlich schmerzhaft?
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q6
+        label: Leiden Sie im Bereich der Schmerzen unter Taubheitsgefühl?
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
+
+      - name: q7
+        label: Löst ein leichter Druck z.B. mit dem Finger Schmerzen aus?
+        type: integer
+        range:
+          min: 0
+          max: 5
+          labels:
+            - nie
+            - kaum
+            - gering
+            - mittel
+            - stark
+            - sehr stark
 
 
